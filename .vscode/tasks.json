@@ -1,0 +1,87 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Activate Virtual Environment",
+      "type": "shell",
+      "windows": {
+        "command": ".\\venv\\Scripts\\Activate.ps1"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Run Main Pipeline",
+      "type": "shell",
+      "windows": {
+        "command": ".\\venv\\Scripts\\python.exe"
+      },
+      "args": ["src/main.py"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Validate Dependencies",
+      "type": "shell",
+      "windows": {
+        "command": ".\\venv\\Scripts\\python.exe"
+      },
+      "args": [
+        "-c",
+        "from src.utils.validators import validate_dependencies; import json; c = json.load(open('config/settings.json')); print('✓ Dependencies OK' if validate_dependencies(c['system']['rhubarb_path'], c['system']['ffmpeg_path']) else '✗ Dependencies Failed')"
+      ],
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "List Available Presets",
+      "type": "shell",
+      "windows": {
+        "command": ".\\venv\\Scripts\\python.exe"
+      },
+      "args": ["src/cli.py", "--list-presets"],
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Clear Cache",
+      "type": "shell",
+      "windows": {
+        "command": ".\\venv\\Scripts\\python.exe"
+      },
+      "args": [
+        "-c",
+        "from src.utils.cache_manager import CacheManager; cm = CacheManager(); cm.clear_cache(); print('Cache cleared')"
+      ],
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Run Unit Tests",
+      "type": "shell",
+      "windows": {
+        "command": ".\\venv\\Scripts\\python.exe"
+      },
+      "args": ["-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}

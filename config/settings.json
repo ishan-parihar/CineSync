@@ -1,0 +1,45 @@
+{
+  "system": {
+    "rhubarb_path": "C:\\Users\\Ishan\\Documents\\GitHub\\LipSyncAutomation\\tools\\rhubarb\\rhubarb.exe",
+    "ffmpeg_path": "C:\\Users\\Ishan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-8.0-full_build\\bin\\ffmpeg.exe",
+    "temp_directory": "output\\temp",
+    "cache_directory": "output\\cache"
+  },
+  "video": {
+    "fps": 30,
+    "resolution": [1920, 1080],
+    "codec": "libx264",
+    "preset": "medium",
+    "crf": 18,
+    "pixel_format": "yuv420p",
+    "audio_codec": "aac",
+    "audio_bitrate": "192k"
+  },
+  "rhubarb": {
+    "output_format": "json",
+    "recognizer": "pocketSphinx",
+    "threads": 0,
+    "quiet": false,
+    "extended_shapes": true
+  },
+  "processing": {
+    "enable_caching": true,
+    "parallel_workers": 4,
+    "cleanup_temp_files": true
+  },
+  "presets": {
+    "default_preset": "character_1/front",
+    "preset_directory": "assets\\presets"
+  },
+  "viseme_mapping": {
+    "A": "mouth_A.png",
+    "B": "mouth_B.png",
+    "C": "mouth_C.png",
+    "D": "mouth_D.png",
+    "E": "mouth_E.png",
+    "F": "mouth_F.png",
+    "G": "mouth_G.png",
+    "H": "mouth_H.png",
+    "X": "mouth_X.png"
+  }
+}

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+
+# Output directories
+output/temp/
+output/cache/
+*.mp4
+*.avi
+*.mkv
+
+# Logs
+*.log
+
+# IDE
+.vscode/.history/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*_phonemes.json

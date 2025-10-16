@@ -1,0 +1,52 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Main Pipeline",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/src"
+      }
+    },
+    {
+      "name": "Python: CLI Interface",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/cli.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--audio", "assets/audio/raw/narration.wav",
+        "--output", "output/production/test/final/video.mp4",
+        "--verbose"
+      ],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: Batch Processor",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/batch_processor.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--input", "assets/audio/raw",
+        "--output", "output/production/batch_test/final",
+        "--workers", "4"
+      ],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: List Presets",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/cli.py",
+      "console": "integratedTerminal",
+      "args": ["--list-presets"],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

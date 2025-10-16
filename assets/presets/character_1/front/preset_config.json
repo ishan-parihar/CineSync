@@ -1,0 +1,38 @@
+{
+  "preset_name": "character_1_front",
+  "character_id": "character_1",
+  "angle": "front",
+  "description": "Front-facing view of character 1",
+  "mouth_position": {
+    "x": 960,
+    "y": 700,
+    "anchor": "center"
+  },
+  "background": {
+    "image": "background.png",
+    "type": "static"
+  },
+  "mouth_shapes": {
+    "A": "mouth_A.png",
+    "B": "mouth_B.png",
+    "C": "mouth_C.png",
+    "D": "mouth_D.png",
+    "E": "mouth_E.png",
+    "F": "mouth_F.png",
+    "G": "mouth_G.png",
+    "H": "mouth_H.png",
+    "X": "mouth_X.png"
+  },
+  "image_specifications": {
+    "format": "PNG",
+    "bit_depth": 32,
+    "alpha_channel": true,
+    "dimensions": [512, 512],
+    "dpi": 300
+  },
+  "metadata": {
+    "created_date": "2025-10-17",
+    "version": "1.0",
+    "author": ""
+  }
+}
