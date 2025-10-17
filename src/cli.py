@@ -139,7 +139,7 @@ Examples:
             mouth_position=preset_config['mouth_position']
         )
         
-        print(f"\n✓ Video generated successfully: {args.output}\n")
+        print(f"\n[SUCCESS] Video generated successfully: {args.output}\n")
         return 0
         
     except Exception as e:

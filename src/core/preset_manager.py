@@ -1,5 +1,6 @@
 import json
 import os
+import copy
 from pathlib import Path
 from typing import Dict, List, Optional
 import logging
@@ -46,7 +47,7 @@ class PresetManager:
         if preset_name not in self.presets_cache:
             raise ValueError(f"Preset '{preset_name}' not found. Available: {self.list_presets()}")
         
-        preset_config = self.presets_cache[preset_name].copy()
+        preset_config = copy.deepcopy(self.presets_cache[preset_name])
         preset_path = self.preset_dir / preset_name
         
         # Resolve absolute paths for all image assets

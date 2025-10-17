@@ -32,14 +32,14 @@
     "preset_directory": "assets\\presets"
   },
   "viseme_mapping": {
-    "A": "mouth_A.png",
-    "B": "mouth_B.png",
-    "C": "mouth_C.png",
-    "D": "mouth_D.png",
-    "E": "mouth_E.png",
-    "F": "mouth_F.png",
-    "G": "mouth_G.png",
-    "H": "mouth_H.png",
-    "X": "mouth_X.png"
+    "A": "mouth_A.jpg",
+    "B": "mouth_B.jpg",
+    "C": "mouth_C.jpg",
+    "D": "mouth_D.jpg",
+    "E": "mouth_E.jpg",
+    "F": "mouth_F.jpg",
+    "G": "mouth_G.jpg",
+    "H": "mouth_H.jpg",
+    "X": "mouth_X.jpg"
   }
 }
