@@ -7,9 +7,8 @@ from pathlib import Path
 # Add src directory to Python path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from core.lip_sync_generator import LipSyncGenerator
-from core.video_compositor import VideoCompositor
-from core.preset_manager import PresetManager
+from core.content_orchestrator import ContentOrchestrator
+from core.profile_manager import ProfileManager
 from utils.validators import (
     validate_audio_file,
     validate_dependencies,
@@ -28,10 +27,10 @@ def setup_logging():
 
 
 def main():
-    """Main execution workflow for single audio file"""
+    """Main execution workflow for single audio file using v2.0 architecture"""
     logger = setup_logging()
     logger.info("=" * 80)
-    logger.info("Lip Sync Automation System - Starting")
+    logger.info("Lip Sync Automation System v2.0 - Starting")
     logger.info("=" * 80)
     
     try:
@@ -48,16 +47,14 @@ def main():
             logger.error("Dependency validation failed")
             return 1
         
-        # Initialize components
-        preset_manager = PresetManager()
-        generator = LipSyncGenerator()
-        compositor = VideoCompositor()
-        cache_manager = CacheManager() if config['processing']['enable_caching'] else None
+        # Initialize v2.0 orchestrator
+        orchestrator = ContentOrchestrator(config)
         
         # Configuration
         audio_path = 'assets/audio/raw/narration.wav'
-        preset_name = config['presets']['default_preset']
+        profile_name = config['presets']['default_profile']  # Changed from preset to profile
         output_path = 'output/production/test_project/final/lipsync_video.mp4'
+        cinematic_mode = config.get('cinematography', {}).get('mode', 'balanced')  # 'emotional', 'tension', 'balanced'
         
         # Validate inputs
         logger.info("Validating input files...")
@@ -67,48 +64,25 @@ def main():
         if not validate_output_directory(output_path):
             return 1
         
-        # Load preset
-        logger.info(f"Loading preset: {preset_name}")
-        preset_config = preset_manager.get_preset(preset_name)
-        
-        if not preset_manager.validate_preset(preset_name):
-            logger.error("Preset validation failed")
+        # Validate profile
+        logger.info(f"Validating profile: {profile_name}")
+        is_valid, validation_msg = orchestrator.validate_profile(profile_name)
+        if not is_valid:
+            logger.error(f"Profile validation failed: {validation_msg}")
             return 1
         
-        # Check cache
-        phoneme_data = None
-        if cache_manager:
-            phoneme_data = cache_manager.get_cached_phoneme_data(audio_path)
-        
-        # Generate or retrieve phoneme data
-        if phoneme_data is None:
-            logger.info("Generating phoneme data with Rhubarb...")
-            phoneme_json = generator.generate_phoneme_data(audio_path)
-            phoneme_data = generator.parse_phoneme_data(phoneme_json)
-            
-            if cache_manager:
-                cache_manager.save_phoneme_data(audio_path, phoneme_data)
-        
-        # Generate frame sequence
-        logger.info("Generating frame sequence...")
-        frame_sequence = generator.generate_frame_sequence(
-            mouth_cues=phoneme_data['mouth_cues'],
-            duration=phoneme_data['duration'],
-            viseme_mapping=preset_config['mouth_shapes']
-        )
-        
-        # Render video
-        logger.info("Rendering final video...")
-        compositor.render_video(
-            frame_sequence=frame_sequence,
+        # Generate content using cinematographic principles
+        logger.info(f"Generating content with profile '{profile_name}' and cinematic mode '{cinematic_mode}'...")
+        result = orchestrator.generate_content(
             audio_path=audio_path,
+            profile_name=profile_name,
             output_path=output_path,
-            background_path=preset_config['background']['image'],
-            mouth_position=preset_config['mouth_position']
+            cinematic_mode=cinematic_mode
         )
         
         logger.info("=" * 80)
-        logger.info(f"Video generated successfully: {output_path}")
+        logger.info(f"Video generated successfully: {result.video_path}")
+        logger.info(f"Metadata: {json.dumps(result.metadata, indent=2)}")
         logger.info("=" * 80)
         return 0
         

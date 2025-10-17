@@ -1,0 +1,2 @@
+This is a placeholder for the audio2emotion model file.
+In a production environment, you would place the actual .onnx model file here.

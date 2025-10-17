@@ -1,10 +1,57 @@
 {
   "system": {
+    "profiles_directory": "./profiles",
+    "cache_directory": "./cache",
+    "temp_directory": "./temp",
+    "log_directory": "./logs",
     "rhubarb_path": "C:\\Users\\Ishan\\Documents\\GitHub\\LipSyncAutomation\\tools\\rhubarb\\rhubarb.exe",
-    "ffmpeg_path": "C:\\Users\\Ishan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-8.0-full_build\\bin\\ffmpeg.exe",
-    "temp_directory": "output\\temp",
-    "cache_directory": "output\\cache"
+    "ffmpeg_path": "C:\\Users\\Ishan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-8.0-full_build\\bin\\ffmpeg.exe"
   },
+  
+  "emotion_analysis": {
+    "backend": "audio2emotion",
+    "model_path": "./models/audio2emotion/model.onnx",
+    "cache_enabled": true,
+    "confidence_threshold": 0.6,
+    "segment_min_duration": 1.0,
+    "segment_max_duration": 10.0,
+    "use_gpu": false
+  },
+  
+  "profile_settings": {
+    "cache_enabled": true,
+    "validation_strict": true,
+    "default_profile": "character_1",
+    "asset_preload": false
+  },
+  
+  "cinematography": {
+    "default_angle": "eye_level",
+    "default_distance": "MCU",
+    "tension_analysis_enabled": true,
+    "grammar_validation_enabled": true,
+    "shot_duration_range": {
+      "min": 0.5,
+      "max": 5.0
+    },
+    "transition_types": ["cut", "dissolve", "fade", "wipe"],
+    "emotional_intensity_mapping": {
+      "high": ["CU", "ECU"],
+      "medium": ["MCU"],
+      "low": ["MS", "MLS", "LS"]
+    }
+  },
+  
+  "video_composition": {
+    "default_resolution": "1920x1080",
+    "fps": 30,
+    "codec": "libx264",
+    "preset": "medium",
+    "crf": 18,
+    "audio_codec": "aac",
+    "audio_bitrate": "192k"
+  },
+  
   "video": {
     "fps": 30,
     "resolution": [1920, 1080],
@@ -15,6 +62,7 @@
     "audio_codec": "aac",
     "audio_bitrate": "192k"
   },
+  
   "rhubarb": {
     "output_format": "json",
     "recognizer": "pocketSphinx",
@@ -22,15 +70,18 @@
     "quiet": false,
     "extended_shapes": true
   },
+  
   "processing": {
     "enable_caching": true,
     "parallel_workers": 4,
     "cleanup_temp_files": true
   },
-  "presets": {
-    "default_preset": "character_1/front",
-    "preset_directory": "assets\\presets"
+  
+  "profiles": {
+    "default_profile": "character_1",
+    "profile_directory": "profiles"
   },
+  
   "viseme_mapping": {
     "A": "mouth_A.jpg",
     "B": "mouth_B.jpg",
