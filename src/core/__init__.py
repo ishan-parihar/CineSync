@@ -12,4 +12,3 @@ from .cinematography.tension_engine import TensionEngine
 # Re-export the old modules for backward compatibility if needed
 from .lip_sync_generator import LipSyncGenerator
 from .preset_manager import PresetManager
-from .video_compositor import VideoCompositor

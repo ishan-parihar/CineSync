@@ -10,7 +10,7 @@ from typing import List, Tuple
 sys.path.insert(0, str(Path(__file__).parent))
 
 from core.lip_sync_generator import LipSyncGenerator
-from core.video_compositor import VideoCompositor
+from core.video_compositor_v2 import VideoCompositorV2
 from core.preset_manager import PresetManager
 from utils.validators import validate_audio_file
 from utils.cache_manager import CacheManager
@@ -24,7 +24,7 @@ def setup_logging():
 
 
 def process_single_file(audio_path: Path, output_dir: Path, preset_name: str,
-                       generator: LipSyncGenerator, compositor: VideoCompositor,
+                       generator: LipSyncGenerator, compositor: VideoCompositorV2,
                        preset_config: dict, cache_manager: CacheManager = None) -> Tuple[str, bool, str]:
     """Process single audio file - designed for parallel execution"""
     
@@ -89,7 +89,7 @@ def main():
         # Initialize components
         preset_manager = PresetManager(args.config)
         generator = LipSyncGenerator(args.config)
-        compositor = VideoCompositor(args.config)
+        compositor = VideoCompositorV2(config_path=args.config)
         cache_manager = CacheManager() if config['processing']['enable_caching'] else None
         
         # Determine preset

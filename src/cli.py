@@ -66,7 +66,7 @@ Examples:
         
         # List profiles if requested
         if args.list_profiles:
-            profile_manager = ProfileManager()
+            profile_manager = ProfileManager(config=config)
             print("\nAvailable profiles:")
             for profile in profile_manager.list_profiles():
                 print(f"  - {profile}")

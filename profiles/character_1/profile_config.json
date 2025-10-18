@@ -1,0 +1,116 @@
+{
+  "schema_version": "2.0",
+  "profile_name": "character_1",
+  "version": "1.0.0",
+  "created_date": "2025-10-18T06:26:58.602121",
+  "last_modified": "2025-10-18T06:26:58.602121",
+  "character_metadata": {
+    "full_name": "character_1",
+    "character_type": "Default character profile for testing",
+    "art_style": "",
+    "artist": "",
+    "notes": ""
+  },
+  "supported_angles": ["front", "side"],
+  "supported_emotions": {
+    "core": ["neutral", "joy", "surprise", "anger", "fear", "disgust", "sadness", "trust", "anticipation"],
+    "compound": []
+  },
+  "default_settings": {
+    "default_angle": "front",
+    "default_emotion": "trust",
+    "base_intensity": 0.7
+  },
+  "asset_specifications": {
+    "viseme_format": "PNG",
+    "alpha_channel_required": true,
+    "resolution_by_angle": {
+      "ECU": {"width": 2048, "height": 2048},
+      "CU": {"width": 1920, "height": 1920},
+      "MCU": {"width": 1920, "height": 1080},
+      "MS": {"width": 1920, "height": 1080}
+    },
+    "color_space": "sRGB",
+    "bit_depth": 8
+  },
+  "validation": {
+    "strict_mode": true,
+    "allow_missing_emotions": false,
+    "allow_missing_angles": false,
+    "require_base_images": true
+  },
+  "angles": {
+    "front": {
+      "name": "Front View",
+      "assets": [
+        "assets/presets/character_1/front/background.png"
+      ],
+      "mouth_position": [960, 540],
+      "scale_factor": 1.0,
+      "angle_type": "eye_level",
+      "distance": "MCU"
+    },
+    "side": {
+      "name": "Side View",
+      "assets": [
+        "assets/presets/character_1/side/background.png"
+      ],
+      "mouth_position": [800, 520],
+      "scale_factor": 0.9,
+      "angle_type": "eye_level",
+      "distance": "MCU"
+    }
+  },
+  "emotion_mappings": {
+    "neutral": {
+      "primary_mouth_shape": "X",
+      "intensity_multiplier": 0.5
+    },
+    "joy": {
+      "primary_mouth_shape": "E",
+      "intensity_multiplier": 1.2
+    },
+    "surprise": {
+      "primary_mouth_shape": "A",
+      "intensity_multiplier": 1.3
+    },
+    "anger": {
+      "primary_mouth_shape": "F",
+      "intensity_multiplier": 1.1
+    },
+    "fear": {
+      "primary_mouth_shape": "A",
+      "intensity_multiplier": 0.9
+    },
+    "disgust": {
+      "primary_mouth_shape": "G",
+      "intensity_multiplier": 1.0
+    },
+    "sadness": {
+      "primary_mouth_shape": "X",
+      "intensity_multiplier": 0.7
+    },
+    "trust": {
+      "primary_mouth_shape": "E",
+      "intensity_multiplier": 0.8
+    },
+    "anticipation": {
+      "primary_mouth_shape": "D",
+      "intensity_multiplier": 1.0
+    }
+  },
+  "cinematographic_preferences": {
+    "preferred_angles": ["front", "side"],
+    "preferred_distances": ["MCU", "CU"],
+    "tension_response": {
+      "low_tension": "MCU",
+      "medium_tension": "CU",
+      "high_tension": "ECU"
+    }
+  },
+  "default_settings": {
+    "fps": 30,
+    "resolution": [1920, 1080],
+    "mouth_position": [960, 540]
+  }
+}

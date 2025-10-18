@@ -51,8 +51,8 @@ def main():
         orchestrator = ContentOrchestrator(config)
         
         # Configuration
-        audio_path = 'assets/audio/raw/narration.wav'
-        profile_name = config['presets']['default_profile']  # Changed from preset to profile
+        audio_path = 'assets/audio/raw/test.wav'
+        profile_name = config['profiles']['default_profile']  # Use correct config key
         output_path = 'output/production/test_project/final/lipsync_video.mp4'
         cinematic_mode = config.get('cinematography', {}).get('mode', 'balanced')  # 'emotional', 'tension', 'balanced'
         

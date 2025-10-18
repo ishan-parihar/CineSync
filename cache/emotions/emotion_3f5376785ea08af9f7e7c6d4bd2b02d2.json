@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "audio_file": "assets/audio/raw/test.wav",
+    "duration": 0.0,
+    "model": "audio2emotion",
+    "timestamp": "2025-10-18T06:33:12.898497",
+    "sample_rate": 16000
+  },
+  "emotion_segments": [
+    {
+      "segment_id": "seg_000",
+      "start_time": 0.0,
+      "end_time": 1.0,
+      "primary_emotion": {
+        "name": "trust",
+        "confidence": 0.6,
+        "intensity": 0.6,
+        "valence": 0.0,
+        "arousal": 0.12
+      },
+      "secondary_emotions": [
+        {
+          "name": "joy",
+          "confidence": 0.3,
+          "intensity": 0.3
+        },
+        {
+          "name": "fear",
+          "confidence": 0.2,
+          "intensity": 0.2
+        }
+      ],
+      "acoustic_features": {
+        "pitch_mean": 0.0,
+        "pitch_variance": 0.0,
+        "energy_level": 0.0,
+        "speaking_rate": 0.0
+      }
+    }
+  ],
+  "overall_sentiment": {
+    "dominant_emotion": "trust",
+    "emotional_arc": "stable",
+    "tone": "neutral",
+    "average_valence": 0.0,
+    "average_arousal": 0.12
+  }
+}

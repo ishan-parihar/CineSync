@@ -1,0 +1,15 @@
+{
+  "schema_version": "2.0",
+  "last_updated": "2025-10-18T06:26:58.602121",
+  "profiles": [
+    {
+      "profile_name": "character_1",
+      "path": "character_1",
+      "version": "1.0.0",
+      "status": "active",
+      "supported_angles": ["front", "side"],
+      "supported_emotions": ["neutral", "joy", "surprise", "anger", "fear", "disgust", "sadness", "trust", "anticipation"],
+      "asset_count": 162
+    }
+  ]
+}

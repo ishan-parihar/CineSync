@@ -3,7 +3,7 @@ CinematographicDecisionEngine: Main engine that orchestrates all cinematographic
 decisions using psycho-mapping, tension analysis, and grammar rules.
 
 Author: Development Team
-Date: 2025-10-18
+Date: 2025-10-10
 """
 
 from typing import Dict, List, Optional
@@ -526,3 +526,7 @@ class CinematographicDecisionEngine:
             notes.append("Uses wide-to-close progression for narrative development")
         
         return notes
+
+
+# Alias for backward compatibility
+DecisionEngine = CinematographicDecisionEngine
