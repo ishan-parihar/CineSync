@@ -93,10 +93,16 @@ class EmotionAnalyzer:
                 logger.warning(f"Model not found: {model_path}. Using dummy model.")
                 return None  # Fall back to dummy model when file doesn't exist
             
-            # Load ONNX model
+            # Load ONNX model with GPU/CPU preference based on config
+            use_gpu = self.config.get('emotion_analysis', {}).get('use_gpu', False)
+            if use_gpu:
+                providers = ['CUDAExecutionProvider', 'CPUExecutionProvider']
+            else:
+                providers = ['CPUExecutionProvider']
+            
             session = ort.InferenceSession(
                 model_path,
-                providers=['CUDAExecutionProvider', 'CPUExecutionProvider']
+                providers=providers
             )
             logger.info(f"Loaded Audio2Emotion model from {model_path}")
             return session
@@ -368,47 +374,80 @@ class EmotionAnalyzer:
             
             return result
         
-        # Preprocess audio for model
-        # Note: Actual preprocessing depends on Audio2Emotion model requirements
-        # This is a placeholder implementation
+        # Preprocess audio for model - Audio2Emotion expects raw audio in specific format
+        # According to network_info.json, model expects 16kHz audio
         
-        # Extract mel spectrogram
-        mel_spec = librosa.feature.melspectrogram(
-            y=audio,
-            sr=sr,
-            n_mels=128,
-            fmax=8000
-        )
+        # Ensure audio is at correct sample rate (should already be 16kHz from librosa.load)
+        if sr != 16000:
+            audio = librosa.resample(audio, orig_sr=sr, target_sr=16000)
+            sr = 16000
         
-        # Convert to log scale
-        mel_spec_db = librosa.power_to_db(mel_spec, ref=np.max)
+        # Get model input specifications to understand exact requirements
+        if self.model is None:
+            raise EmotionAnalysisError("Model not loaded properly. Check if model file exists and dependencies are installed.")
         
-        # Normalize
-        mel_spec_norm = (mel_spec_db - mel_spec_db.mean()) / mel_spec_db.std()
+        input_name = self.model.get_inputs()[0].name
+        input_shape = self.model.get_inputs()[0].shape
         
-        # Reshape for model input (batch_size, channels, height, width)
-        input_tensor = mel_spec_norm[np.newaxis, np.newaxis, :, :]
-        input_tensor = input_tensor.astype(np.float32)
+        logger.info(f"Model expects input shape: {input_shape}")
+        
+        # Based on error messages, the model internally reshapes [batch, seq_len] to [batch, -1, 5000]
+        # So seq_len must be divisible by 5000
+        chunk_size = 5000
+        audio_len = len(audio)
+        
+        # Round up to nearest multiple of chunk_size
+        padded_len = ((audio_len + chunk_size - 1) // chunk_size) * chunk_size  # Ceiling division
+        
+        # Pad the audio to make length divisible by chunk_size
+        if audio_len < padded_len:
+            padded_audio = np.zeros(padded_len, dtype=np.float32)
+            padded_audio[:audio_len] = audio
+            audio = padded_audio
+        elif audio_len > 60000:  # Limit based on trt_info.json MAX_BUFFER_LEN
+            # Truncate if too long
+            audio = audio[:60000]
+            # Make sure it's divisible by chunk_size
+            actual_len = 60000
+            padded_len = ((60000 + chunk_size - 1) // chunk_size) * chunk_size
+            padded_audio = np.zeros(padded_len, dtype=np.float32)
+            padded_audio[:60000] = audio
+            audio = padded_audio
+        
+        # Reshape for model input as [batch_size, sequence_length] - 2D tensor
+        input_tensor = audio[np.newaxis, :].astype(np.float32)  # Shape: (1, sequence_length)
+        
+        logger.info(f"Input tensor shape: {input_tensor.shape}, sequence_length={len(audio)} must be divisible by {chunk_size}")
         
         # Run inference
+        if self.model is None:
+            raise EmotionAnalysisError("Model not loaded properly. Check if model file exists and dependencies are installed.")
+        
         if self.model is None:
             raise EmotionAnalysisError("Model not loaded properly. Check if model file exists and dependencies are installed.")
         
         input_name = self.model.get_inputs()[0].name
         output_name = self.model.get_outputs()[0].name
         
+        # Run the model
         outputs = self.model.run([output_name], {input_name: input_tensor})
         emotion_probs = outputs[0][0]  # Shape: (num_emotions,)
         
         # Get top emotions
         top_idx = np.argsort(emotion_probs)[::-1]
         
-        # Map model outputs to taxonomy
-        # Note: Mapping depends on model's emotion labels
-        model_emotions = ['neutral', 'happy', 'sad', 'angry', 'fearful', 'disgusted', 'surprised']
+        # Map model outputs to actual emotions from network_info.json
+        # According to network_info.json, the model outputs: ["angry", "disgust", "fear", "happy", "neutral", "sad"]
+        model_emotions = ['angry', 'disgust', 'fear', 'happy', 'neutral', 'sad']
+        
+        # Validate that the number of emotions matches
+        if len(emotion_probs) != len(model_emotions):
+            logger.warning(f"Model output shape {len(emotion_probs)} doesn't match expected emotions {len(model_emotions)}, using default mapping")
+            # Default to the known emotions if there's a mismatch
+            pass  # Continue with known emotions list
         
         primary_idx = top_idx[0]
-        primary_emotion_name = model_emotions[primary_idx]
+        primary_emotion_name = model_emotions[primary_idx] if primary_idx < len(model_emotions) else 'neutral'
         primary_confidence = float(emotion_probs[primary_idx])
         
         # Calculate valence and arousal from emotion
@@ -429,7 +468,7 @@ class EmotionAnalyzer:
             },
             'secondary_emotions': [
                 {
-                    'name': model_emotions[idx],
+                    'name': model_emotions[idx] if idx < len(model_emotions) else 'neutral',
                     'confidence': float(emotion_probs[idx]),
                     'intensity': float(emotion_probs[idx])
                 }
@@ -651,9 +690,9 @@ class EmotionAnalyzer:
             total_valence += segment['primary_emotion']['valence']
             total_arousal += segment['primary_emotion']['arousal']
         
-        # Dominant emotion
+         # Dominant emotion
         if emotion_counts:
-            dominant_emotion = max(emotion_counts, key=emotion_counts.get)
+            dominant_emotion = max(emotion_counts, key=lambda k: emotion_counts[k])
         else:
             dominant_emotion = 'trust'  # Default if no emotions found
         

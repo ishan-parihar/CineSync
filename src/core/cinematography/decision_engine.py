@@ -8,6 +8,7 @@ Date: 2025-10-10
 
 from typing import Dict, List, Optional
 import logging
+import json
 
 from .psycho_mapper import PsychoCinematicMapper
 from .tension_engine import TensionEngine
@@ -51,15 +52,42 @@ class CinematographicDecisionEngine:
         Returns:
             Dictionary of decision rules
         """
-        return {
-            'emotion_weight': 0.4,
-            'tension_weight': 0.3,
-            'grammar_weight': 0.3,
-            'temporal_smoothing': 0.2,
-            'shot_duration_range': {'min': 0.5, 'max': 5.0},
-            'angle_stability_window': 3,  # How many shots to maintain angle consistency
-            'distance_progression_preference': True,
-        }
+        # Try to load from config file, fall back to defaults
+        try:
+            config_path = self.config.get('cinematography_config', 'config/cinematography_rules.json')
+            with open(config_path, 'r') as f:
+                rules = json.load(f)
+            return rules.get('cinematography_weights', {
+                'emotion_weight': 0.4,
+                'tension_weight': 0.3,
+                'grammar_weight': 0.3,
+                'temporal_smoothing': 0.2,
+                'shot_duration_range': {'min': 0.5, 'max': 5.0},
+                'angle_stability_window': 3,  # How many shots to maintain angle consistency
+                'distance_progression_preference': True,
+            })
+        except FileNotFoundError:
+            logger.warning(f"Cinematography rules file not found: {config_path}, using defaults")
+            return {
+                'emotion_weight': 0.4,
+                'tension_weight': 0.3,
+                'grammar_weight': 0.3,
+                'temporal_smoothing': 0.2,
+                'shot_duration_range': {'min': 0.5, 'max': 5.0},
+                'angle_stability_window': 3,  # How many shots to maintain angle consistency
+                'distance_progression_preference': True,
+            }
+        except json.JSONDecodeError:
+            logger.error(f"Invalid JSON in cinematography rules file: {config_path}, using defaults")
+            return {
+                'emotion_weight': 0.4,
+                'tension_weight': 0.3,
+                'grammar_weight': 0.3,
+                'temporal_smoothing': 0.2,
+                'shot_duration_range': {'min': 0.5, 'max': 5.0},
+                'angle_stability_window': 3,  # How many shots to maintain angle consistency
+                'distance_progression_preference': True,
+            }
     
     def generate_shot_sequence(self, emotion_analysis: Dict) -> List[Dict]:
         """

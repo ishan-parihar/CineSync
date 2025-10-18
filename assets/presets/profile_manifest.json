@@ -1,0 +1,29 @@
+{
+  "schema_version": "2.0",
+  "last_updated": "2025-10-18T00:00:00Z",
+  "profiles": [
+    {
+      "profile_name": "character_1",
+      "path": "character_1",
+      "version": "1.0.0",
+      "status": "active",
+      "supported_angles": [
+        "ECU",
+        "CU",
+        "MCU",
+        "MS"
+      ],
+      "supported_emotions": [
+        "joy",
+        "sadness",
+        "anger",
+        "fear",
+        "surprise",
+        "disgust",
+        "trust",
+        "anticipation"
+      ],
+      "asset_count": 288
+    }
+  ]
+}

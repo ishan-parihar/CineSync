@@ -10,12 +10,12 @@
   
   "emotion_analysis": {
     "backend": "audio2emotion",
-    "model_path": "./models/audio2emotion/model.onnx",
+    "model_path": "./models/audio2emotion/network.onnx",
     "cache_enabled": true,
     "confidence_threshold": 0.6,
     "segment_min_duration": 1.0,
     "segment_max_duration": 10.0,
-    "use_gpu": false
+    "use_gpu": true
   },
   
   "profile_settings": {
@@ -80,6 +80,11 @@
   "profiles": {
     "default_profile": "character_1",
     "profile_directory": "profiles"
+  },
+  
+  "presets": {
+    "default_preset": "character_1/front",
+    "preset_directory": "assets/presets"
   },
   
   "viseme_mapping": {

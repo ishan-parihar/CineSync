@@ -27,15 +27,75 @@ class PresetManager:
             if not character_dir.is_dir() or character_dir.name == 'preset_template':
                 continue
             
-            for angle_dir in character_dir.iterdir():
-                if not angle_dir.is_dir():
-                    continue
-                
-                config_file = angle_dir / 'preset_config.json'
-                if config_file.exists():
-                    preset_key = f"{character_dir.name}/{angle_dir.name}"
-                    self.presets_cache[preset_key] = self._load_preset_config(config_file)
-                    logger.debug(f"Loaded preset: {preset_key}")
+            # Check if this is the new structure with angles directory
+            angles_dir = character_dir / 'angles'
+            if angles_dir.exists() and angles_dir.is_dir():
+                # New structure: character/angles/angle_name/emotions/emotion_name/
+                for angle_dir in angles_dir.iterdir():
+                    if not angle_dir.is_dir():
+                        continue
+                    
+                    # Look for base config in angle directory
+                    base_config_file = angle_dir / 'base' / 'preset_config.json'
+                    if base_config_file.exists():
+                        # Load base configuration
+                        base_config = self._load_preset_config(base_config_file)
+                        
+                        # For each emotion in this angle
+                        emotions_dir = angle_dir / 'emotions'
+                        if emotions_dir.exists():
+                            for emotion_dir in emotions_dir.iterdir():
+                                if not emotion_dir.is_dir():
+                                    continue
+                                
+                                # Create preset config for this emotion by updating base config
+                                emotion_config = copy.deepcopy(base_config)
+                                emotion_config['preset_name'] = f"{character_dir.name}_{angle_dir.name}_{emotion_dir.name}"
+                                emotion_config['angle'] = angle_dir.name
+                                emotion_config['emotion'] = emotion_dir.name
+                                emotion_config['character_id'] = character_dir.name
+                                
+                                preset_key = f"{character_dir.name}/{angle_dir.name}/{emotion_dir.name}"
+                                self.presets_cache[preset_key] = emotion_config
+                                logger.debug(f"Loaded preset: {preset_key}")
+                    else:
+                        # Look for base config at angle level
+                        config_file = angle_dir / 'preset_config.json'
+                        if config_file.exists():
+                            preset_key = f"{character_dir.name}/{angle_dir.name}"
+                            self.presets_cache[preset_key] = self._load_preset_config(config_file)
+                            logger.debug(f"Loaded preset: {preset_key}")
+                        else:
+                            # Look for separate config files in each emotion directory
+                            emotions_dir = angle_dir / 'emotions'
+                            if emotions_dir.exists():
+                                for emotion_dir in emotions_dir.iterdir():
+                                    if not emotion_dir.is_dir():
+                                        continue
+                                    
+                                    # Load individual preset config for this emotion
+                                    config_file = emotion_dir / 'preset_config.json'
+                                    if config_file.exists():
+                                        preset_config = self._load_preset_config(config_file)
+                                        preset_config['preset_name'] = f"{character_dir.name}_{angle_dir.name}_{emotion_dir.name}"
+                                        preset_config['angle'] = angle_dir.name
+                                        preset_config['emotion'] = emotion_dir.name
+                                        preset_config['character_id'] = character_dir.name
+                                        
+                                        preset_key = f"{character_dir.name}/{angle_dir.name}/{emotion_dir.name}"
+                                        self.presets_cache[preset_key] = preset_config
+                                        logger.debug(f"Loaded preset: {preset_key}")
+            else:
+                # Old structure: character/angle_name/
+                for angle_dir in character_dir.iterdir():
+                    if not angle_dir.is_dir():
+                        continue
+                    
+                    config_file = angle_dir / 'preset_config.json'
+                    if config_file.exists():
+                        preset_key = f"{character_dir.name}/{angle_dir.name}"
+                        self.presets_cache[preset_key] = self._load_preset_config(config_file)
+                        logger.debug(f"Loaded preset: {preset_key}")
     
     def _load_preset_config(self, config_path: Path) -> Dict:
         """Load preset configuration from JSON file"""
@@ -48,13 +108,26 @@ class PresetManager:
             raise ValueError(f"Preset '{preset_name}' not found. Available: {self.list_presets()}")
         
         preset_config = copy.deepcopy(self.presets_cache[preset_name])
-        preset_path = self.preset_dir / preset_name
+        
+        # Handle the new structure: character/angle/emotion
+        path_parts = preset_name.split('/')
+        if len(path_parts) == 3:  # character/angle/emotion
+            character_name, angle_name, emotion_name = path_parts
+            preset_path = self.preset_dir / character_name / 'angles' / angle_name / 'emotions' / emotion_name
+        else:  # old structure: character/angle
+            preset_path = self.preset_dir / preset_name
         
         # Resolve absolute paths for all image assets
-        preset_config['background']['image'] = str(preset_path / preset_config['background']['image'])
+        if 'background' in preset_config and 'image' in preset_config['background']:
+            background_path = preset_path / preset_config['background']['image']
+            if background_path.exists():
+                preset_config['background']['image'] = str(background_path)
         
-        for shape, filename in preset_config['mouth_shapes'].items():
-            preset_config['mouth_shapes'][shape] = str(preset_path / filename)
+        if 'mouth_shapes' in preset_config:
+            for shape, filename in preset_config['mouth_shapes'].items():
+                shape_path = preset_path / filename
+                if shape_path.exists():
+                    preset_config['mouth_shapes'][shape] = str(shape_path)
         
         return preset_config
     
@@ -99,15 +172,17 @@ class PresetManager:
             preset_config = self.get_preset(preset_name)
             
             # Check background image
-            if not os.path.exists(preset_config['background']['image']):
-                logger.error(f"Background missing: {preset_config['background']['image']}")
-                return False
+            if 'background' in preset_config and 'image' in preset_config['background']:
+                if not os.path.exists(preset_config['background']['image']):
+                    logger.error(f"Background missing: {preset_config['background']['image']}")
+                    return False
             
             # Check all mouth shape images
-            for shape, path in preset_config['mouth_shapes'].items():
-                if not os.path.exists(path):
-                    logger.error(f"Mouth shape {shape} missing: {path}")
-                    return False
+            if 'mouth_shapes' in preset_config:
+                for shape, path in preset_config['mouth_shapes'].items():
+                    if not os.path.exists(path):
+                        logger.error(f"Mouth shape {shape} missing: {path}")
+                        return False
             
             logger.info(f"Preset '{preset_name}' validation passed")
             return True

@@ -92,7 +92,7 @@ Examples:
         orchestrator = ContentOrchestrator(config)
         
         # Determine profile
-        profile_name = args.profile or config['presets']['default_profile']
+        profile_name = args.profile or config['profiles']['default_profile']
         logger.info(f"Using profile: {profile_name}")
         
         # Validate profile

@@ -16,6 +16,8 @@ import logging
 import numpy as np
 from PIL import Image
 
+from .cinematography.transform_processor import TransformProcessor
+
 logger = logging.getLogger('lip_sync.compositor_v2')
 
 
@@ -36,6 +38,9 @@ class VideoCompositorV2:
         self.video_config = self.config['video_composition']
         self.temp_dir = Path(self.config['system']['temp_directory'])
         self.temp_dir.mkdir(parents=True, exist_ok=True)
+        
+        # NEW: Initialize transform processor
+        self.transform_processor = TransformProcessor()
         
         logger.info("VideoCompositorV2 initialized")
     
@@ -92,7 +97,7 @@ class VideoCompositorV2:
         Render a single scene with specified shot parameters.
         
         Args:
-            shot: Shot specification with distance, angle, emotion
+            shot: Shot specification with distance, angle, emotion and cinematographic metadata
             scene_index: Scene index for file naming
             profile_manager: ProfileManager instance
             temp_dir: Temporary directory for scene rendering
@@ -102,19 +107,27 @@ class VideoCompositorV2:
         """
         scene_id = shot['scene_id']
         emotion = shot['emotion']
-        distance = shot['shot_specification']['distance']
-        duration = shot['shot_specification']['duration']
+        distance = shot.get('angle', shot.get('shot_specification', {}).get('distance', 'MCU'))
+        duration = shot.get('shot_specification', {}).get('duration', 2.0)
+        
+        # Extract cinematographic metadata
+        shot_purpose = shot.get('shot_purpose', 'dialogue')
+        vertical_angle = shot.get('vertical_angle', 'eye_level')
+        composition = shot.get('composition', 'centered')
         
         # Use default profile from config
         profile_name = self.config['profile_settings'].get('default_profile', 'character_1')
         
-        # Create frame sequence for this scene based on emotion
+        # Create frame sequence for this scene based on emotion and cinematographic parameters
         frame_sequence = self._create_emotion_aware_frame_sequence(
             profile_manager=profile_manager,
             profile_name=profile_name,
             emotion=emotion,
             distance=distance,
-            duration=duration
+            duration=duration,
+            shot_purpose=shot_purpose,
+            vertical_angle=vertical_angle,
+            composition=composition
         )
         
         # Create scene-specific output
@@ -140,7 +153,10 @@ class VideoCompositorV2:
                                            profile_name: str,
                                            emotion: str,
                                            distance: str,
-                                           duration: float) -> List[str]:
+                                           duration: float,
+                                           shot_purpose: str = "dialogue",
+                                           vertical_angle: str = "eye_level",
+                                           composition: str = "centered") -> List[str]:
         """
         Create frame sequence based on emotion, angle, and duration.
         
@@ -150,6 +166,9 @@ class VideoCompositorV2:
             emotion: Emotion for this scene
             distance: Shot distance (determines which angle assets to use)
             duration: Duration in seconds
+            shot_purpose: Narrative purpose of the shot
+            vertical_angle: Vertical camera angle
+            composition: Composition style
             
         Returns:
             List of frame file paths
@@ -188,9 +207,22 @@ class VideoCompositorV2:
                     frame_idx=frame_idx
                 )
                 
-                frame_sequence.append(placeholder_path)
+                # Apply cinematographic transforms if needed
+                if vertical_angle != "eye_level" or composition != "centered":
+                    # In a real implementation, we would apply transforms to each frame
+                    # to achieve the desired vertical angle and composition
+                    transformed_path = self._apply_cinematographic_transforms(
+                        placeholder_path,
+                        vertical_angle,
+                        composition,
+                        distance,
+                        frame_idx
+                    )
+                    frame_sequence.append(transformed_path)
+                else:
+                    frame_sequence.append(placeholder_path)
             
-            logger.info(f"Created emotion-aware frame sequence: {total_frames} frames for '{emotion}' emotion")
+            logger.info(f"Created emotion-aware frame sequence: {total_frames} frames for '{emotion}' emotion with purpose '{shot_purpose}'")
             return frame_sequence
         except Exception as e:
             logger.error(f"Error creating emotion-aware frame sequence: {e}")
@@ -275,6 +307,60 @@ class VideoCompositorV2:
             f.write(f"file '{last_frame}'\n")
         
         logger.debug(f"Concat file created: {output_file}")
+    
+    def _apply_cinematographic_transforms(self, 
+                                        image_path: str, 
+                                        vertical_angle: str, 
+                                        composition: str, 
+                                        framing: str, 
+                                        frame_idx: int) -> str:
+        """
+        Apply cinematographic transforms to a frame.
+        
+        Args:
+            image_path: Path to source image
+            vertical_angle: Vertical angle to apply
+            composition: Composition style
+            framing: Shot framing
+            frame_idx: Frame index for positioning logic
+            
+        Returns:
+            Path to transformed image
+        """
+        try:
+            # Load the source image
+            image = Image.open(image_path)
+            
+            # Apply vertical angle transform
+            transformed_image = self.transform_processor.apply_vertical_angle(
+                image=image,
+                angle=vertical_angle,
+                frame_size=(1920, 1080)  # Default HD frame size
+            )
+            
+            # Calculate composition position
+            position = self.transform_processor.calculate_composition_position(
+                composition=composition,
+                framing=framing,
+                frame_size=(1920, 1080),
+                asset_size=transformed_image.size,
+                shot_index=frame_idx
+            )
+            
+            # Create a new frame with the transformed image at the calculated position
+            # For the basic implementation, we'll just save the transformed image
+            # since the actual positioning happens during compositing
+            transformed_path = image_path.replace('.png', f'_transformed_{vertical_angle}_{composition}.png')
+            
+            # In a real implementation, we might want to reposition the image within the frame
+            # For now, just save the transformed image
+            transformed_image.save(transformed_path)
+            
+            return transformed_path
+        except Exception as e:
+            logger.error(f"Error applying cinematographic transforms: {e}")
+            # Return original image path if transform fails
+            return image_path
     
     def _render_simple_video(self, concat_file: Path, duration: float, 
                            output_path: str):

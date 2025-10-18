@@ -8,6 +8,7 @@ Date: 2025-10-18
 
 from typing import Dict, List, Tuple
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -41,15 +42,42 @@ class TensionEngine:
         Returns:
             Dictionary of tension calculation parameters
         """
-        return {
-            'temporal_smoothing': 0.3,  # How much previous segments affect current tension
-            'emotional_intensity_weight': 0.4,
-            'arousal_weight': 0.3,
-            'valence_change_weight': 0.3,
-            'emotional_stability_weight': 0.2,
-            'minimum_tension': 0.0,
-            'maximum_tension': 1.0
-        }
+        # Try to load from config file, fall back to defaults
+        try:
+            config_path = self.config.get('cinematography_config', 'config/cinematography_rules.json')
+            with open(config_path, 'r') as f:
+                rules = json.load(f)
+            return rules.get('tension_weights', {
+                'temporal_smoothing': 0.3,  # How much previous segments affect current tension
+                'emotional_intensity_weight': 0.4,
+                'arousal_weight': 0.3,
+                'valence_change_weight': 0.3,
+                'emotional_stability_weight': 0.2,
+                'minimum_tension': 0.0,
+                'maximum_tension': 1.0
+            })
+        except FileNotFoundError:
+            logger.warning(f"Tension weights config file not found: {config_path}, using defaults")
+            return {
+                'temporal_smoothing': 0.3,  # How much previous segments affect current tension
+                'emotional_intensity_weight': 0.4,
+                'arousal_weight': 0.3,
+                'valence_change_weight': 0.3,
+                'emotional_stability_weight': 0.2,
+                'minimum_tension': 0.0,
+                'maximum_tension': 1.0
+            }
+        except json.JSONDecodeError:
+            logger.error(f"Invalid JSON in tension weights file: {config_path}, using defaults")
+            return {
+                'temporal_smoothing': 0.3,  # How much previous segments affect current tension
+                'emotional_intensity_weight': 0.4,
+                'arousal_weight': 0.3,
+                'valence_change_weight': 0.3,
+                'emotional_stability_weight': 0.2,
+                'minimum_tension': 0.0,
+                'maximum_tension': 1.0
+            }
     
     def calculate_segment_tension(self, segment: Dict, context: Dict = None) -> Dict:
         """

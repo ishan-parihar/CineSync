@@ -1,0 +1,42 @@
+{
+  "preset_name": "character_1_MS_anticipation",
+  "character_id": "character_1",
+  "angle": "MS",
+  "emotion": "anticipation",
+  "description": "Anticipation expression for MS view",
+  "mouth_position": {
+    "x": 960,
+    "y": 700,
+    "anchor": "center"
+  },
+  "background": {
+    "image": "background.png",
+    "type": "static"
+  },
+  "mouth_shapes": {
+    "A": "A.png",
+    "B": "B.png",
+    "C": "C.png",
+    "D": "D.png",
+    "E": "E.png",
+    "F": "F.png",
+    "G": "G.png",
+    "H": "H.png",
+    "X": "X.png"
+  },
+  "image_specifications": {
+    "format": "PNG",
+    "bit_depth": 32,
+    "alpha_channel": true,
+    "dimensions": [
+      512,
+      512
+    ],
+    "dpi": 300
+  },
+  "metadata": {
+    "created_date": "2025-10-18T16:55:21.646427",
+    "version": "1.0",
+    "author": ""
+  }
+}

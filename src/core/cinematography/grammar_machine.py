@@ -9,6 +9,7 @@ Date: 2025-10-18
 from typing import Dict, List, Tuple, Set
 import logging
 import random
+import json
 from .psycho_mapper import PsychoCinematicMapper
 from .tension_engine import TensionEngine
 
@@ -47,38 +48,111 @@ class GrammarMachine:
         Returns:
             Dictionary of grammar rules
         """
-        return {
-            # Shot distance progression rules
-            'distance_progression': {
-                'allowed_sequences': [
-                    ['LS', 'MS', 'MCU', 'CU', 'ECU'],  # Establishing to intimate
-                    ['ECU', 'CU', 'MCU', 'MS', 'LS'],  # Intimate to establishing
-                    ['MS', 'CU', 'MS'],  # Classic reverse shot pattern
-                ],
-                'forbidden_sequences': [
-                    ['ECU', 'LS'],  # Too jarring jump
-                    ['LS', 'ECU'],  # Avoid too abrupt change
-                ],
-                'progression_penalty': 0.3,  # Penalty for breaking progression
-            },
-            # Angle consistency rules
-            'angle_consistency': {
-                '180_degree_rule': True,  # Maintain screen direction
-                'axis_break_penalty': 0.8,  # High penalty for breaking 180-degree rule
-                'angle_transition_rules': {
-                    'high_angle': ['eye_level', 'low_angle'],
-                    'eye_level': ['high_angle', 'low_angle', 'dutch'],
-                    'low_angle': ['eye_level', 'high_angle'],
-                    'dutch': ['any'],  # Dutch can go anywhere
+        # Try to load from config file, fall back to defaults
+        try:
+            config_path = self.config.get('cinematography_config', 'config/cinematography_rules.json')
+            with open(config_path, 'r') as f:
+                rules = json.load(f)
+            return rules.get('grammar_rules', {
+                # Shot distance progression rules
+                'distance_progression': {
+                    'allowed_sequences': [
+                        ['LS', 'MS', 'MCU', 'CU', 'ECU'],  # Establishing to intimate
+                        ['ECU', 'CU', 'MCU', 'MS', 'LS'],  # Intimate to establishing
+                        ['MS', 'CU', 'MS'],  # Classic reverse shot pattern
+                    ],
+                    'forbidden_sequences': [
+                        ['ECU', 'LS'],  # Too jarring jump
+                        ['LS', 'ECU'],  # Avoid too abrupt change
+                    ],
+                    'progression_penalty': 0.3,  # Penalty for breaking progression
+                },
+                # Angle consistency rules
+                'angle_consistency': {
+                    '180_degree_rule': True,  # Maintain screen direction
+                    'axis_break_penalty': 0.8,  # High penalty for breaking 180-degree rule
+                    'angle_transition_rules': {
+                        'high_angle': ['eye_level', 'low_angle'],
+                        'eye_level': ['high_angle', 'low_angle', 'dutch'],
+                        'low_angle': ['eye_level', 'high_angle'],
+                        'dutch': ['any'],  # Dutch can go anywhere
+                    }
+                },
+                # Emotional rhythm matching
+                'emotional_rhythm': {
+                    'tempo_matching': True,  # Match shot duration to emotional tempo
+                    'intensity_matching': True,  # Match shot type to emotional intensity
+                    'valence_continuity': True,  # Maintain emotional tone transitions
                 }
-            },
-            # Emotional rhythm matching
-            'emotional_rhythm': {
-                'tempo_matching': True,  # Match shot duration to emotional tempo
-                'intensity_matching': True,  # Match shot type to emotional intensity
-                'valence_continuity': True,  # Maintain emotional tone transitions
+            })
+        except FileNotFoundError:
+            logger.warning(f"Grammar rules config file not found: {config_path}, using defaults")
+            return {
+                # Shot distance progression rules
+                'distance_progression': {
+                    'allowed_sequences': [
+                        ['LS', 'MS', 'MCU', 'CU', 'ECU'],  # Establishing to intimate
+                        ['ECU', 'CU', 'MCU', 'MS', 'LS'],  # Intimate to establishing
+                        ['MS', 'CU', 'MS'],  # Classic reverse shot pattern
+                    ],
+                    'forbidden_sequences': [
+                        ['ECU', 'LS'],  # Too jarring jump
+                        ['LS', 'ECU'],  # Avoid too abrupt change
+                    ],
+                    'progression_penalty': 0.3,  # Penalty for breaking progression
+                },
+                # Angle consistency rules
+                'angle_consistency': {
+                    '180_degree_rule': True,  # Maintain screen direction
+                    'axis_break_penalty': 0.8,  # High penalty for breaking 180-degree rule
+                    'angle_transition_rules': {
+                        'high_angle': ['eye_level', 'low_angle'],
+                        'eye_level': ['high_angle', 'low_angle', 'dutch'],
+                        'low_angle': ['eye_level', 'high_angle'],
+                        'dutch': ['any'],  # Dutch can go anywhere
+                    }
+                },
+                # Emotional rhythm matching
+                'emotional_rhythm': {
+                    'tempo_matching': True,  # Match shot duration to emotional tempo
+                    'intensity_matching': True,  # Match shot type to emotional intensity
+                    'valence_continuity': True,  # Maintain emotional tone transitions
+                }
             }
-        }
+        except json.JSONDecodeError:
+            logger.error(f"Invalid JSON in grammar rules file: {config_path}, using defaults")
+            return {
+                # Shot distance progression rules
+                'distance_progression': {
+                    'allowed_sequences': [
+                        ['LS', 'MS', 'MCU', 'CU', 'ECU'],  # Establishing to intimate
+                        ['ECU', 'CU', 'MCU', 'MS', 'LS'],  # Intimate to establishing
+                        ['MS', 'CU', 'MS'],  # Classic reverse shot pattern
+                    ],
+                    'forbidden_sequences': [
+                        ['ECU', 'LS'],  # Too jarring jump
+                        ['LS', 'ECU'],  # Avoid too abrupt change
+                    ],
+                    'progression_penalty': 0.3,  # Penalty for breaking progression
+                },
+                # Angle consistency rules
+                'angle_consistency': {
+                    '180_degree_rule': True,  # Maintain screen direction
+                    'axis_break_penalty': 0.8,  # High penalty for breaking 180-degree rule
+                    'angle_transition_rules': {
+                        'high_angle': ['eye_level', 'low_angle'],
+                        'eye_level': ['high_angle', 'low_angle', 'dutch'],
+                        'low_angle': ['eye_level', 'high_angle'],
+                        'dutch': ['any'],  # Dutch can go anywhere
+                    }
+                },
+                # Emotional rhythm matching
+                'emotional_rhythm': {
+                    'tempo_matching': True,  # Match shot duration to emotional tempo
+                    'intensity_matching': True,  # Match shot type to emotional intensity
+                    'valence_continuity': True,  # Maintain emotional tone transitions
+                }
+            }
     
     def _load_state_transitions(self) -> Dict:
         """
@@ -87,22 +161,63 @@ class GrammarMachine:
         Returns:
             Dictionary of transition probabilities
         """
-        return {
-            'establishing': {
-                'MS': {'probability': 0.4, 'next_states': ['closeup', 'medium']},
-                'LS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
-                'MLS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
-            },
-            'closeup': {
-                'CU': {'probability': 0.6, 'next_states': ['medium', 'establishing']},
-                'ECU': {'probability': 0.4, 'next_states': ['medium', 'establishing']},
-            },
-            'medium': {
-                'MCU': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
-                'MS': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
-                'CU': {'probability': 0.2, 'next_states': ['closeup']},
+        # Try to load from config file, fall back to defaults
+        try:
+            config_path = self.config.get('cinematography_config', 'config/cinematography_rules.json')
+            with open(config_path, 'r') as f:
+                rules = json.load(f)
+            return rules.get('state_transitions', {
+                'establishing': {
+                    'MS': {'probability': 0.4, 'next_states': ['closeup', 'medium']},
+                    'LS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
+                    'MLS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
+                },
+                'closeup': {
+                    'CU': {'probability': 0.6, 'next_states': ['medium', 'establishing']},
+                    'ECU': {'probability': 0.4, 'next_states': ['medium', 'establishing']},
+                },
+                'medium': {
+                    'MCU': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
+                    'MS': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
+                    'CU': {'probability': 0.2, 'next_states': ['closeup']},
+                }
+            })
+        except FileNotFoundError:
+            logger.warning(f"State transitions config file not found: {config_path}, using defaults")
+            return {
+                'establishing': {
+                    'MS': {'probability': 0.4, 'next_states': ['closeup', 'medium']},
+                    'LS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
+                    'MLS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
+                },
+                'closeup': {
+                    'CU': {'probability': 0.6, 'next_states': ['medium', 'establishing']},
+                    'ECU': {'probability': 0.4, 'next_states': ['medium', 'establishing']},
+                },
+                'medium': {
+                    'MCU': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
+                    'MS': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
+                    'CU': {'probability': 0.2, 'next_states': ['closeup']},
+                }
             }
-        }
+        except json.JSONDecodeError:
+            logger.error(f"Invalid JSON in state transitions file: {config_path}, using defaults")
+            return {
+                'establishing': {
+                    'MS': {'probability': 0.4, 'next_states': ['closeup', 'medium']},
+                    'LS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
+                    'MLS': {'probability': 0.3, 'next_states': ['closeup', 'medium']},
+                },
+                'closeup': {
+                    'CU': {'probability': 0.6, 'next_states': ['medium', 'establishing']},
+                    'ECU': {'probability': 0.4, 'next_states': ['medium', 'establishing']},
+                },
+                'medium': {
+                    'MCU': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
+                    'MS': {'probability': 0.4, 'next_states': ['closeup', 'establishing']},
+                    'CU': {'probability': 0.2, 'next_states': ['closeup']},
+                }
+            }
     
     def _load_emotional_grammar(self) -> Dict:
         """
@@ -111,36 +226,105 @@ class GrammarMachine:
         Returns:
             Dictionary of emotional grammar rules
         """
-        return {
-            'emotional_containment': {
-                # Emotions that should maintain shot distance consistency
-                'high_intensity': ['anger', 'fear', 'surprise'],
-                'low_intensity': ['sadness', 'trust', 'anticipation'],
-                'modulation_rules': {
-                    'quick_modulation_penalty': 0.7,  # Penalty for rapid changes during high intensity
-                    'gradual_modulation_bonus': 0.3,   # Bonus for gradual changes during low intensity
+        # Try to load from config file, fall back to defaults
+        try:
+            config_path = self.config.get('cinematography_config', 'config/cinematography_rules.json')
+            with open(config_path, 'r') as f:
+                rules = json.load(f)
+            return rules.get('emotional_grammar', {
+                'emotional_containment': {
+                    # Emotions that should maintain shot distance consistency
+                    'high_intensity': ['anger', 'fear', 'surprise'],
+                    'low_intensity': ['sadness', 'trust', 'anticipation'],
+                    'modulation_rules': {
+                        'quick_modulation_penalty': 0.7,  # Penalty for rapid changes during high intensity
+                        'gradual_modulation_bonus': 0.3,   # Bonus for gradual changes during low intensity
+                    }
+                },
+                'emotional_transition': {
+                    # Rules for transitioning between emotions
+                    'compatible_pairs': [
+                        ['joy', 'trust'],
+                        ['fear', 'surprise'],
+                        ['anger', 'anticipation'],
+                        ['sadness', 'trust'],
+                    ],
+                    'incompatible_pairs': [
+                        ['joy', 'sadness'],
+                        ['anger', 'joy'],
+                        ['fear', 'joy'],
+                    ],
+                    'transition_rules': {
+                        'compatible_bonus': 0.4,
+                        'incompatible_penalty': 0.6,
+                        'neutral_bridge_shot': ['MCU', 'MS'],  # Use neutral shots for incompatible transitions
+                    }
                 }
-            },
-            'emotional_transition': {
-                # Rules for transitioning between emotions
-                'compatible_pairs': [
-                    ('joy', 'trust'),
-                    ('fear', 'surprise'),
-                    ('anger', 'anticipation'),
-                    ('sadness', 'trust'),
-                ],
-                'incompatible_pairs': [
-                    ('joy', 'sadness'),
-                    ('anger', 'joy'),
-                    ('fear', 'joy'),
-                ],
-                'transition_rules': {
-                    'compatible_bonus': 0.4,
-                    'incompatible_penalty': 0.6,
-                    'neutral_bridge_shot': ['MCU', 'MS'],  # Use neutral shots for incompatible transitions
+            })
+        except FileNotFoundError:
+            logger.warning(f"Emotional grammar config file not found: {config_path}, using defaults")
+            return {
+                'emotional_containment': {
+                    # Emotions that should maintain shot distance consistency
+                    'high_intensity': ['anger', 'fear', 'surprise'],
+                    'low_intensity': ['sadness', 'trust', 'anticipation'],
+                    'modulation_rules': {
+                        'quick_modulation_penalty': 0.7,  # Penalty for rapid changes during high intensity
+                        'gradual_modulation_bonus': 0.3,   # Bonus for gradual changes during low intensity
+                    }
+                },
+                'emotional_transition': {
+                    # Rules for transitioning between emotions
+                    'compatible_pairs': [
+                        ['joy', 'trust'],
+                        ['fear', 'surprise'],
+                        ['anger', 'anticipation'],
+                        ['sadness', 'trust'],
+                    ],
+                    'incompatible_pairs': [
+                        ['joy', 'sadness'],
+                        ['anger', 'joy'],
+                        ['fear', 'joy'],
+                    ],
+                    'transition_rules': {
+                        'compatible_bonus': 0.4,
+                        'incompatible_penalty': 0.6,
+                        'neutral_bridge_shot': ['MCU', 'MS'],  # Use neutral shots for incompatible transitions
+                    }
                 }
             }
-        }
+        except json.JSONDecodeError:
+            logger.error(f"Invalid JSON in emotional grammar file: {config_path}, using defaults")
+            return {
+                'emotional_containment': {
+                    # Emotions that should maintain shot distance consistency
+                    'high_intensity': ['anger', 'fear', 'surprise'],
+                    'low_intensity': ['sadness', 'trust', 'anticipation'],
+                    'modulation_rules': {
+                        'quick_modulation_penalty': 0.7,  # Penalty for rapid changes during high intensity
+                        'gradual_modulation_bonus': 0.3,   # Bonus for gradual changes during low intensity
+                    }
+                },
+                'emotional_transition': {
+                    # Rules for transitioning between emotions
+                    'compatible_pairs': [
+                        ['joy', 'trust'],
+                        ['fear', 'surprise'],
+                        ['anger', 'anticipation'],
+                        ['sadness', 'trust'],
+                    ],
+                    'incompatible_pairs': [
+                        ['joy', 'sadness'],
+                        ['anger', 'joy'],
+                        ['fear', 'joy'],
+                    ],
+                    'transition_rules': {
+                        'compatible_bonus': 0.4,
+                        'incompatible_penalty': 0.6,
+                        'neutral_bridge_shot': ['MCU', 'MS'],  # Use neutral shots for incompatible transitions
+                    }
+                }
+            }
     
     def validate_shot_sequence(self, shot_sequence: List[Dict], 
                               emotion_sequence: List[Dict] = None) -> Dict:

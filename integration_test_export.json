@@ -1,0 +1,3181 @@
+{
+  "export_timestamp": "1760783997.2931085",
+  "base_path": "profiles",
+  "preset_path": "assets\\presets",
+  "config": {
+    "base_path": "profiles",
+    "preset_path": "assets/presets",
+    "emotions": [
+      "joy",
+      "sadness",
+      "anger",
+      "fear",
+      "surprise",
+      "disgust",
+      "trust",
+      "anticipation"
+    ],
+    "viseme_images": [
+      "A.png",
+      "B.png",
+      "C.png",
+      "D.png",
+      "E.png",
+      "F.png",
+      "G.png",
+      "H.png",
+      "X.png"
+    ],
+    "angles": [
+      "ECU",
+      "CU",
+      "MCU",
+      "MS"
+    ],
+    "required_files": [
+      "A.png",
+      "B.png",
+      "C.png",
+      "D.png",
+      "E.png",
+      "F.png",
+      "G.png",
+      "H.png",
+      "X.png"
+    ]
+  },
+  "profiles_structure": {
+    "character_1": {
+      "config": {
+        "schema_version": "2.0",
+        "profile_name": "character_1",
+        "version": "1.0.0",
+        "created_date": "2025-10-18T00:00:00Z",
+        "last_modified": "2025-10-18T00:00:00Z",
+        "character_metadata": {
+          "full_name": "Character 1",
+          "character_type": "protagonist",
+          "art_style": "semi-realistic",
+          "artist": "Auto-generated",
+          "notes": "Auto-generated profile structure"
+        },
+        "supported_angles": [
+          "ECU",
+          "CU",
+          "MCU",
+          "MS"
+        ],
+        "supported_emotions": {
+          "core": [
+            "joy",
+            "sadness",
+            "anger",
+            "fear",
+            "surprise",
+            "disgust",
+            "trust",
+            "anticipation"
+          ],
+          "compound": []
+        },
+        "default_settings": {
+          "default_angle": "MCU",
+          "default_emotion": "trust",
+          "base_intensity": 0.7
+        },
+        "asset_specifications": {
+          "viseme_format": "PNG",
+          "alpha_channel_required": true,
+          "resolution_by_angle": {
+            "ECU": {
+              "width": 2048,
+              "height": 2048
+            },
+            "CU": {
+              "width": 1920,
+              "height": 1920
+            },
+            "MCU": {
+              "width": 1920,
+              "height": 1080
+            },
+            "MS": {
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "color_space": "sRGB",
+          "bit_depth": 8
+        },
+        "validation": {
+          "strict_mode": true,
+          "allow_missing_emotions": false,
+          "allow_missing_angles": false,
+          "require_base_images": true
+        },
+        "angles": [
+          "CU/anger",
+          "CU/anticipation",
+          "CU/disgust",
+          "CU/fear",
+          "CU/joy",
+          "CU/sadness",
+          "CU/surprise",
+          "CU/trust",
+          "ECU/anger",
+          "ECU/anticipation",
+          "ECU/disgust",
+          "ECU/fear",
+          "ECU/joy",
+          "ECU/sadness",
+          "ECU/surprise",
+          "ECU/trust",
+          "MCU/anger",
+          "MCU/anticipation",
+          "MCU/disgust",
+          "MCU/fear",
+          "MCU/joy",
+          "MCU/sadness",
+          "MCU/surprise",
+          "MCU/trust",
+          "MS/anger",
+          "MS/anticipation",
+          "MS/disgust",
+          "MS/fear",
+          "MS/joy",
+          "MS/sadness",
+          "MS/surprise",
+          "MS/trust"
+        ]
+      },
+      "angles": {
+        "CU": {
+          "emotions": {
+            "anger": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anger\\X.png"
+                }
+              ]
+            },
+            "anticipation": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\anticipation\\X.png"
+                }
+              ]
+            },
+            "disgust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\disgust\\X.png"
+                }
+              ]
+            },
+            "fear": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\fear\\X.png"
+                }
+              ]
+            },
+            "joy": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\joy\\X.png"
+                }
+              ]
+            },
+            "sadness": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\sadness\\X.png"
+                }
+              ]
+            },
+            "surprise": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\surprise\\X.png"
+                }
+              ]
+            },
+            "trust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\CU\\emotions\\trust\\X.png"
+                }
+              ]
+            }
+          }
+        },
+        "ECU": {
+          "emotions": {
+            "anger": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anger\\X.png"
+                }
+              ]
+            },
+            "anticipation": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\anticipation\\X.png"
+                }
+              ]
+            },
+            "disgust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\disgust\\X.png"
+                }
+              ]
+            },
+            "fear": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\fear\\X.png"
+                }
+              ]
+            },
+            "joy": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\joy\\X.png"
+                }
+              ]
+            },
+            "sadness": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\sadness\\X.png"
+                }
+              ]
+            },
+            "surprise": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\surprise\\X.png"
+                }
+              ]
+            },
+            "trust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\ECU\\emotions\\trust\\X.png"
+                }
+              ]
+            }
+          }
+        },
+        "MCU": {
+          "emotions": {
+            "anger": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anger\\X.png"
+                }
+              ]
+            },
+            "anticipation": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\anticipation\\X.png"
+                }
+              ]
+            },
+            "disgust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\disgust\\X.png"
+                }
+              ]
+            },
+            "fear": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\fear\\X.png"
+                }
+              ]
+            },
+            "joy": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\joy\\X.png"
+                }
+              ]
+            },
+            "sadness": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\sadness\\X.png"
+                }
+              ]
+            },
+            "surprise": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\surprise\\X.png"
+                }
+              ]
+            },
+            "trust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MCU\\emotions\\trust\\X.png"
+                }
+              ]
+            }
+          }
+        },
+        "MS": {
+          "emotions": {
+            "anger": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anger\\X.png"
+                }
+              ]
+            },
+            "anticipation": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\anticipation\\X.png"
+                }
+              ]
+            },
+            "disgust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\disgust\\X.png"
+                }
+              ]
+            },
+            "fear": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\fear\\X.png"
+                }
+              ]
+            },
+            "joy": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\joy\\X.png"
+                }
+              ]
+            },
+            "sadness": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\sadness\\X.png"
+                }
+              ]
+            },
+            "surprise": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\surprise\\X.png"
+                }
+              ]
+            },
+            "trust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\MS\\emotions\\trust\\X.png"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "presets_structure": {
+    "character_1/CU/anger": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_anger",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "anger",
+        "description": "Anger expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\anger\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.379818",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/CU/anticipation": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_anticipation",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "anticipation",
+        "description": "Anticipation expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\anticipation\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.418695",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/CU/disgust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_disgust",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "disgust",
+        "description": "Disgust expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\disgust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.403281",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/CU/fear": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_fear",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "fear",
+        "description": "Fear expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\fear\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.387600",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/CU/joy": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_joy",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "joy",
+        "description": "Joy expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\joy\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.365347",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/CU/sadness": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_sadness",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "sadness",
+        "description": "Sadness expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\sadness\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.372663",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/CU/surprise": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_surprise",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "surprise",
+        "description": "Surprise expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\surprise\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.395701",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/CU/trust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_CU_trust",
+        "character_id": "character_1",
+        "angle": "CU",
+        "emotion": "trust",
+        "description": "Trust expression for CU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\CU\\emotions\\trust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.411323",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/anger": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_anger",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "anger",
+        "description": "Anger expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anger\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.262884",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/anticipation": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_anticipation",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "anticipation",
+        "description": "Anticipation expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\anticipation\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.300979",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/disgust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_disgust",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "disgust",
+        "description": "Disgust expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\disgust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.285948",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/fear": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_fear",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "fear",
+        "description": "Fear expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\fear\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.270908",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/joy": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_joy",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "joy",
+        "description": "Joy expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\joy\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.244788",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/sadness": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_sadness",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "sadness",
+        "description": "Sadness expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\sadness\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.253274",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/surprise": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_surprise",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "surprise",
+        "description": "Surprise expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\surprise\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.278498",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/ECU/trust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_ECU_trust",
+        "character_id": "character_1",
+        "angle": "ECU",
+        "emotion": "trust",
+        "description": "Trust expression for ECU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\ECU\\emotions\\trust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.293563",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/anger": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_anger",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "anger",
+        "description": "Anger expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anger\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.497282",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/anticipation": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_anticipation",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "anticipation",
+        "description": "Anticipation expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\anticipation\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.535253",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/disgust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_disgust",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "disgust",
+        "description": "Disgust expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\disgust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.520698",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/fear": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_fear",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "fear",
+        "description": "Fear expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\fear\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.505274",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/joy": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_joy",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "joy",
+        "description": "Joy expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\joy\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.481394",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/sadness": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_sadness",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "sadness",
+        "description": "Sadness expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\sadness\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.489838",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/surprise": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_surprise",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "surprise",
+        "description": "Surprise expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\surprise\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.512531",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MCU/trust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MCU_trust",
+        "character_id": "character_1",
+        "angle": "MCU",
+        "emotion": "trust",
+        "description": "Trust expression for MCU view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MCU\\emotions\\trust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.528289",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/anger": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_anger",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "anger",
+        "description": "Anger expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\anger\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.611152",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/anticipation": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_anticipation",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "anticipation",
+        "description": "Anticipation expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\anticipation\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.646427",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/disgust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_disgust",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "disgust",
+        "description": "Disgust expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\disgust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.632920",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/fear": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_fear",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "fear",
+        "description": "Fear expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\fear\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.617949",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/joy": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_joy",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "joy",
+        "description": "Joy expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\joy\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.596629",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/sadness": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_sadness",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "sadness",
+        "description": "Sadness expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\sadness\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.604113",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/surprise": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_surprise",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "surprise",
+        "description": "Surprise expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\surprise\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.626157",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    },
+    "character_1/MS/trust": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_MS_trust",
+        "character_id": "character_1",
+        "angle": "MS",
+        "emotion": "trust",
+        "description": "Trust expression for MS view",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\A.png",
+          "B": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\B.png",
+          "C": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\C.png",
+          "D": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\D.png",
+          "E": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\E.png",
+          "F": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\F.png",
+          "G": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\G.png",
+          "H": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\H.png",
+          "X": "assets\\presets\\character_1\\angles\\MS\\emotions\\trust\\X.png"
+        },
+        "image_specifications": {
+          "format": "PNG",
+          "bit_depth": 32,
+          "alpha_channel": true,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-18T16:55:21.639542",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    }
+  }
+}

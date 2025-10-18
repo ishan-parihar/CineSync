@@ -3,11 +3,11 @@ import sys
 import json
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.lip_sync_generator import LipSyncGenerator
-from core.preset_manager import PresetManager
-from utils.validators import validate_dependencies, validate_audio_file
+from src.core.lip_sync_generator import LipSyncGenerator
+from src.core.preset_manager import PresetManager
+from src.utils.validators import validate_dependencies, validate_audio_file
 
 
 class TestLipSyncGenerator(unittest.TestCase):

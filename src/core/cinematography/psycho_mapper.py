@@ -8,6 +8,7 @@ Date: 2025-10-18
 
 from typing import Dict, List, Tuple
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -44,53 +45,147 @@ class PsychoCinematicMapper:
         Returns:
             Dictionary mapping emotions to appropriate shot types
         """
-        # Based on classical psycho-cinematic research
-        emotion_mappings = {
-            # High arousal emotions - typically use close-ups for intensity
-            'joy': {
-                'primary_shots': ['CU', 'MCU'],  # Close-up, Medium Close-up for intimacy
-                'angles': ['eye_level', 'low_angle'],  # Eye-level for neutrality, low for power
-                'intensity_bias': 0.3,  # Joy doesn't need extreme intensity
-            },
-            'anger': {
-                'primary_shots': ['CU', 'ECU'],  # Extreme Close-up for intensity
-                'angles': ['low_angle', 'dutch'],  # Low for aggression, Dutch for tension
-                'intensity_bias': 0.9,  # High intensity for anger
-            },
-            'fear': {
-                'primary_shots': ['CU', 'MCU'],
-                'angles': ['high_angle', 'low_angle'],  # High for vulnerability, low for threat
-                'intensity_bias': 0.8,  # High intensity for fear
-            },
-            'surprise': {
-                'primary_shots': ['CU', 'MCU'],
-                'angles': ['eye_level', 'dutch'],  # Sudden change with Dutch angle
-                'intensity_bias': 0.7,  # Moderate to high intensity
-            },
-            # Low arousal emotions - may use wider shots for contemplation
-            'sadness': {
-                'primary_shots': ['MCU', 'MS'],  # Medium shots for emotional distance
-                'angles': ['high_angle', 'eye_level'],  # High for sadness/vulnerability
-                'intensity_bias': 0.4,  # Moderate intensity for sadness
-            },
-            'disgust': {
-                'primary_shots': ['CU', 'ECU'],
-                'angles': ['high_angle', 'dutch'],  # High for looking down, Dutch for unease
-                'intensity_bias': 0.7,  # Moderate to high intensity
-            },
-            'trust': {
-                'primary_shots': ['MCU', 'MS'],
-                'angles': ['eye_level', 'slight_low'],  # Neutral eye-level, slight low for reliability
-                'intensity_bias': 0.2,  # Low intensity for calm trust
-            },
-            'anticipation': {
-                'primary_shots': ['CU', 'MCU'],
-                'angles': ['eye_level', 'slight_low'],  # Focused attention
-                'intensity_bias': 0.6,  # Moderate intensity for anticipation
+        # Try to load from config file, fall back to defaults
+        try:
+            config_path = self.config.get('cinematography_config', 'config/cinematography_rules.json')
+            with open(config_path, 'r') as f:
+                rules = json.load(f)
+            return rules.get('emotion_mappings', {
+                # High arousal emotions - typically use close-ups for intensity
+                'joy': {
+                    'primary_shots': ['CU', 'MCU'],  # Close-up, Medium Close-up for intimacy
+                    'angles': ['eye_level', 'low_angle'],  # Eye-level for neutrality, low for power
+                    'intensity_bias': 0.3,  # Joy doesn't need extreme intensity
+                },
+                'anger': {
+                    'primary_shots': ['CU', 'ECU'],  # Extreme Close-up for intensity
+                    'angles': ['low_angle', 'dutch'],  # Low for aggression, Dutch for tension
+                    'intensity_bias': 0.9,  # High intensity for anger
+                },
+                'fear': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['high_angle', 'low_angle'],  # High for vulnerability, low for threat
+                    'intensity_bias': 0.8,  # High intensity for fear
+                },
+                'surprise': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['eye_level', 'dutch'],  # Sudden change with Dutch angle
+                    'intensity_bias': 0.7,  # Moderate to high intensity
+                },
+                # Low arousal emotions - may use wider shots for contemplation
+                'sadness': {
+                    'primary_shots': ['MCU', 'MS'],  # Medium shots for emotional distance
+                    'angles': ['high_angle', 'eye_level'],  # High for sadness/vulnerability
+                    'intensity_bias': 0.4,  # Moderate intensity for sadness
+                },
+                'disgust': {
+                    'primary_shots': ['CU', 'ECU'],
+                    'angles': ['high_angle', 'dutch'],  # High for looking down, Dutch for unease
+                    'intensity_bias': 0.7,  # Moderate to high intensity
+                },
+                'trust': {
+                    'primary_shots': ['MCU', 'MS'],
+                    'angles': ['eye_level', 'slight_low'],  # Neutral eye-level, slight low for reliability
+                    'intensity_bias': 0.2,  # Low intensity for calm trust
+                },
+                'anticipation': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['eye_level', 'slight_low'],  # Focused attention
+                    'intensity_bias': 0.6,  # Moderate intensity for anticipation
+                }
+            })
+        except FileNotFoundError:
+            logger.warning(f"Emotion mappings config file not found: {config_path}, using defaults")
+            return {
+                # High arousal emotions - typically use close-ups for intensity
+                'joy': {
+                    'primary_shots': ['CU', 'MCU'],  # Close-up, Medium Close-up for intimacy
+                    'angles': ['eye_level', 'low_angle'],  # Eye-level for neutrality, low for power
+                    'intensity_bias': 0.3,  # Joy doesn't need extreme intensity
+                },
+                'anger': {
+                    'primary_shots': ['CU', 'ECU'],  # Extreme Close-up for intensity
+                    'angles': ['low_angle', 'dutch'],  # Low for aggression, Dutch for tension
+                    'intensity_bias': 0.9,  # High intensity for anger
+                },
+                'fear': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['high_angle', 'low_angle'],  # High for vulnerability, low for threat
+                    'intensity_bias': 0.8,  # High intensity for fear
+                },
+                'surprise': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['eye_level', 'dutch'],  # Sudden change with Dutch angle
+                    'intensity_bias': 0.7,  # Moderate to high intensity
+                },
+                # Low arousal emotions - may use wider shots for contemplation
+                'sadness': {
+                    'primary_shots': ['MCU', 'MS'],  # Medium shots for emotional distance
+                    'angles': ['high_angle', 'eye_level'],  # High for sadness/vulnerability
+                    'intensity_bias': 0.4,  # Moderate intensity for sadness
+                },
+                'disgust': {
+                    'primary_shots': ['CU', 'ECU'],
+                    'angles': ['high_angle', 'dutch'],  # High for looking down, Dutch for unease
+                    'intensity_bias': 0.7,  # Moderate to high intensity
+                },
+                'trust': {
+                    'primary_shots': ['MCU', 'MS'],
+                    'angles': ['eye_level', 'slight_low'],  # Neutral eye-level, slight low for reliability
+                    'intensity_bias': 0.2,  # Low intensity for calm trust
+                },
+                'anticipation': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['eye_level', 'slight_low'],  # Focused attention
+                    'intensity_bias': 0.6,  # Moderate intensity for anticipation
+                }
             }
-        }
-        
-        return emotion_mappings
+        except json.JSONDecodeError:
+            logger.error(f"Invalid JSON in emotion mappings file: {config_path}, using defaults")
+            return {
+                # High arousal emotions - typically use close-ups for intensity
+                'joy': {
+                    'primary_shots': ['CU', 'MCU'],  # Close-up, Medium Close-up for intimacy
+                    'angles': ['eye_level', 'low_angle'],  # Eye-level for neutrality, low for power
+                    'intensity_bias': 0.3,  # Joy doesn't need extreme intensity
+                },
+                'anger': {
+                    'primary_shots': ['CU', 'ECU'],  # Extreme Close-up for intensity
+                    'angles': ['low_angle', 'dutch'],  # Low for aggression, Dutch for tension
+                    'intensity_bias': 0.9,  # High intensity for anger
+                },
+                'fear': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['high_angle', 'low_angle'],  # High for vulnerability, low for threat
+                    'intensity_bias': 0.8,  # High intensity for fear
+                },
+                'surprise': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['eye_level', 'dutch'],  # Sudden change with Dutch angle
+                    'intensity_bias': 0.7,  # Moderate to high intensity
+                },
+                # Low arousal emotions - may use wider shots for contemplation
+                'sadness': {
+                    'primary_shots': ['MCU', 'MS'],  # Medium shots for emotional distance
+                    'angles': ['high_angle', 'eye_level'],  # High for sadness/vulnerability
+                    'intensity_bias': 0.4,  # Moderate intensity for sadness
+                },
+                'disgust': {
+                    'primary_shots': ['CU', 'ECU'],
+                    'angles': ['high_angle', 'dutch'],  # High for looking down, Dutch for unease
+                    'intensity_bias': 0.7,  # Moderate to high intensity
+                },
+                'trust': {
+                    'primary_shots': ['MCU', 'MS'],
+                    'angles': ['eye_level', 'slight_low'],  # Neutral eye-level, slight low for reliability
+                    'intensity_bias': 0.2,  # Low intensity for calm trust
+                },
+                'anticipation': {
+                    'primary_shots': ['CU', 'MCU'],
+                    'angles': ['eye_level', 'slight_low'],  # Focused attention
+                    'intensity_bias': 0.6,  # Moderate intensity for anticipation
+                }
+            }
     
     def _load_tension_mappings(self) -> Dict:
         """
@@ -141,7 +236,13 @@ class PsychoCinematicMapper:
         intensity = emotion_data.get('intensity', 0.0)
         
         # Get emotion-based preferences
-        emotion_prefs = self.emotion_shot_mappings.get(emotion_name, self.emotion_shot_mappings['trust'])
+        default_prefs = {
+            'primary_shots': ['MCU', 'MS'],
+            'angles': ['eye_level', 'slight_low'],
+            'intensity_bias': 0.2
+        }
+        emotion_prefs = self.emotion_shot_mappings.get(emotion_name, 
+                                                      self.emotion_shot_mappings.get('trust', default_prefs))
         
         # Calculate shot distance based on arousal and intensity
         shot_distance = self._determine_distance(emotion_data, context)
@@ -227,16 +328,22 @@ class PsychoCinematicMapper:
             # Use high angle for vulnerability
             if 'high_angle' in emotion_prefs['angles']:
                 return 'high_angle'
+            else:
+                return 'high_angle'  # Default to high angle for these emotions even if not in preferences
         
         elif emotion_name in ['anger', 'joy']:
             # Use low angle for power/authority or confidence
             if 'low_angle' in emotion_prefs['angles']:
                 return 'low_angle'
+            else:
+                return 'low_angle'  # Default to low angle for these emotions even if not in preferences
         
         elif emotion_name == 'surprise':
             # Surprise often benefits from sudden angle changes
             if 'dutch' in emotion_prefs['angles']:
                 return 'dutch'  # Dutch angle for disorientation
+            else:
+                return 'dutch'  # Default to Dutch for surprise even if not in preferences
         
         elif valence < -0.3:
             # Negative valence - often use high angle for vulnerability
@@ -368,3 +475,7 @@ class PsychoCinematicMapper:
         
         logger.info(f"Generated shot sequence for {len(shot_sequence)} segments")
         return shot_sequence
+
+
+# Aliases for backward compatibility
+PsychoMapper = PsychoCinematicMapper
