@@ -39,7 +39,12 @@
       "high": ["CU", "ECU"],
       "medium": ["MCU"],
       "low": ["MS", "MLS", "LS"]
-    }
+    },
+    "shot_purpose_enabled": true,
+    "vertical_angle_transforms": true,
+    "composition_positioning": true,
+    "shot_purpose_config": "config/shot_purpose_profiles.json",
+    "transform_config": "config/transform_presets.json"
   },
   
   "video_composition": {

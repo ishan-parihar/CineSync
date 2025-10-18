@@ -14,15 +14,15 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from ..utils.audio_processor import AudioProcessor
-from ..utils.cache_manager import CacheManager
+from src.utils.audio_processor import AudioProcessor
+from src.utils.cache_manager import CacheManager
 
-from .profile_manager import ProfileManager
-from .emotion_analyzer import EmotionAnalyzer
-from .cinematography.decision_engine import DecisionEngine
-from .cinematography.shot_purpose_selector import ShotPurposeSelector
-from .cinematography.transform_processor import TransformProcessor
-from .video_compositor_v2 import VideoCompositorV2
+from src.core.profile_manager import ProfileManager
+from src.core.emotion_analyzer import EmotionAnalyzer
+from src.core.cinematography.decision_engine import DecisionEngine
+from src.core.cinematography.shot_purpose_selector import ShotPurposeSelector
+from src.core.cinematography.transform_processor import TransformProcessor
+from src.core.video_compositor_v2 import VideoCompositorV2
 
 
 @dataclass
@@ -111,32 +111,32 @@ class ContentOrchestrator:
                 emotions = self.emotion_analyzer.analyze_audio(audio_path)
             processing_log["stages"]["emotion_analysis"] = self._get_timestamp()
             
-             # 4. Generate cinematographic decisions
-             self.logger.info("Generating cinematographic decisions...")
-             cinematographic_decisions = self.decision_engine.generate_shot_sequence(emotions)
-             processing_log["stages"]["cinematography_decisions"] = self._get_timestamp()
-             
-             # 5. Add cinematographic enhancement with shot purpose selection
-             self.logger.info("Applying cinematographic enhancements...")
-             frame_sequences = self._build_frame_sequences(
-                 shot_sequence=cinematographic_decisions,
-                 emotions=emotions,
-                 cinematic_mode=cinematic_mode
-             )
-             processing_log["stages"]["cinematography_enhancement"] = self._get_timestamp()
-             
-             # 6. Compose final video
-             self.logger.info("Composing final video...")
-             if output_path is None:
-                 output_filename = f"generated_{Path(audio_path).stem}_{profile_name}.mp4"
-                 output_path = str(Path("output") / output_filename)
-             
-             video_path = self.compositor.render_multiscene_video(
-                 shot_sequence=frame_sequences,  # Using enhanced frame sequences
-                 audio_path=audio_path,
-                 output_path=output_path,
-                 profile_manager=self.profile_manager
-             )
+            # 4. Generate cinematographic decisions
+            self.logger.info("Generating cinematographic decisions...")
+            cinematographic_decisions = self.decision_engine.generate_shot_sequence(emotions)
+            processing_log["stages"]["cinematography_decisions"] = self._get_timestamp()
+            
+            # 5. Add cinematographic enhancement with shot purpose selection
+            self.logger.info("Applying cinematographic enhancements...")
+            frame_sequences = self._build_frame_sequences(
+                shot_sequence=cinematographic_decisions,
+                emotions=emotions,
+                cinematic_mode=cinematic_mode
+            )
+            processing_log["stages"]["cinematography_enhancement"] = self._get_timestamp()
+            
+            # 6. Compose final video
+            self.logger.info("Composing final video...")
+            if output_path is None:
+                output_filename = f"generated_{Path(audio_path).stem}_{profile_name}.mp4"
+                output_path = str(Path("output") / output_filename)
+            
+            video_path = self.compositor.render_multiscene_video(
+                shot_sequence=frame_sequences,  # Using enhanced frame sequences
+                audio_path=audio_path,
+                output_path=output_path,
+                profile_manager=self.profile_manager
+            )
             processing_log["stages"]["video_composition"] = self._get_timestamp()
             
             # 6. Create metadata
@@ -167,59 +167,59 @@ class ContentOrchestrator:
             self.logger.info(f"Content generation completed: {video_path}")
             return result
             
-         except Exception as e:
-             self.logger.error(f"Content generation failed: {str(e)}")
-             raise
+        except Exception as e:
+            self.logger.error(f"Content generation failed: {str(e)}")
+            raise
      
-     def _build_frame_sequences(self, shot_sequence, emotions, cinematic_mode: str = "balanced"):
-         """
-         Build enhanced frame sequences with cinematographic metadata.
-         
-         Args:
-             shot_sequence: Original shot sequence from decision engine
-             emotions: Emotion analysis results
-             cinematic_mode: How to balance emotion vs tension in decisions
-             
-         Returns:
-             Enhanced frame sequences with cinematographic metadata
-         """
-         frame_sequences = []
-         
-         # Get narrative phase and tension score for context
-         narrative_phase = "setup"  # This would come from tension engine in full implementation
-         tension_score = 0.5  # This would come from tension engine in full implementation
-         
-         for i, shot in enumerate(shot_sequence):
-             # NEW: Select shot purpose
-             emotion_segment = emotions[i] if i < len(emotions) else emotions[0]  # Fallback for missing emotions
-             shot_purpose_spec = self.shot_purpose_selector.select_purpose(
-                 emotion_segment=emotion_segment,
-                 segment_index=i,
-                 total_segments=len(shot_sequence),
-                 narrative_phase=narrative_phase,
-                 tension_score=tension_score
-             )
-             
-             # NEW: Determine vertical angle
-             vertical_angle = self.transform_processor.get_vertical_angle_for_emotion(
-                 emotion=shot.get('emotion', 'neutral'),
-                 base_angle=shot_purpose_spec['vertical_angle']
-             )
-             
-             # Add cinematographic metadata to frame sequence
-             frame_sequences.append({
-                 'scene_id': shot.get('scene_id', f'scene_{i}'),
-                 'emotion': shot.get('emotion', 'neutral'),
-                 'angle': shot.get('angle', 'MCU'),
-                 'viseme_sequence': shot.get('viseme_sequence', []),
-                 'shot_purpose': shot_purpose_spec['purpose'],
-                 'vertical_angle': vertical_angle,
-                 'composition': shot_purpose_spec['composition'],
-                 'duration_modifier': shot_purpose_spec['duration_modifier'],
-                 'confidence': shot_purpose_spec['confidence']
-             })
-         
-         return frame_sequences
+    def _build_frame_sequences(self, shot_sequence, emotions, cinematic_mode: str = "balanced"):
+        """
+        Build enhanced frame sequences with cinematographic metadata.
+        
+        Args:
+            shot_sequence: Original shot sequence from decision engine
+            emotions: Emotion analysis results
+            cinematic_mode: How to balance emotion vs tension in decisions
+            
+        Returns:
+            Enhanced frame sequences with cinematographic metadata
+        """
+        frame_sequences = []
+        
+        # Get narrative phase and tension score for context
+        narrative_phase = "setup"  # This would come from tension engine in full implementation
+        tension_score = 0.5  # This would come from tension engine in full implementation
+        
+        for i, shot in enumerate(shot_sequence):
+            # NEW: Select shot purpose
+            emotion_segment = emotions[i] if i < len(emotions) else emotions[0]  # Fallback for missing emotions
+            shot_purpose_spec = self.shot_purpose_selector.select_purpose(
+                emotion_segment=emotion_segment,
+                segment_index=i,
+                total_segments=len(shot_sequence),
+                narrative_phase=narrative_phase,
+                tension_score=tension_score
+            )
+            
+            # NEW: Determine vertical angle
+            vertical_angle = self.transform_processor.get_vertical_angle_for_emotion(
+                emotion=shot.get('emotion', 'neutral'),
+                base_angle=shot_purpose_spec['vertical_angle']
+            )
+            
+            # Add cinematographic metadata to frame sequence
+            frame_sequences.append({
+                'scene_id': shot.get('scene_id', f'scene_{i}'),
+                'emotion': shot.get('emotion', 'neutral'),
+                'angle': shot.get('angle', 'MCU'),
+                'viseme_sequence': shot.get('viseme_sequence', []),
+                'shot_purpose': shot_purpose_spec['purpose'],
+                'vertical_angle': vertical_angle,
+                'composition': shot_purpose_spec['composition'],
+                'duration_modifier': shot_purpose_spec['duration_modifier'],
+                'confidence': shot_purpose_spec['confidence']
+            })
+        
+        return frame_sequences
     
     def generate_batch(
         self, 

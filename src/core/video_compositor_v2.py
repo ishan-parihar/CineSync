@@ -16,7 +16,7 @@ import logging
 import numpy as np
 from PIL import Image
 
-from .cinematography.transform_processor import TransformProcessor
+from src.core.cinematography.transform_processor import TransformProcessor
 
 logger = logging.getLogger('lip_sync.compositor_v2')
 
