@@ -1,0 +1,1138 @@
+{
+  "export_timestamp": "1760781008.5932994",
+  "base_path": "profiles",
+  "preset_path": "assets\\presets",
+  "config": {
+    "base_path": "profiles",
+    "preset_path": "assets/presets",
+    "emotions": [
+      "neutral",
+      "joy",
+      "sadness",
+      "anger",
+      "fear",
+      "surprise",
+      "disgust",
+      "trust",
+      "anticipation"
+    ],
+    "viseme_images": [
+      "A.png",
+      "B.png",
+      "C.png",
+      "D.png",
+      "E.png",
+      "F.png",
+      "G.png",
+      "H.png",
+      "X.png"
+    ],
+    "angles": [
+      "front",
+      "side",
+      "profile",
+      "three_quarter"
+    ],
+    "required_files": [
+      "A.png",
+      "B.png",
+      "C.png",
+      "D.png",
+      "E.png",
+      "F.png",
+      "G.png",
+      "H.png",
+      "X.png"
+    ]
+  },
+  "profiles_structure": {
+    "character_1": {
+      "config": {
+        "schema_version": "2.0",
+        "profile_name": "character_1",
+        "version": "1.0.0",
+        "created_date": "2025-10-18T06:26:58.602121",
+        "last_modified": "2025-10-18T06:26:58.602121",
+        "character_metadata": {
+          "full_name": "character_1",
+          "character_type": "Default character profile for testing",
+          "art_style": "",
+          "artist": "",
+          "notes": ""
+        },
+        "supported_angles": [
+          "front",
+          "side"
+        ],
+        "supported_emotions": {
+          "core": [
+            "neutral",
+            "joy",
+            "surprise",
+            "anger",
+            "fear",
+            "disgust",
+            "sadness",
+            "trust",
+            "anticipation"
+          ],
+          "compound": []
+        },
+        "default_settings": {
+          "default_angle": "front",
+          "default_emotion": "trust",
+          "base_intensity": 0.7
+        },
+        "asset_specifications": {
+          "viseme_format": "PNG",
+          "alpha_channel_required": true,
+          "resolution_by_angle": {
+            "ECU": {
+              "width": 2048,
+              "height": 2048
+            },
+            "CU": {
+              "width": 1920,
+              "height": 1920
+            },
+            "MCU": {
+              "width": 1920,
+              "height": 1080
+            },
+            "MS": {
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "color_space": "sRGB",
+          "bit_depth": 8
+        },
+        "validation": {
+          "strict_mode": true,
+          "allow_missing_emotions": false,
+          "allow_missing_angles": false,
+          "require_base_images": true
+        },
+        "angles": {
+          "front": {
+            "name": "Front View",
+            "assets": [
+              "assets/presets/character_1/front/background.png"
+            ],
+            "mouth_position": [
+              960,
+              540
+            ],
+            "scale_factor": 1.0,
+            "angle_type": "eye_level",
+            "distance": "MCU"
+          },
+          "side": {
+            "name": "Side View",
+            "assets": [
+              "assets/presets/character_1/side/background.png"
+            ],
+            "mouth_position": [
+              800,
+              520
+            ],
+            "scale_factor": 0.9,
+            "angle_type": "eye_level",
+            "distance": "MCU"
+          }
+        },
+        "emotion_mappings": {
+          "neutral": {
+            "primary_mouth_shape": "X",
+            "intensity_multiplier": 0.5
+          },
+          "joy": {
+            "primary_mouth_shape": "E",
+            "intensity_multiplier": 1.2
+          },
+          "surprise": {
+            "primary_mouth_shape": "A",
+            "intensity_multiplier": 1.3
+          },
+          "anger": {
+            "primary_mouth_shape": "F",
+            "intensity_multiplier": 1.1
+          },
+          "fear": {
+            "primary_mouth_shape": "A",
+            "intensity_multiplier": 0.9
+          },
+          "disgust": {
+            "primary_mouth_shape": "G",
+            "intensity_multiplier": 1.0
+          },
+          "sadness": {
+            "primary_mouth_shape": "X",
+            "intensity_multiplier": 0.7
+          },
+          "trust": {
+            "primary_mouth_shape": "E",
+            "intensity_multiplier": 0.8
+          },
+          "anticipation": {
+            "primary_mouth_shape": "D",
+            "intensity_multiplier": 1.0
+          }
+        },
+        "cinematographic_preferences": {
+          "preferred_angles": [
+            "front",
+            "side"
+          ],
+          "preferred_distances": [
+            "MCU",
+            "CU"
+          ],
+          "tension_response": {
+            "low_tension": "MCU",
+            "medium_tension": "CU",
+            "high_tension": "ECU"
+          }
+        }
+      },
+      "angles": {
+        "front": {
+          "emotions": {
+            "anger": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anger\\X.png"
+                }
+              ]
+            },
+            "anticipation": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\anticipation\\X.png"
+                }
+              ]
+            },
+            "disgust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\disgust\\X.png"
+                }
+              ]
+            },
+            "fear": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\fear\\X.png"
+                }
+              ]
+            },
+            "joy": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\joy\\X.png"
+                }
+              ]
+            },
+            "neutral": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\neutral\\X.png"
+                }
+              ]
+            },
+            "sadness": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\sadness\\X.png"
+                }
+              ]
+            },
+            "surprise": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\surprise\\X.png"
+                }
+              ]
+            },
+            "trust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\front\\emotions\\trust\\X.png"
+                }
+              ]
+            }
+          }
+        },
+        "side": {
+          "emotions": {
+            "anger": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anger\\X.png"
+                }
+              ]
+            },
+            "anticipation": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\anticipation\\X.png"
+                }
+              ]
+            },
+            "disgust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\disgust\\X.png"
+                }
+              ]
+            },
+            "fear": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\fear\\X.png"
+                }
+              ]
+            },
+            "joy": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\joy\\X.png"
+                }
+              ]
+            },
+            "neutral": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\neutral\\X.png"
+                }
+              ]
+            },
+            "sadness": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\sadness\\X.png"
+                }
+              ]
+            },
+            "surprise": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\surprise\\X.png"
+                }
+              ]
+            },
+            "trust": {
+              "visemes": [
+                {
+                  "name": "A.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\A.png"
+                },
+                {
+                  "name": "B.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\B.png"
+                },
+                {
+                  "name": "C.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\C.png"
+                },
+                {
+                  "name": "D.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\D.png"
+                },
+                {
+                  "name": "E.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\E.png"
+                },
+                {
+                  "name": "F.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\F.png"
+                },
+                {
+                  "name": "G.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\G.png"
+                },
+                {
+                  "name": "H.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\H.png"
+                },
+                {
+                  "name": "X.png",
+                  "exists": true,
+                  "relative_path": "profiles\\character_1\\angles\\side\\emotions\\trust\\X.png"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "presets_structure": {
+    "character_1/front": {
+      "valid": true,
+      "config": {
+        "preset_name": "character_1_front",
+        "character_id": "character_1",
+        "angle": "front",
+        "description": "Front-facing view of character 1",
+        "mouth_position": {
+          "x": 960,
+          "y": 700,
+          "anchor": "center"
+        },
+        "background": {
+          "image": "assets\\presets\\character_1\\front\\background.png",
+          "type": "static"
+        },
+        "mouth_shapes": {
+          "A": "assets\\presets\\character_1\\front\\mouth_A.jpg",
+          "B": "assets\\presets\\character_1\\front\\mouth_B.jpg",
+          "C": "assets\\presets\\character_1\\front\\mouth_C.jpg",
+          "D": "assets\\presets\\character_1\\front\\mouth_D.jpg",
+          "E": "assets\\presets\\character_1\\front\\mouth_E.jpg",
+          "F": "assets\\presets\\character_1\\front\\mouth_F.jpg",
+          "G": "assets\\presets\\character_1\\front\\mouth_G.jpg",
+          "H": "assets\\presets\\character_1\\front\\mouth_H.jpg",
+          "X": "assets\\presets\\character_1\\front\\mouth_X.jpg"
+        },
+        "image_specifications": {
+          "format": "JPG",
+          "bit_depth": 24,
+          "alpha_channel": false,
+          "dimensions": [
+            512,
+            512
+          ],
+          "dpi": 300
+        },
+        "metadata": {
+          "created_date": "2025-10-17",
+          "version": "1.0",
+          "author": ""
+        }
+      }
+    }
+  }
+}

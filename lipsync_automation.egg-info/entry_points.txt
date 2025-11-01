@@ -1,0 +1,2 @@
+[console_scripts]
+lipsync = lipsync_automation.cli:main
