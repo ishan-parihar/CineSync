@@ -1,0 +1,24 @@
+{
+  "name": "lipsyncautomation-web-ui",
+  "version": "2.0.0",
+  "description": "Web UI for LipSyncAutomation system",
+  "scripts": {
+    "dev:backend": "cd backend && python main.py",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "start": "cd frontend && npm run start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": [
+    "lipsync",
+    "automation",
+    "web-ui",
+    "nextjs",
+    "fastapi"
+  ],
+  "author": "LipSyncAutomation Team",
+  "license": "MIT"
+}

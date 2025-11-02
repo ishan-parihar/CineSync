@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: lipsync_backend
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+      - profiles_data:/app/profiles
+      - cache_data:/app/cache
+      - output_data:/app/output
+      - ./uploads:/app/uploads
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    networks:
+      - lipsync_network
+    restart: unless-stopped
+    command: ["python", "-m", "web-ui.backend.main"]
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: lipsync_frontend
+    ports:
+      - "5000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://backend:8001
+    networks:
+      - lipsync_network
+    restart: unless-stopped
+    # Note: This setup is for development; for production, the frontend would be built and served differently
+
+networks:
+  lipsync_network:
+    driver: bridge
+
+volumes:
+  profiles_data:
+  cache_data:
+  output_data:
+  uploads:

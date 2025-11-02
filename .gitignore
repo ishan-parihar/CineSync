@@ -32,3 +32,6 @@ Thumbs.db
 *_phonemes.json
 /models/audio2emotion
 /temp
+/web-ui/frontend/node_modules
+/web-ui/frontend/out/_next
+/web-ui/frontend/.next

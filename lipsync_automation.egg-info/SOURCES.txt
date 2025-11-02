@@ -1,13 +1,20 @@
+.flake8
 .gitattributes
 .gitignore
+.isort.cfg
+.pre-commit-config.yaml
+CHARACTER_ASSET_CREATION_MANUAL.md
 README.md
+SETUP_MANUAL.md
 demo_structure_export.json
+mypy.ini
 pyproject.toml
 requirements.txt
 setup.py
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
+assets/demo_structure_export.json
 assets/audio/raw/test.mp3
 assets/audio/raw/test.wav
 assets/presets/profile_manifest.json
@@ -377,6 +384,9 @@ config/logging_config.json
 config/settings.json
 config/shot_purpose_profiles.json
 config/transform_presets.json
+docs/REORGANIZATION_SUMMARY.md
+docs/comprehensive_reorganization_plan.md
+docs/structure_plan.md
 docs/development/Blueprint_3.md
 docs/development/Blueprint_4.md
 docs/development/0_Completed/Blueprint_1 (Complete).md
@@ -419,6 +429,8 @@ lipsync_automation/tests/__init__.py
 lipsync_automation/tools/__init__.py
 lipsync_automation/utils/__init__.py
 lipsync_automation/utils/animation_structure_manager.py
+lipsync_automation/utils/animation_structure_manager.py.backup
+lipsync_automation/utils/animation_structure_manager.py.bak
 lipsync_automation/utils/audio_processor.py
 lipsync_automation/utils/cache_manager.py
 lipsync_automation/utils/validators.py
@@ -782,6 +794,16 @@ profiles/character_1/angles/MS/emotions/trust/H.png
 profiles/character_1/angles/MS/emotions/trust/X.png
 profiles/character_1/angles/MS/emotions/trust/background.png
 profiles/character_1/angles/MS/emotions/trust/preset_config.json
+scripts/create_animation_structure.py
+scripts/create_background_placeholders.py
+scripts/create_placeholders.py
+scripts/create_proper_preset_structure.py
+scripts/create_side_placeholders.py
+scripts/debug_preset.py
+scripts/demonstrate_enhanced_manager.py
+scripts/recreate_presets_structure.py
+scripts/rhubarb_wrapper.sh
+scripts/validate_implementation.py
 temp/placeholder_character_1_MS_trust_A_0000.png
 temp/placeholder_character_1_MS_trust_A_0009.png
 temp/placeholder_character_1_MS_trust_A_0018.png
@@ -839,6 +861,9 @@ temp/placeholder_character_1_MS_trust_X_0026.png
 temp/placeholder_character_1_MS_trust_X_0035.png
 temp/placeholder_character_1_MS_trust_X_0044.png
 temp/placeholder_character_1_MS_trust_X_0053.png
+tests/final_integration_test.py
+tests/integration_test_export.json
+tests/integration_test_final.py
 tests/run_integration_test.ps1
 tests/test_generator.py
 tests/test_shot_purpose.py
