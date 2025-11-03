@@ -38,10 +38,11 @@ export const apiEndpoints = {
   // System info
   getSystemInfo: () => api.get('/api/system-info'),
   
-  // Profiles
-  getProfiles: () => api.get('/api/profiles'),
-  createProfile: (profileData: any) => api.post('/api/profiles', profileData),
-  getProfile: (profileName: string) => api.get(`/api/profiles/${profileName}`),
+   // Profiles
+   getProfiles: () => api.get('/api/profiles'),
+   createProfile: (profileData: any) => api.post('/api/profiles', profileData),
+   getProfile: (profileName: string) => api.get(`/api/profiles/${profileName}`),
+   updateProfile: (profileName: string, profileData: any) => api.put(`/api/profiles/${profileName}`, profileData),
   
   // Processing
   startProcessing: (jobData: any) => api.post('/api/process', jobData),
@@ -60,6 +61,10 @@ export const apiEndpoints = {
     });
   },
   
-  // Health check
-  healthCheck: () => api.get('/api/health'),
-};
+   // Settings
+   getSettings: () => api.get('/api/settings'),
+   updateSettings: (settingsData: any) => api.put('/api/settings', settingsData),
+   
+   // Health check
+   healthCheck: () => api.get('/api/health'),
+ };

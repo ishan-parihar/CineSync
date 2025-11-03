@@ -95,7 +95,7 @@ export default function DashboardPage() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading system information...</p>
-          <p className="mt-2 text-sm text-gray-500">Make sure the backend server is running on port 8001</p>
+           <p className="mt-2 text-sm text-gray-500">Make sure the backend server is running on port 8500</p>
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
-'use client';
+ 'use client';
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+ import { useState, useEffect } from 'react';
+ import { apiEndpoints } from '../../utils/api';
 
 interface Profile {
   profile_name: string;
@@ -27,51 +27,58 @@ export default function ProfilesPage() {
   const [newProfileAngles, setNewProfileAngles] = useState<string[]>([]);
   const [newProfileEmotions, setNewProfileEmotions] = useState<string[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  
+  // State for editing profile
+  const [editingProfile, setEditingProfile] = useState<Profile | null>(null);
+  const [editProfileName, setEditProfileName] = useState('');
+  const [editProfileAngles, setEditProfileAngles] = useState<string[]>([]);
+  const [editProfileEmotions, setEditProfileEmotions] = useState<string[]>([]);
+  const [showEditForm, setShowEditForm] = useState(false);
 
   useEffect(() => {
     fetchProfiles();
   }, []);
 
-  const fetchProfiles = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get('http://localhost:8001/api/profiles');
-      setProfiles(response.data.profiles);
-      setError(null);
-    } catch (err) {
-      console.error('Error fetching profiles:', err);
-      setError('Failed to load profiles');
-    } finally {
-      setLoading(false);
-    }
-  };
+   const fetchProfiles = async () => {
+     try {
+       setLoading(true);
+       const response = await apiEndpoints.getProfiles();
+       setProfiles(response.data.profiles);
+       setError(null);
+     } catch (err) {
+       console.error('Error fetching profiles:', err);
+       setError('Failed to load profiles');
+     } finally {
+       setLoading(false);
+     }
+   };
 
-  const createProfile = async () => {
-    try {
-      const response = await axios.post('http://localhost:8001/api/profiles', {
-        profile_name: newProfileName,
-        supported_angles: newProfileAngles,
-        supported_emotions: newProfileEmotions,
-      });
-      
-      if (response.data.error) {
-        setError(response.data.error);
-        return;
-      }
-      
-      // Reset form
-      setNewProfileName('');
-      setNewProfileAngles([]);
-      setNewProfileEmotions([]);
-      setShowCreateForm(false);
-      
-      // Refresh profiles
-      fetchProfiles();
-    } catch (err) {
-      console.error('Error creating profile:', err);
-      setError('Failed to create profile');
-    }
-  };
+   const createProfile = async () => {
+     try {
+       const response = await apiEndpoints.createProfile({
+         profile_name: newProfileName,
+         supported_angles: newProfileAngles,
+         supported_emotions: newProfileEmotions,
+       });
+       
+       if (response.data.error) {
+         setError(response.data.error);
+         return;
+       }
+       
+       // Reset form
+       setNewProfileName('');
+       setNewProfileAngles([]);
+       setNewProfileEmotions([]);
+       setShowCreateForm(false);
+       
+       // Refresh profiles
+       fetchProfiles();
+     } catch (err) {
+       console.error('Error creating profile:', err);
+       setError('Failed to create profile');
+     }
+   };
 
   const handleAngleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -90,6 +97,94 @@ export default function ProfilesPage() {
       setNewProfileEmotions(newProfileEmotions.filter(emotion => emotion !== value));
     }
   };
+
+   const openEditModal = async (profile: Profile) => {
+     try {
+       // Fetch the full profile data for editing
+       const response = await apiEndpoints.getProfile(profile.profile_name);
+       const fullProfileData = response.data;
+       
+       // Set the edit form fields with current values
+       setEditProfileName(profile.profile_name);
+       // For supported_angles, use the values from the config if available
+       const supportedAngles = Array.isArray(fullProfileData.profile_info.supported_angles) 
+         ? fullProfileData.profile_info.supported_angles 
+         : profile.profile_name === 'character_1' 
+           ? ['CU', 'ECU', 'MCU', 'MS'] // Default angles
+           : [];
+       
+       // For supported_emotions, extract from the config structure
+       let supportedEmotions: string[] = [];
+       if (fullProfileData.profile_info.supported_emotions) {
+         if (Array.isArray(fullProfileData.profile_info.supported_emotions)) {
+           supportedEmotions = fullProfileData.profile_info.supported_emotions;
+         } else if (typeof fullProfileData.profile_info.supported_emotions === 'object' && fullProfileData.profile_info.supported_emotions.core) {
+           supportedEmotions = fullProfileData.profile_info.supported_emotions.core;
+         }
+       }
+       
+       setEditProfileAngles(supportedAngles);
+       setEditProfileEmotions(supportedEmotions);
+       setEditingProfile(profile);
+       setShowEditForm(true);
+     } catch (err) {
+       console.error('Error fetching profile for editing:', err);
+       setError('Failed to load profile data for editing');
+     }
+   };
+
+  const closeEditModal = () => {
+    setShowEditForm(false);
+    setEditingProfile(null);
+    setEditProfileName('');
+    setEditProfileAngles([]);
+    setEditProfileEmotions([]);
+  };
+
+  const handleEditAngleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (e.target.checked && !editProfileAngles.includes(value)) {
+      setEditProfileAngles([...editProfileAngles, value]);
+    } else {
+      setEditProfileAngles(editProfileAngles.filter(angle => angle !== value));
+    }
+  };
+
+  const handleEditEmotionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (e.target.checked && !editProfileEmotions.includes(value)) {
+      setEditProfileEmotions([...editProfileEmotions, value]);
+    } else {
+      setEditProfileEmotions(editProfileEmotions.filter(emotion => emotion !== value));
+    }
+  };
+
+   const updateProfile = async () => {
+     if (!editingProfile) return;
+
+     try {
+       const response = await apiEndpoints.updateProfile(editingProfile.profile_name, {
+         supported_angles: editProfileAngles,
+         supported_emotions: editProfileEmotions,
+         character_metadata: {
+           full_name: editProfileName,
+           last_modified: new Date().toISOString()
+         }
+       });
+       
+       if (response.data.error) {
+         setError(response.data.error);
+         return;
+       }
+       
+       // Close the modal and refresh profiles
+       closeEditModal();
+       fetchProfiles();
+     } catch (err) {
+       console.error('Error updating profile:', err);
+       setError('Failed to update profile');
+     }
+   };
 
   if (loading) {
     return (
@@ -187,19 +282,115 @@ export default function ProfilesPage() {
                     </div>
                   ))}
                 </div>
-              </div>
-
-              <button
-                onClick={createProfile}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition duration-150 ease-in-out"
-              >
-                Create Profile
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Profiles List */}
+               </div>
+ 
+               <button
+                 onClick={createProfile}
+                 className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition duration-150 ease-in-out"
+               >
+                 Create Profile
+               </button>
+             </div>
+           </div>
+         )}
+ 
+         {/* Edit Profile Modal */}
+         {showEditForm && editingProfile && (
+           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+             <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+               <div className="flex justify-between items-center mb-4">
+                 <h2 className="text-xl font-semibold text-gray-800">Edit Profile: {editingProfile.profile_name}</h2>
+                 <button 
+                   onClick={closeEditModal}
+                   className="text-gray-500 hover:text-gray-700"
+                 >
+                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                   </svg>
+                 </button>
+               </div>
+               
+               <div className="space-y-4">
+                 <div>
+                   <label htmlFor="editProfileName" className="block text-sm font-medium text-gray-700 mb-1">
+                     Profile Name
+                   </label>
+                   <input
+                     type="text"
+                     id="editProfileName"
+                     value={editProfileName}
+                     onChange={(e) => setEditProfileName(e.target.value)}
+                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                     placeholder="Enter profile name"
+                   />
+                 </div>
+ 
+                 <div>
+                   <label className="block text-sm font-medium text-gray-700 mb-1">
+                     Supported Angles
+                   </label>
+                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                     {['CU', 'ECU', 'MCU', 'MS', 'WS'].map((angle) => (
+                       <div key={angle} className="flex items-center">
+                         <input
+                           id={`edit-angle-${angle}`}
+                           type="checkbox"
+                           value={angle}
+                           checked={editProfileAngles.includes(angle)}
+                           onChange={handleEditAngleChange}
+                           className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                         />
+                         <label htmlFor={`edit-angle-${angle}`} className="ml-2 text-sm text-gray-700">
+                           {angle}
+                         </label>
+                       </div>
+                     ))}
+                   </div>
+                 </div>
+ 
+                 <div>
+                   <label className="block text-sm font-medium text-gray-700 mb-1">
+                     Supported Emotions
+                   </label>
+                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                     {['neutral', 'happy', 'sad', 'angry', 'surprised', 'fearful', 'disgusted', 'contempt'].map((emotion) => (
+                       <div key={emotion} className="flex items-center">
+                         <input
+                           id={`edit-emotion-${emotion}`}
+                           type="checkbox"
+                           value={emotion}
+                           checked={editProfileEmotions.includes(emotion)}
+                           onChange={handleEditEmotionChange}
+                           className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                         />
+                         <label htmlFor={`edit-emotion-${emotion}`} className="ml-2 text-sm text-gray-700">
+                           {emotion}
+                         </label>
+                       </div>
+                     ))}
+                   </div>
+                 </div>
+ 
+                 <div className="flex justify-end space-x-3 pt-4">
+                   <button
+                     onClick={closeEditModal}
+                     className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition duration-150 ease-in-out"
+                   >
+                     Cancel
+                   </button>
+                   <button
+                     onClick={updateProfile}
+                     className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-150 ease-in-out"
+                   >
+                     Update Profile
+                   </button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         )}
+ 
+         {/* Profiles List */}
         <div className="bg-white shadow rounded-lg p-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Available Profiles</h2>
           <div className="overflow-x-auto">
@@ -226,10 +417,15 @@ export default function ProfilesPage() {
                          {profile.validation.valid ? 'Valid' : 'Invalid'}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <button className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                      <button className="text-red-600 hover:text-red-900">Delete</button>
-                    </td>
+                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                       <button 
+                         onClick={() => openEditModal(profile)}
+                         className="text-blue-600 hover:text-blue-900 mr-3"
+                       >
+                         Edit
+                       </button>
+                       <button className="text-red-600 hover:text-red-900">Delete</button>
+                     </td>
                   </tr>
                 ))}
               </tbody>
