@@ -2,7 +2,6 @@
 Main FastAPI application for LipSyncAutomation Web UI
 """
 from fastapi import FastAPI, WebSocket, File, UploadFile
-from fastapi_socketio import SocketManager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
@@ -29,9 +28,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Initialize SocketManager for WebSocket functionality
-socket_manager = SocketManager(app=app, cors_allowed_origins=[])
-
 # Add CORS middleware to allow frontend communication
 app.add_middleware(
     CORSMiddleware,
@@ -44,14 +40,28 @@ app.add_middleware(
 # Store processing jobs status
 processing_jobs: Dict[str, Dict[str, Any]] = {}
 
+# Maintain active WebSocket connections to broadcast updates
+active_websocket_connections = set()
+
 async def emit_processing_update():
     """Emit processing update to all connected WebSocket clients"""
     status_update = {
         "active_jobs": len([job for job in processing_jobs.values() if job['status'] in ['processing', 'queued']]),
         "jobs": processing_jobs
     }
-    # Emit to all connected clients
-    await socket_manager.emit("processing_status", data=status_update)
+    
+    # Broadcast to all connected WebSocket clients
+    disconnected_clients = []
+    for connection in active_websocket_connections:
+        try:
+            await connection.send_text(json.dumps(status_update))
+        except Exception as e:
+            print(f"Error sending to WebSocket client: {e}")
+            disconnected_clients.append(connection)
+    
+    # Remove disconnected clients
+    for client in disconnected_clients:
+        active_websocket_connections.discard(client)
 
 @app.get("/")
 async def read_root():
@@ -167,27 +177,168 @@ async def get_profile(profile_name: str):
     except Exception as e:
         return {"error": str(e)}
 
+
+@app.put("/api/profiles/{profile_name}")
+async def update_profile(profile_name: str, profile_data: Dict[str, Any]):
+    """Update an existing character profile"""
+    config_path = project_root / "config" / "settings.json"
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+    
+    profile_manager = ProfileManager(config)
+    
+    try:
+        # Check if profile exists
+        validation_result = profile_manager.validate_profile(profile_name)
+        if not validation_result['valid']:
+            return {"error": f"Profile '{profile_name}' does not exist or is invalid"}
+        
+        # Load existing profile config
+        profiles_dir_config = config['system']['profiles_directory']
+        if profiles_dir_config is None:
+            return {"error": "profiles_directory not configured in settings"}
+        
+        profiles_dir_str = str(profiles_dir_config)
+        
+        # Use string concatenation to avoid path type issues
+        if profiles_dir_str.startswith('./'):
+            profile_path = project_root / profiles_dir_str[2:] / profile_name / "profile_config.json"
+        else:
+            profile_path = Path(profiles_dir_str) / profile_name / "profile_config.json"
+            
+        with open(profile_path, 'r') as f:
+            existing_config = json.load(f)
+        
+        # Update provided fields while preserving others
+        if 'supported_angles' in profile_data:
+            existing_config['supported_angles'] = profile_data['supported_angles']
+        
+        if 'supported_emotions' in profile_data:
+            if isinstance(existing_config['supported_emotions'], dict) and 'core' in existing_config['supported_emotions']:
+                existing_config['supported_emotions']['core'] = profile_data['supported_emotions']
+            else:
+                # If the structure is different, update the whole field
+                existing_config['supported_emotions'] = profile_data['supported_emotions']
+        
+        if 'character_metadata' in profile_data:
+            if 'character_metadata' in existing_config:
+                existing_config['character_metadata'].update(profile_data['character_metadata'])
+            else:
+                existing_config['character_metadata'] = profile_data['character_metadata']
+        
+        if 'default_settings' in profile_data:
+            if 'default_settings' in existing_config:
+                existing_config['default_settings'].update(profile_data['default_settings'])
+            else:
+                existing_config['default_settings'] = profile_data['default_settings']
+        
+        # Update last modified timestamp
+        existing_config['last_modified'] = datetime.now().isoformat()
+        
+        # Save updated config
+        with open(profile_path, 'w') as f:
+            json.dump(existing_config, f, indent=2)
+        
+        # Update manifest if needed
+        for profile in profile_manager.manifest['profiles']:
+            if profile['profile_name'] == profile_name:
+                profile['supported_angles'] = existing_config['supported_angles']
+                if isinstance(existing_config['supported_emotions'], dict) and 'core' in existing_config['supported_emotions']:
+                    profile['supported_emotions'] = existing_config['supported_emotions']['core']
+                else:
+                    profile['supported_emotions'] = existing_config['supported_emotions']
+                profile['modified_date'] = datetime.now().isoformat()
+                break
+        
+        # Save updated manifest
+        profile_manager._save_manifest(profile_manager.manifest)
+        
+        return {
+            "message": f"Profile '{profile_name}' updated successfully",
+            "profile_name": profile_name
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/settings")
+async def get_settings():
+    """Get the main application settings"""
+    config_path = project_root / "config" / "settings.json"
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        return {"settings": config}
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.put("/api/settings")
+async def update_settings(settings_data: Dict[str, Any]):
+    """Update the main application settings"""
+    config_path = project_root / "config" / "settings.json"
+    try:
+        # Load existing settings
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        
+        # Update with provided settings data
+        # Only update fields that exist in the current config to avoid overwriting important settings
+        for key, value in settings_data.items():
+            if key in config:
+                config[key] = value
+            # Also check nested objects
+            elif '.' in key:
+                # Handle nested keys like 'profiles.default_profile'
+                keys = key.split('.')
+                temp_config = config
+                for k in keys[:-1]:
+                    if k in temp_config and isinstance(temp_config[k], dict):
+                        temp_config = temp_config[k]
+                    else:
+                        break
+                else:
+                    if keys[-1] in temp_config:
+                        temp_config[keys[-1]] = value
+        
+        # Save updated settings
+        with open(config_path, 'w') as f:
+            json.dump(config, f, indent=2)
+        
+        return {"message": "Settings updated successfully"}
+    except Exception as e:
+        return {"error": str(e)}
+
 # Regular WebSocket endpoint still needed for direct connections
 @app.websocket("/ws/processing-status")
 async def websocket_processing_status(websocket: WebSocket):
     """WebSocket endpoint for real-time processing status updates"""
-    await websocket.accept()
-    
     try:
+        await websocket.accept()
+        active_websocket_connections.add(websocket)
+        
+        # Send current processing status initially
+        status_update = {
+            "active_jobs": len([job for job in processing_jobs.values() if job['status'] in ['processing', 'queued']]),
+            "jobs": processing_jobs
+        }
+        await websocket.send_text(json.dumps(status_update))
+        
+        # Keep the connection alive by listening for any messages (though we don't expect any)
         while True:
-            # Send current processing status
-            status_update = {
-                "active_jobs": len([job for job in processing_jobs.values() if job['status'] in ['processing', 'queued']]),
-                "jobs": processing_jobs
-            }
-            
-            await websocket.send_text(json.dumps(status_update))
-            await asyncio.sleep(2)  # Update every 2 seconds
+            # Wait for messages - we expect this to raise an exception when connection closes
+            data = await websocket.receive_text()
+            # If we somehow receive data (which shouldn't happen in this use case), just continue
+            print(f"Unexpected message received: {data}")
             
     except Exception as e:
-        print(f"WebSocket error: {e}")
+        # Don't log this as an error - disconnections are normal
+        print(f"WebSocket disconnected: {type(e).__name__}: {e}")
     finally:
-        await websocket.close()
+        # Remove the connection from the active set
+        if websocket in active_websocket_connections:
+            active_websocket_connections.discard(websocket)
+        # Note: We don't explicitly close the websocket here as FastAPI/Starlette handles it automatically
 
 @app.post("/api/process")
 async def start_processing(job_data: Dict[str, Any]):
@@ -309,6 +460,9 @@ async def upload_file(file: UploadFile = File(...)):
     uploads_dir.mkdir(exist_ok=True)
     
     # Save the uploaded file
+    if file.filename is None:
+        return {"error": "Uploaded file has no name"}
+    
     file_path = uploads_dir / file.filename
     with open(file_path, "wb") as buffer:
         import shutil
@@ -316,5 +470,17 @@ async def upload_file(file: UploadFile = File(...)):
     
     return {"path": str(file_path)}
 
+@app.on_event("startup")
+async def startup_event():
+    """Initialize app on startup"""
+    print("LipSyncAutomation Web API starting up...")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Cleanup on shutdown"""
+    print("LipSyncAutomation Web API shutting down...")
+
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    import os
+    port = int(os.getenv("PORT", 8001))  # Default to 8001 to match the script
+    uvicorn.run(app, host="0.0.0.0", port=port)

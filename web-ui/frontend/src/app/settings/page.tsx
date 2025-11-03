@@ -1,7 +1,7 @@
-'use client';
+ 'use client';
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+ import { useState, useEffect } from 'react';
+ import { apiEndpoints } from '../../utils/api';
 
 interface SystemInfo {
   dependencies: {
@@ -32,38 +32,39 @@ export default function SettingsPage() {
     fetchSettings();
   }, []);
 
-  const fetchSystemInfo = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get('http://localhost:8001/api/system-info');
-      setSystemInfo(response.data);
-      setError(null);
-    } catch (err) {
-      console.error('Error fetching system info:', err);
-      setError('Failed to load system information');
-    } finally {
-      setLoading(false);
-    }
-  };
+   const fetchSystemInfo = async () => {
+     try {
+       setLoading(true);
+       const response = await apiEndpoints.getSystemInfo();
+       setSystemInfo(response.data);
+       setError(null);
+     } catch (err) {
+       console.error('Error fetching system info:', err);
+       setError('Failed to load system information');
+     } finally {
+       setLoading(false);
+     }
+   };
 
-  const fetchSettings = async () => {
-    try {
-      const response = await axios.get('http://localhost:8001/config/settings.json');
-      setSettings(response.data);
-    } catch (err) {
-      console.error('Error fetching settings:', err);
-    }
-  };
+   const fetchSettings = async () => {
+     try {
+       const response = await apiEndpoints.getSettings();
+       // Extract the actual settings from the response
+       setSettings(response.data.settings || {});
+     } catch (err) {
+       console.error('Error fetching settings:', err);
+     }
+   };
 
-  const updateSettings = async () => {
-    try {
-      await axios.put('http://localhost:8001/config/settings.json', settings);
-      alert('Settings updated successfully');
-    } catch (err) {
-      console.error('Error updating settings:', err);
-      setError('Failed to update settings');
-    }
-  };
+   const updateSettings = async () => {
+     try {
+       await apiEndpoints.updateSettings(settings);
+       alert('Settings updated successfully');
+     } catch (err) {
+       console.error('Error updating settings:', err);
+       setError('Failed to update settings');
+     }
+   };
 
   if (loading) {
     return (

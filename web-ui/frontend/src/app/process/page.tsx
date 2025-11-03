@@ -1,8 +1,7 @@
-'use client';
+ 'use client';
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import io, { Socket } from 'socket.io-client';
+import { apiEndpoints } from '../../utils/api';
 
 interface Profile {
   profile_name: string;
@@ -44,63 +43,126 @@ export default function ProcessPage() {
   const [cinematicMode, setCinematicMode] = useState('balanced');
   const [jobs, setJobs] = useState<Job[]>([]);
   const [wsConnected, setWsConnected] = useState(false);
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
 
-  // Initialize WebSocket connection
-  useEffect(() => {
-    const newSocket = io('http://localhost:8001');
-    setSocket(newSocket);
+// Initialize WebSocket connection to the processing status endpoint
+     useEffect(() => {
+       let ws: WebSocket;
+       
+       // Function to establish WebSocket connection
+       const connectWebSocket = () => {
+         try {
+           // Determine backend URL based on environment and current location
+           let wsUrl: string;
+           
+           if (typeof window !== 'undefined') {
+             // Client-side: use environment variable or construct from current location
+             const envBackendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+             
+             if (envBackendUrl) {
+               // If NEXT_PUBLIC_BACKEND_URL has protocol, use it; otherwise construct from it
+               if (envBackendUrl.startsWith('http://')) {
+                 wsUrl = envBackendUrl.replace('http://', 'ws://') + '/ws/processing-status';
+               } else if (envBackendUrl.startsWith('https://')) {
+                 wsUrl = envBackendUrl.replace('https://', 'wss://') + '/ws/processing-status';
+               } else {
+                 // Assume it's just host:port
+                 const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                 wsUrl = `${wsProtocol}//${envBackendUrl}/ws/processing-status`;
+               }
+             } else {
+               // No environment variable, construct from current location
+               // For Docker setup, we may need to try different approaches
+               const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+               const backendHost = process.env.NEXT_PUBLIC_BACKEND_HOST || window.location.hostname;
+               const backendPort = process.env.NEXT_PUBLIC_BACKEND_PORT || '8001';
+               wsUrl = `${wsProtocol}//${backendHost}:${backendPort}/ws/processing-status`;
+             }
+           } else {
+             // Server-side (shouldn't happen in useEffect, but for safety)
+             wsUrl = 'ws://localhost:8001/ws/processing-status';
+           }
+           
+           console.log('Attempting to connect to WebSocket:', wsUrl);
+           
+           ws = new WebSocket(wsUrl);
+           
+           ws.onopen = () => {
+             console.log('Connected to WebSocket');
+             setWsConnected(true);
+           };
 
-    newSocket.on('connect', () => {
-      console.log('Connected to WebSocket');
-      setWsConnected(true);
-    });
+           ws.onclose = (event) => {
+             console.log('Disconnected from WebSocket', event);
+             setWsConnected(false);
+             
+             // Attempt to reconnect after a delay
+             setTimeout(() => {
+               if (typeof window !== 'undefined') {
+                 connectWebSocket();
+               }
+             }, 3000); // Reconnect after 3 seconds
+           };
 
-    newSocket.on('disconnect', () => {
-      console.log('Disconnected from WebSocket');
-      setWsConnected(false);
-    });
+           ws.onerror = (error: Event) => {
+             console.error('WebSocket error:', error);
+             setWsConnected(false);
+           };
 
-    // Listen for processing status updates
-    newSocket.on('processing_status', (data) => {
-      // Update jobs list with the received data
-      const updatedJobs = Object.values(data.jobs) as Job[];
-      setJobs(updatedJobs);
-    });
+           // Listen for processing status updates
+           ws.onmessage = (event) => {
+             try {
+               const data = JSON.parse(event.data);
+               // Update jobs list with the received data
+               const updatedJobs = Object.values(data.jobs || {}) as Job[];
+               setJobs(updatedJobs);
+             } catch (error) {
+               console.error('Error parsing WebSocket message:', error);
+             }
+           };
+         } catch (error) {
+           console.error('Error creating WebSocket connection:', error);
+           setWsConnected(false);
+         }
+       };
+       
+       connectWebSocket();
 
-    // Cleanup on unmount
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
+      // Cleanup on unmount
+      return () => {
+        if (ws) {
+          ws.close();
+        }
+      };
+    }, []);
 
   useEffect(() => {
     fetchProfiles();
     fetchJobs();
   }, []);
 
-  const fetchProfiles = async () => {
-    try {
-      setLoadingProfiles(true);
-      const response = await axios.get('http://localhost:8001/api/profiles');
-      setProfiles(response.data.profiles);
-      setError(null);
-    } catch (err) {
-      console.error('Error fetching profiles:', err);
-      setError('Failed to load profiles');
-    } finally {
-      setLoadingProfiles(false);
-    }
-  };
+   const fetchProfiles = async () => {
+     try {
+       setLoadingProfiles(true);
+       const response = await apiEndpoints.getProfiles();
+       setProfiles(response.data.profiles);
+       setError(null);
+     } catch (err) {
+       console.error('Error fetching profiles:', err);
+       setError('Failed to load profiles');
+     } finally {
+       setLoadingProfiles(false);
+     }
+   };
 
-  const fetchJobs = async () => {
-    try {
-      const response = await axios.get('http://localhost:8001/api/jobs');
-      setJobs(Object.values(response.data.jobs) as Job[]);
-    } catch (err) {
-      console.error('Error fetching jobs:', err);
-    }
-  };
+   const fetchJobs = async () => {
+     try {
+       const response = await apiEndpoints.getJobs();
+       setJobs(Object.values(response.data.jobs) as Job[]);
+     } catch (err) {
+       console.error('Error fetching jobs:', err);
+     }
+   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -108,51 +170,43 @@ export default function ProcessPage() {
     }
   };
 
-  const startProcessing = async () => {
-    if (!audioFile) {
-      setError('Please select an audio file');
-      return;
-    }
+   const startProcessing = async () => {
+     if (!audioFile) {
+       setError('Please select an audio file');
+       return;
+     }
 
-    // Create FormData to send the file
-    const formData = new FormData();
-    formData.append('audio_file', audioFile);
-    
-    try {
-      // First upload the file to the server
-      const uploadResponse = await axios.post('http://localhost:8001/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      
-      const audioPath = uploadResponse.data.path; // Assuming the server returns the path
-      
-      // Then start processing
-      const processResponse = await axios.post('http://localhost:8001/api/process', {
-        audio_path: audioPath,
-        profile: selectedProfile,
-        output_path: outputPath || `output/${audioFile.name.replace(/\.[^/.]+$/, '')}_processed.mp4`,
-        cinematic_mode: cinematicMode,
-      });
-      
-      if (processResponse.data.error) {
-        setError(processResponse.data.error);
-        return;
-      }
-      
-      // Reset form
-      setAudioFile(null);
-      setSelectedProfile('');
-      setOutputPath('');
-      
-      // Jobs will be updated via WebSocket
-      console.log('Processing started:', processResponse.data);
-    } catch (err) {
-      console.error('Error starting processing:', err);
-      setError('Failed to start processing');
-    }
-  };
+     try {
+       // First upload the file to the server
+       const uploadResponse = await apiEndpoints.uploadFile(audioFile);
+       
+       const audioPath = uploadResponse.data.path; // Assuming the server returns the path
+       
+       // Then start processing
+       const processResponse = await apiEndpoints.startProcessing({
+         audio_path: audioPath,
+         profile: selectedProfile,
+         output_path: outputPath || `output/${audioFile.name.replace(/\.[^/.]+$/, '')}_processed.mp4`,
+         cinematic_mode: cinematicMode,
+       });
+       
+       if (processResponse.data.error) {
+         setError(processResponse.data.error);
+         return;
+       }
+       
+       // Reset form
+       setAudioFile(null);
+       setSelectedProfile('');
+       setOutputPath('');
+       
+       // Jobs will be updated via WebSocket
+       console.log('Processing started:', processResponse.data);
+     } catch (err) {
+       console.error('Error starting processing:', err);
+       setError('Failed to start processing');
+     }
+   };
 
   return (
     <div className="min-h-screen bg-gray-50">

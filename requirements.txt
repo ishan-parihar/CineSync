@@ -8,7 +8,6 @@ onnxruntime==1.18.0
 soundfile==0.12.1
 wave==0.0.2
 python-multipart==0.0.9
-python-socketio==5.11.0
 websockets==13.0
 pyjwt==2.9.0
 bcrypt==4.2.0
