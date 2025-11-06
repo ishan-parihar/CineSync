@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "shot_purposes": {
+    "establishing": {
+      "description": "Introduce scene/location context",
+      "narrative_function": "context_setting",
+      "preferred_framings": ["MS", "MCU"],
+      "fallback_framings": ["CU"],
+      "composition_default": "rule_of_thirds",
+      "vertical_angle_default": "eye_level",
+      "duration_modifier": 1.3,
+      "typical_emotions": ["trust", "anticipation", "joy"],
+      "usage_context": "scene_start"
+    },
+    "reaction": {
+      "description": "Capture emotional response",
+      "narrative_function": "emotion_emphasis",
+      "preferred_framings": ["ECU", "CU"],
+      "fallback_framings": ["MCU"],
+      "composition_default": "centered",
+      "vertical_angle_default": "emotion_dependent",
+      "duration_modifier": 0.8,
+      "typical_emotions": ["all"],
+      "usage_context": "high_arousal"
+    },
+    "dialogue": {
+      "description": "Standard conversational shot",
+      "narrative_function": "information_delivery",
+      "preferred_framings": ["MCU", "CU"],
+      "fallback_framings": ["MS"],
+      "composition_default": "rule_of_thirds",
+      "vertical_angle_default": "eye_level",
+      "duration_modifier": 1.0,
+      "typical_emotions": ["trust", "anticipation"],
+      "usage_context": "moderate_arousal"
+    },
+    "emphasis": {
+      "description": "Emphasize important moment",
+      "narrative_function": "importance_signaling",
+      "preferred_framings": ["CU", "ECU"],
+      "fallback_framings": ["MCU"],
+      "composition_default": "centered",
+      "vertical_angle_default": "low_angle",
+      "duration_modifier": 0.9,
+      "typical_emotions": ["anger", "joy", "surprise"],
+      "usage_context": "peak_moments"
+    },
+    "transition": {
+      "description": "Scene or emotional transition",
+      "narrative_function": "continuity",
+      "preferred_framings": ["MCU", "MS"],
+      "fallback_framings": ["CU"],
+      "composition_default": "rule_of_thirds",
+      "vertical_angle_default": "eye_level",
+      "duration_modifier": 1.1,
+      "typical_emotions": ["trust"],
+      "usage_context": "between_scenes"
+    }
+  },
+  "purpose_selection_rules": {
+    "scene_start_trigger": {
+      "condition": "first_segment",
+      "purpose": "establishing"
+    },
+    "high_arousal_trigger": {
+      "condition": "arousal > 0.75",
+      "purpose": "reaction"
+    },
+    "emotion_peak_trigger": {
+      "condition": "arousal_derivative > 0.3",
+      "purpose": "emphasis"
+    },
+    "moderate_speech_trigger": {
+      "condition": "arousal < 0.6",
+      "purpose": "dialogue"
+    },
+    "valence_shift_trigger": {
+      "condition": "valence_change > 0.5",
+      "purpose": "transition"
+    }
+  }
+}

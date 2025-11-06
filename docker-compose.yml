@@ -1,39 +1,40 @@
 version: '3.8'
 
 services:
-   backend:
-     build:
-       context: .
-       dockerfile: Dockerfile.backend
-     container_name: lipsync_backend
-     ports:
-       - "8001:8500"
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lipsync_backend
+    ports:
+      - "8001:8500"
     volumes:
-      - .:/app
-      - profiles_data:/app/profiles
-      - cache_data:/app/cache
-      - output_data:/app/output
+      - ./backend:/app
+      - ./profiles:/app/profiles
+      - ./cache:/app/cache
+      - ./output:/app/output
       - ./uploads:/app/uploads
+      - ./shared:/app/shared
     environment:
       - PYTHONPATH=/app
       - PYTHONUNBUFFERED=1
     networks:
       - lipsync_network
     restart: unless-stopped
-    command: ["python", "-m", "web-ui.backend.main"]
+    command: ["python", "app/main.py"]
 
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.frontend
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: lipsync_frontend
     ports:
       - "5000:3000"
     depends_on:
       - backend
-     environment:
-       - NODE_ENV=development
-       - NEXT_PUBLIC_API_URL=http://backend:8500
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://backend:8500
     networks:
       - lipsync_network
     restart: unless-stopped

@@ -35,3 +35,11 @@ Thumbs.db
 /web-ui/frontend/node_modules
 /web-ui/frontend/out/_next
 /web-ui/frontend/.next
+frontend/node_modules/
+backend/__pycache__/
+backend/app/__pycache__/
+frontend/.next/
+frontend/node_modules/
+frontend/out/
+backend/__pycache__/
+backend/app/__pycache__/

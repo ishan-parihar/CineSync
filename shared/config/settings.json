@@ -1,0 +1,106 @@
+{
+  "system": {
+    "profiles_directory": "./profiles",
+    "cache_directory": "./cache",
+    "temp_directory": "./temp",
+    "log_directory": "./logs",
+    "rhubarb_path": "./scripts/rhubarb_wrapper.sh",
+    "ffmpeg_path": "/usr/bin/ffmpeg"
+  },
+  
+  "emotion_analysis": {
+    "backend": "audio2emotion",
+    "model_path": "./models/audio2emotion/network.onnx",
+    "cache_enabled": true,
+    "confidence_threshold": 0.6,
+    "segment_min_duration": 1.0,
+    "segment_max_duration": 10.0,
+    "use_gpu": true
+  },
+  
+  "profile_settings": {
+    "cache_enabled": true,
+    "validation_strict": true,
+    "default_profile": "character_1",
+    "asset_preload": false
+  },
+  
+  "cinematography": {
+    "default_angle": "eye_level",
+    "default_distance": "MCU",
+    "tension_analysis_enabled": true,
+    "grammar_validation_enabled": true,
+    "shot_duration_range": {
+      "min": 0.5,
+      "max": 5.0
+    },
+    "transition_types": ["cut", "dissolve", "fade", "wipe"],
+    "emotional_intensity_mapping": {
+      "high": ["CU", "ECU"],
+      "medium": ["MCU"],
+      "low": ["MS", "MLS", "LS"]
+    },
+    "shot_purpose_enabled": true,
+    "vertical_angle_transforms": true,
+    "composition_positioning": true,
+    "shot_purpose_config": "config/shot_purpose_profiles.json",
+    "transform_config": "config/transform_presets.json"
+  },
+  
+  "video_composition": {
+    "default_resolution": "1920x1080",
+    "fps": 30,
+    "codec": "libx264",
+    "preset": "medium",
+    "crf": 18,
+    "audio_codec": "aac",
+    "audio_bitrate": "192k"
+  },
+  
+  "video": {
+    "fps": 30,
+    "resolution": [1920, 1080],
+    "codec": "libx264",
+    "preset": "medium",
+    "crf": 18,
+    "pixel_format": "yuv420p",
+    "audio_codec": "aac",
+    "audio_bitrate": "192k"
+  },
+  
+  "rhubarb": {
+    "output_format": "json",
+    "recognizer": "pocketSphinx",
+    "threads": 0,
+    "quiet": false,
+    "extended_shapes": true
+  },
+  
+  "processing": {
+    "enable_caching": true,
+    "parallel_workers": 4,
+    "cleanup_temp_files": true
+  },
+  
+  "profiles": {
+    "default_profile": "character_1",
+    "profile_directory": "profiles"
+  },
+  
+  "presets": {
+    "default_preset": "character_1/front",
+    "preset_directory": "assets/presets"
+  },
+  
+  "viseme_mapping": {
+    "A": "mouth_A.jpg",
+    "B": "mouth_B.jpg",
+    "C": "mouth_C.jpg",
+    "D": "mouth_D.jpg",
+    "E": "mouth_E.jpg",
+    "F": "mouth_F.jpg",
+    "G": "mouth_G.jpg",
+    "H": "mouth_H.jpg",
+    "X": "mouth_X.jpg"
+  }
+}
