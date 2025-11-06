@@ -10,6 +10,9 @@ const Navigation = () => {
     { name: 'Dashboard', path: '/' },
     { name: 'Profiles', path: '/profiles' },
     { name: 'Process', path: '/process' },
+    { name: 'Cinematography', path: '/cinematography' },
+    { name: 'Visualizations', path: '/visualizations' },
+    { name: 'Batch', path: '/batch' },
     { name: 'Settings', path: '/settings' },
   ];
 

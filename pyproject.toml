@@ -31,6 +31,11 @@ dependencies = [
     "onnxruntime",
     "python-dotenv",
     "tqdm",
+    "psutil",
+    "fastapi",
+    "uvicorn[standard]",
+    "websockets",
+    "pydantic",
 ]
 
 [project.optional-dependencies]

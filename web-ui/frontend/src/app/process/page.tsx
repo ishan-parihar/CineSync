@@ -2,6 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import { apiEndpoints } from '../../utils/api';
+import { 
+  EmotionAnalysisViewer, 
+  ShotDecisionPreview, 
+  ProcessingStagesIndicator, 
+  InteractiveTimeline, 
+  BatchQueueManager 
+} from '../../components/processing';
+import { SystemPerformanceDashboard } from '../../components/visualization/SystemPerformanceDashboard';
+import { useProcessingStore, useCinematographyStore } from '../../stores';
+
+// Disable static generation
+export const dynamic = 'force-dynamic';
 
 interface Profile {
   profile_name: string;
@@ -34,6 +46,23 @@ interface Job {
 }
 
 export default function ProcessPage() {
+  // Store hooks
+  const { 
+    currentJobId,
+    processingStages,
+    recentEvents,
+    createJob,
+    allJobs
+  } = useProcessingStore();
+  
+  const { 
+    emotionAnalysis,
+    shotDecisions,
+    currentTime,
+    setCurrentTime
+  } = useCinematographyStore();
+  
+  // Local state
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loadingProfiles, setLoadingProfiles] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +72,8 @@ export default function ProcessPage() {
   const [cinematicMode, setCinematicMode] = useState('balanced');
   const [jobs, setJobs] = useState<Job[]>([]);
   const [wsConnected, setWsConnected] = useState(false);
-  const [socket, setSocket] = useState<WebSocket | null>(null);
+  const [showAdvancedView, setShowAdvancedView] = useState(false);
+  const [selectedView, setSelectedView] = useState<'overview' | 'detailed' | 'timeline'>('overview');
 
 // Initialize WebSocket connection to the processing status endpoint
      useEffect(() => {
@@ -80,7 +110,7 @@ export default function ProcessPage() {
              }
            } else {
              // Server-side (shouldn't happen in useEffect, but for safety)
-             wsUrl = 'ws://localhost:8001/ws/processing-status';
+             wsUrl = 'ws://localhost:8002/ws/processing-status';
            }
            
            console.log('Attempting to connect to WebSocket:', wsUrl);
@@ -145,7 +175,7 @@ export default function ProcessPage() {
      try {
        setLoadingProfiles(true);
        const response = await apiEndpoints.getProfiles();
-       setProfiles(response.data.profiles);
+       setProfiles(response.data?.data?.profiles || []);
        setError(null);
      } catch (err) {
        console.error('Error fetching profiles:', err);
@@ -158,7 +188,7 @@ export default function ProcessPage() {
    const fetchJobs = async () => {
      try {
        const response = await apiEndpoints.getJobs();
-       setJobs(Object.values(response.data.jobs) as Job[]);
+       setJobs(Object.values(response.data?.data?.jobs || {}) as Job[]);
      } catch (err) {
        console.error('Error fetching jobs:', err);
      }
@@ -170,50 +200,98 @@ export default function ProcessPage() {
     }
   };
 
-   const startProcessing = async () => {
-     if (!audioFile) {
-       setError('Please select an audio file');
-       return;
-     }
+const startProcessing = async () => {
+      if (!audioFile) {
+        setError('Please select an audio file');
+        return;
+      }
 
-     try {
-       // First upload the file to the server
-       const uploadResponse = await apiEndpoints.uploadFile(audioFile);
-       
-       const audioPath = uploadResponse.data.path; // Assuming the server returns the path
-       
-       // Then start processing
-       const processResponse = await apiEndpoints.startProcessing({
-         audio_path: audioPath,
-         profile: selectedProfile,
-         output_path: outputPath || `output/${audioFile.name.replace(/\.[^/.]+$/, '')}_processed.mp4`,
-         cinematic_mode: cinematicMode,
-       });
-       
-       if (processResponse.data.error) {
-         setError(processResponse.data.error);
-         return;
-       }
-       
-       // Reset form
-       setAudioFile(null);
-       setSelectedProfile('');
-       setOutputPath('');
-       
-       // Jobs will be updated via WebSocket
-       console.log('Processing started:', processResponse.data);
-     } catch (err) {
-       console.error('Error starting processing:', err);
-       setError('Failed to start processing');
-     }
-   };
+      try {
+        // Create job using the store
+        const job = await createJob({
+          profile_id: selectedProfile,
+          audio_file: audioFile,
+          job_name: audioFile.name,
+          options: {
+            generate_shots: true,
+            analyze_emotions: true,
+            cinematography: [],
+            output_format: 'video',
+            quality: 'high'
+          }
+        });
+        
+        // Reset form
+        setAudioFile(null);
+        setSelectedProfile('');
+        setOutputPath('');
+        
+        // Show advanced view when processing starts
+        setShowAdvancedView(true);
+        setSelectedView('detailed');
+        
+        console.log('Processing started:', job);
+      } catch (err) {
+        console.error('Error starting processing:', err);
+        setError('Failed to start processing');
+      }
+    };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* Enhanced Header */}
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Processing</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-gray-900">Advanced Processing Center</h1>
+            <div className="flex items-center space-x-4">
+              {/* View toggle */}
+              <div className="flex items-center bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setSelectedView('overview')}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                    selectedView === 'overview' 
+                      ? 'bg-white text-blue-600 shadow-sm' 
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Overview
+                </button>
+                <button
+                  onClick={() => setSelectedView('detailed')}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                    selectedView === 'detailed' 
+                      ? 'bg-white text-blue-600 shadow-sm' 
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Detailed
+                </button>
+                <button
+                  onClick={() => setSelectedView('timeline')}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                    selectedView === 'timeline' 
+                      ? 'bg-white text-blue-600 shadow-sm' 
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Timeline
+                </button>
+              </div>
+              
+              {/* Advanced view toggle */}
+              <button
+                onClick={() => setShowAdvancedView(!showAdvancedView)}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  showAdvancedView 
+                    ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {showAdvancedView ? 'Simple View' : 'Advanced View'}
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -224,11 +302,18 @@ export default function ProcessPage() {
           </div>
         )}
 
-        {/* WebSocket Status */}
+        {/* Enhanced WebSocket Status */}
         <div className="mb-6 p-4 rounded-md bg-blue-50 border border-blue-200">
-          <div className="flex items-center">
-            <div className={`h-3 w-3 rounded-full mr-2 ${wsConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
-            <span>WebSocket Status: {wsConnected ? 'Connected' : 'Disconnected'}</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className={`h-3 w-3 rounded-full mr-2 ${wsConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+              <span>WebSocket Status: {wsConnected ? 'Connected' : 'Disconnected'}</span>
+            </div>
+            {recentEvents.length > 0 && (
+              <div className="text-sm text-gray-600">
+                {recentEvents.length} recent event{recentEvents.length > 1 ? 's' : ''}
+              </div>
+            )}
           </div>
         </div>
 
@@ -314,7 +399,7 @@ export default function ProcessPage() {
             <button
               onClick={startProcessing}
               disabled={!audioFile || !selectedProfile}
-              className={`px-4 py-2 rounded-md transition duration-150 ease-in-out ${
+              className={`px-4 py-2 rounded-md transition duration-fast ease-in-out ${
                 audioFile && selectedProfile
                   ? 'bg-blue-600 hover:bg-blue-700 text-white'
                   : 'bg-gray-400 text-gray-700 cursor-not-allowed'
@@ -325,60 +410,157 @@ export default function ProcessPage() {
           </div>
         </div>
 
-        {/* Active Jobs */}
-        <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Active Processing Jobs</h2>
-          {jobs.length === 0 ? (
-            <p className="text-gray-500">No active jobs</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job ID</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profile</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Time</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {jobs.map((job, index) => (
-                    <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{job.job_id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{job.profile_name}</td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          job.status === 'completed' 
-                            ? 'bg-green-100 text-green-800' 
-                            : job.status === 'error'
-                            ? 'bg-red-100 text-red-800'
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}>
-                          {job.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="w-full bg-gray-200 rounded-full h-2.5">
-                          <div 
-                            className={`h-2.5 rounded-full ${
-                              job.status === 'error' ? 'bg-red-600' : 'bg-blue-600'
-                            }`} 
-                            style={{ width: `${job.progress}%` }}
-                          ></div>
-                        </div>
-                        <div className="text-xs text-gray-500 mt-1">{job.progress}%</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(job.start_time).toLocaleString()}
-                      </td>
+        {/* Advanced Processing Visualization */}
+        {showAdvancedView && currentJobId && (
+          <div className="space-y-8">
+            {/* View selector content */}
+            {selectedView === 'overview' && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Processing Stages */}
+                <ProcessingStagesIndicator 
+                  jobId={currentJobId}
+                  showMetrics={true}
+                  showPerformance={true}
+                  realTimeUpdates={true}
+                />
+                
+                {/* Batch Queue */}
+                <BatchQueueManager 
+                  showMetrics={true}
+                  realTimeUpdates={true}
+                  enableDragDrop={true}
+                />
+              </div>
+            )}
+            
+            {selectedView === 'detailed' && (
+              <div className="space-y-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Emotion Analysis */}
+                  <EmotionAnalysisViewer 
+                    showConfidence={true}
+                    showSecondary={true}
+                    interactive={true}
+                    onTimeChange={setCurrentTime}
+                  />
+                  
+                  {/* Shot Decisions */}
+                  <ShotDecisionPreview 
+                    showConfidence={true}
+                    showReasoning={true}
+                    showTransitions={true}
+                    animateTransitions={true}
+                  />
+                </div>
+                
+                {/* System Performance Dashboard */}
+                <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900">System Performance</h3>
+                    <button
+                      className="text-sm text-blue-600 hover:text-blue-700"
+                      onClick={() => {
+                        // Refresh performance data
+                      }}
+                    >
+                      Refresh
+                    </button>
+                  </div>
+                  <SystemPerformanceDashboard />
+                </div>
+                
+                {/* Processing Stages */}
+                <ProcessingStagesIndicator 
+                  jobId={currentJobId}
+                  showMetrics={true}
+                  showPerformance={true}
+                  realTimeUpdates={true}
+                />
+              </div>
+            )}
+            
+            {selectedView === 'timeline' && (
+              <div className="space-y-8">
+                {/* Interactive Timeline */}
+                {emotionAnalysis && (
+                  <InteractiveTimeline 
+                    duration={emotionAnalysis.duration}
+                    showEmotions={true}
+                    showShots={true}
+                    showChapters={true}
+                    interactive={true}
+                    onTimeChange={setCurrentTime}
+                  />
+                )}
+                
+                {/* Emotion Analysis Viewer */}
+                <EmotionAnalysisViewer 
+                  showConfidence={true}
+                  showSecondary={true}
+                  interactive={true}
+                  onTimeChange={setCurrentTime}
+                />
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Simple Jobs List (when not in advanced view) */}
+        {!showAdvancedView && (
+          <div className="bg-white shadow rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Active Processing Jobs</h2>
+            {jobs.length === 0 ? (
+              <p className="text-gray-500">No active jobs</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job ID</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profile</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Time</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {jobs.map((job, index) => (
+                      <tr key={index}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{job.job_id}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{job.profile_name}</td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            job.status === 'completed' 
+                              ? 'bg-green-100 text-green-800' 
+                              : job.status === 'error'
+                              ? 'bg-red-100 text-red-800'
+                              : 'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {job.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="w-full bg-gray-200 rounded-full h-2.5">
+                            <div 
+                              className={`h-2.5 rounded-full ${
+                                job.status === 'error' ? 'bg-red-600' : 'bg-blue-600'
+                              }`} 
+                              style={{ width: `${job.progress}%` }}
+                            ></div>
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1">{job.progress}%</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {new Date(job.start_time).toLocaleString()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
       </main>
     </div>
   );

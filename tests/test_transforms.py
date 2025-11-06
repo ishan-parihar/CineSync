@@ -4,7 +4,7 @@ import os
 # Add the project root to the path so imports work correctly
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.core.cinematography.transform_processor import TransformProcessor
+from lipsync_automation.cinematography.transform_processor import TransformProcessor
 from PIL import Image
 
 def test_vertical_angle_transforms():

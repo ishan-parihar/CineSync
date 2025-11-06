@@ -4,7 +4,7 @@ import os
 # Add the project root to the path so imports work correctly
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.core.cinematography.shot_purpose_selector import ShotPurposeSelector
+from lipsync_automation.cinematography.shot_purpose_selector import ShotPurposeSelector
 
 def test_high_arousal_selects_reaction():
     selector = ShotPurposeSelector()

@@ -50,7 +50,7 @@ export default function SettingsPage() {
      try {
        const response = await apiEndpoints.getSettings();
        // Extract the actual settings from the response
-       setSettings(response.data.settings || {});
+       setSettings(response.data?.data?.settings || {});
      } catch (err) {
        console.error('Error fetching settings:', err);
      }
@@ -186,7 +186,7 @@ export default function SettingsPage() {
           <div className="mt-6">
             <button
               onClick={updateSettings}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-150 ease-in-out"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-fast ease-in-out"
             >
               Save Settings
             </button>

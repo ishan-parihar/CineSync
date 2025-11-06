@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "soundFile": "test_audio.wav",
+    "duration": 1.0,
+    "phonemeSet": "Disney",
+    "frameRate": 30.0,
+    "recognizer": "pocketSphinx",
+    "maxPhonemes": 8,
+    "machineName": "MockRhubarb",
+    "version": "1.13.0-mock"
+  },
+  "mouthCues": [
+    {
+      "start": 0.0,
+      "end": 0.1,
+      "shape": "X"
+    },
+    {
+      "start": 0.1,
+      "end": 0.2,
+      "shape": "X"
+    },
+    {
+      "start": 0.2,
+      "end": 0.30000000000000004,
+      "shape": "X"
+    },
+    {
+      "start": 0.30000000000000004,
+      "end": 0.4,
+      "shape": "X"
+    },
+    {
+      "start": 0.4,
+      "end": 0.5,
+      "shape": "X"
+    },
+    {
+      "start": 0.5,
+      "end": 0.6,
+      "shape": "X"
+    },
+    {
+      "start": 0.6,
+      "end": 0.7,
+      "shape": "X"
+    },
+    {
+      "start": 0.7,
+      "end": 0.7999999999999999,
+      "shape": "X"
+    },
+    {
+      "start": 0.7999999999999999,
+      "end": 0.8999999999999999,
+      "shape": "X"
+    },
+    {
+      "start": 0.8999999999999999,
+      "end": 0.9999999999999999,
+      "shape": "X"
+    },
+    {
+      "start": 0.9999999999999999,
+      "end": 1.0999999999999999,
+      "shape": "X"
+    }
+  ]
+}

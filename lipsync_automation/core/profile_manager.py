@@ -454,3 +454,269 @@ class ProfileManager:
                 return result
         
         raise ValueError(f"Profile '{profile_name}' not found in manifest")
+    
+    def get_profile_structure_analysis(self, profile_name: str) -> Dict[str, Any]:
+        """
+        Perform comprehensive analysis of profile structure.
+        
+        Args:
+            profile_name: Profile to analyze
+            
+        Returns:
+            Detailed structure analysis with completion status
+        """
+        profile_path = self.profiles_dir / profile_name
+        config_path = profile_path / "profile_config.json"
+        
+        if not profile_path.exists():
+            raise ValueError(f"Profile '{profile_name}' not found")
+        
+        # Load profile configuration
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        
+        supported_angles = config.get('supported_angles', [])
+        supported_emotions = config.get('supported_emotions', {}).get('core', [])
+        standard_visemes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X']
+        
+        analysis = {
+            'profile_name': profile_name,
+            'config': {
+                'supported_angles': supported_angles,
+                'supported_emotions': supported_emotions
+            },
+            'actual_structure': {},
+            'missing_structure': {},
+            'completion_stats': {
+                'total_angles': len(supported_angles),
+                'completed_angles': 0,
+                'total_emotions': len(supported_angles) * len(supported_emotions),
+                'completed_emotions': 0,
+                'total_visemes': len(supported_angles) * len(supported_emotions) * len(standard_visemes),
+                'completed_visemes': 0,
+                'overall_completion': 0.0
+            },
+            'repair_needed': False
+        }
+        
+        angles_dir = profile_path / "angles"
+        actual_angles = []
+        
+        if angles_dir.exists():
+            actual_angles = [d.name for d in angles_dir.iterdir() if d.is_dir()]
+        
+        # Analyze each angle
+        for angle in supported_angles:
+            angle_path = angles_dir / angle
+            angle_analysis = {
+                'exists': angle_path.exists(),
+                'emotions': {},
+                'completion': 0.0,
+                'missing_emotions': []
+            }
+            
+            if angle_path.exists():
+                emotions_dir = angle_path / "emotions"
+                actual_emotions = []
+                
+                if emotions_dir.exists():
+                    actual_emotions = [d.name for d in emotions_dir.iterdir() if d.is_dir()]
+                
+                # Analyze each emotion for this angle
+                completed_emotions = 0
+                for emotion in supported_emotions:
+                    emotion_path = emotions_dir / emotion
+                    emotion_analysis = {
+                        'exists': emotion_path.exists(),
+                        'visemes': {},
+                        'completion': 0.0,
+                        'missing_visemes': []
+                    }
+                    
+                    if emotion_path.exists():
+                        completed_visemes = 0
+                        for viseme in standard_visemes:
+                            viseme_path = emotion_path / f"{viseme}.png"
+                            viseme_analysis = {
+                                'exists': viseme_path.exists(),
+                                'valid': viseme_path.exists()  # Add file validation if needed
+                            }
+                            emotion_analysis['visemes'][viseme] = viseme_analysis
+                            if viseme_analysis['exists']:
+                                completed_visemes += 1
+                        
+                        emotion_analysis['completion'] = (completed_visemes / len(standard_visemes)) * 100
+                        if completed_visemes == len(standard_visemes):
+                            completed_emotions += 1
+                        else:
+                            emotion_analysis['missing_visemes'] = [
+                                viseme for viseme in standard_visemes 
+                                if not emotion_analysis['visemes'][viseme]['exists']
+                            ]
+                    else:
+                        emotion_analysis['missing_visemes'] = standard_visemes.copy()
+                    
+                    angle_analysis['emotions'][emotion] = emotion_analysis
+                
+                angle_analysis['completion'] = (completed_emotions / len(supported_emotions)) * 100
+                if completed_emotions == len(supported_emotions):
+                    analysis['completion_stats']['completed_angles'] += 1
+                
+                angle_analysis['missing_emotions'] = [
+                    emotion for emotion in supported_emotions 
+                    if not angle_analysis['emotions'][emotion]['exists']
+                ]
+                
+                # Update totals
+                for emotion in supported_emotions:
+                    if angle_analysis['emotions'][emotion]['exists']:
+                        analysis['completion_stats']['completed_emotions'] += 1
+                        for viseme in standard_visemes:
+                            if angle_analysis['emotions'][emotion]['visemes'][viseme]['exists']:
+                                analysis['completion_stats']['completed_visemes'] += 1
+            else:
+                # Angle doesn't exist - all emotions and visemes are missing
+                for emotion in supported_emotions:
+                    angle_analysis['emotions'][emotion] = {
+                        'exists': False,
+                        'visemes': {viseme: {'exists': False, 'valid': False} for viseme in standard_visemes},
+                        'completion': 0.0,
+                        'missing_visemes': standard_visemes.copy()
+                    }
+                angle_analysis['missing_emotions'] = supported_emotions.copy()
+            
+            analysis['actual_structure'][angle] = angle_analysis
+        
+        # Calculate overall completion
+        if analysis['completion_stats']['total_visemes'] > 0:
+            analysis['completion_stats']['overall_completion'] = (
+                analysis['completion_stats']['completed_visemes'] / 
+                analysis['completion_stats']['total_visemes']
+            ) * 100
+        
+        # Determine if repair is needed
+        analysis['repair_needed'] = (
+            analysis['completion_stats']['completed_angles'] < analysis['completion_stats']['total_angles'] or
+            analysis['completion_stats']['completed_emotions'] < analysis['completion_stats']['total_emotions'] or
+            analysis['completion_stats']['completed_visemes'] < analysis['completion_stats']['total_visemes']
+        )
+        
+        return analysis
+    
+    def create_missing_structure(self, profile_name: str, create_placeholders: bool = True) -> Dict[str, Any]:
+        """
+        Create missing directory structure and placeholder files.
+        
+        Args:
+            profile_name: Profile to repair
+            create_placeholders: Whether to create placeholder viseme files
+            
+        Returns:
+            Repair operation results
+        """
+        try:
+            analysis = self.get_profile_structure_analysis(profile_name)
+            profile_path = self.profiles_dir / profile_name
+            standard_visemes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X']
+            
+            results = {
+                'profile_name': profile_name,
+                'created_directories': [],
+                'created_files': [],
+                'errors': [],
+                'success': True
+            }
+            
+            # Create missing angles
+            for angle_name, angle_data in analysis['actual_structure'].items():
+                if not angle_data['exists']:
+                    angle_path = profile_path / "angles" / angle_name
+                    try:
+                        angle_path.mkdir(parents=True, exist_ok=True)
+                        results['created_directories'].append(str(angle_path))
+                        
+                        # Create base directory for angle
+                        base_path = angle_path / "base"
+                        base_path.mkdir(exist_ok=True)
+                        results['created_directories'].append(str(base_path))
+                        
+                        # Create emotions directory
+                        emotions_path = angle_path / "emotions"
+                        emotions_path.mkdir(exist_ok=True)
+                        results['created_directories'].append(str(emotions_path))
+                        
+                    except Exception as e:
+                        results['errors'].append(f"Failed to create angle {angle_name}: {str(e)}")
+                        results['success'] = False
+                        continue
+                
+                # Create missing emotions
+                for emotion_name, emotion_data in angle_data['emotions'].items():
+                    if not emotion_data['exists']:
+                        emotion_path = profile_path / "angles" / angle_name / "emotions" / emotion_name
+                        try:
+                            emotion_path.mkdir(parents=True, exist_ok=True)
+                            results['created_directories'].append(str(emotion_path))
+                            
+                            # Create placeholder visemes if requested
+                            if create_placeholders:
+                                for viseme in standard_visemes:
+                                    viseme_path = emotion_path / f"{viseme}.png"
+                                    if not viseme_path.exists():
+                                        # Create 1x1 transparent PNG
+                                        img = Image.new('RGBA', (1, 1), (0, 0, 0, 0))
+                                        img.save(viseme_path)
+                                        results['created_files'].append(str(viseme_path))
+                            
+                            # Create preset_config.json for emotion
+                            preset_config = {
+                                "preset_name": f"{profile_name}_{angle_name}_{emotion_name}",
+                                "character_id": profile_name,
+                                "angle": angle_name,
+                                "emotion": emotion_name,
+                                "description": f"{emotion_name.capitalize()} expression for {angle_name} view",
+                                "mouth_position": {
+                                    "x": 960,
+                                    "y": 700,
+                                    "anchor": "center"
+                                },
+                                "background": {
+                                    "image": "background.png",
+                                    "type": "static"
+                                },
+                                "mouth_shapes": {
+                                    viseme: f"{viseme}.png" for viseme in standard_visemes
+                                },
+                                "image_specifications": {
+                                    "format": "PNG",
+                                    "bit_depth": 32,
+                                    "alpha_channel": True,
+                                    "dimensions": [512, 512],
+                                    "dpi": 300
+                                },
+                                "metadata": {
+                                    "created_date": datetime.now().isoformat(),
+                                    "version": "1.0",
+                                    "author": "Auto-generated"
+                                }
+                            }
+                            
+                            config_path = emotion_path / "preset_config.json"
+                            with open(config_path, 'w') as f:
+                                json.dump(preset_config, f, indent=2)
+                            results['created_files'].append(str(config_path))
+                            
+                        except Exception as e:
+                            results['errors'].append(f"Failed to create emotion {emotion_name}: {str(e)}")
+                            results['success'] = False
+            
+            return results
+            
+        except Exception as e:
+            return {
+                'profile_name': profile_name,
+                'created_directories': [],
+                'created_files': [],
+                'errors': [str(e)],
+                'success': False
+            }

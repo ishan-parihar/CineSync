@@ -5,9 +5,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.core.lip_sync_generator import LipSyncGenerator
-from src.core.preset_manager import PresetManager
-from src.utils.validators import validate_dependencies, validate_audio_file
+from lipsync_automation.core.lip_sync_generator import LipSyncGenerator
+from lipsync_automation.core.preset_manager import PresetManager
+from lipsync_automation.utils.validators import validate_dependencies, validate_audio_file
 
 
 class TestLipSyncGenerator(unittest.TestCase):

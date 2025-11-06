@@ -5,7 +5,7 @@ Final integration test to demonstrate the complete preset and profile structure 
 
 import json
 from pathlib import Path
-from src.utils.animation_structure_manager import AnimationStructureManager
+from lipsync_automation.utils.animation_structure_manager import AnimationStructureManager
 
 def run_final_integration_test():
     """Run a comprehensive integration test."""
