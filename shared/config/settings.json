@@ -43,8 +43,8 @@
     "shot_purpose_enabled": true,
     "vertical_angle_transforms": true,
     "composition_positioning": true,
-    "shot_purpose_config": "config/shot_purpose_profiles.json",
-    "transform_config": "config/transform_presets.json"
+    "shot_purpose_config": "shared/config/shot_purpose_profiles.json",
+    "transform_config": "shared/config/transform_presets.json"
   },
   
   "video_composition": {

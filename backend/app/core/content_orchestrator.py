@@ -42,7 +42,7 @@ class ContentOrchestrator:
         self.decision_engine = DecisionEngine(config=settings)
         # VideoCompositorV2 expects config_path, so we'll pass a config instead of settings
         # We can work around this by creating a temp config or using default
-        self.compositor = VideoCompositorV2(config_path="config/settings.json")
+        self.compositor = VideoCompositorV2()  # Will use shared config by default
         self.audio_processor = AudioProcessor(config=settings)
         self.cache_manager = CacheManager(cache_dir=settings.get("cache_dir", "cache"))
 

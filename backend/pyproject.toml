@@ -36,6 +36,11 @@ dependencies = [
     "uvicorn[standard]",
     "websockets",
     "pydantic",
+    "ffmpeg-python",
+    "python-multipart",
+    "pyjwt",
+    "bcrypt",
+    "python-slugify",
 ]
 
 [project.optional-dependencies]
@@ -54,11 +59,11 @@ docs = [
 ]
 
 [project.scripts]
-lipsync = "lipsync_automation.cli:main"
+lipsync = "app.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["lipsync_automation*"]
+include = ["app*"]
 
 [tool.setuptools.package-data]
-lipsync_automation = ["config/*.json", "assets/**/*"]
+app = ["assets/**/*"]

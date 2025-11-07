@@ -11,11 +11,11 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements file
-COPY requirements.txt .
+# Copy pyproject.toml
+COPY pyproject.toml .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -e .
 
 # Copy the rest of the application code
 COPY . .
@@ -28,4 +28,4 @@ ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 
 # Start the backend server
-CMD ["python", "app/main.py"]
+CMD ["python", "run_backend.py"]

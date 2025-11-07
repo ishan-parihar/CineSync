@@ -15,7 +15,7 @@ print(f"Directory exists assets/presets: {os.path.exists('assets/presets')}")
 print(f"Directory exists assets/presets/character_1: {os.path.exists('assets/presets/character_1')}")
 
 # Check the configuration file path
-config_path = "config/settings.json"
+config_path = "shared/config/settings.json"
 print(f"Config file exists: {os.path.exists(config_path)}")
 
 preset_dir = "assets/presets"  # Default fallback

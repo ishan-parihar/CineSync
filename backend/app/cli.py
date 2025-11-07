@@ -12,11 +12,18 @@ from .utils.validators import validate_audio_file, validate_dependencies
 
 # Backend is now self-contained - relative imports used instead
 
+# Get the package directory for config file paths
+PACKAGE_DIR = Path(__file__).parent
+
 
 
 def setup_logging(verbose: bool = False):
-    """Initialize logging configuration"""
-    with open("config/logging_config.json", "r") as f:
+    """Initialize logging configuration using shared resources"""
+    # Use shared config directory
+    project_root = Path(__file__).parent.parent.parent
+    config_path = project_root / "shared" / "config" / "logging_config.json"
+    
+    with open(config_path, "r") as f:
         config = json.load(f)
 
     if verbose:
@@ -58,8 +65,9 @@ Examples:
         default="balanced",
         help="Cinematographic approach to use",
     )
+    default_config = Path(__file__).parent.parent.parent / "shared" / "config" / "settings.json"
     parser.add_argument(
-        "--config", default="config/settings.json", help="Configuration file"
+        "--config", default=str(default_config), help="Configuration file"
     )
     parser.add_argument(
         "--no-cache", action="store_true", help="Disable phoneme caching"

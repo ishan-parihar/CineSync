@@ -21,8 +21,12 @@ class ShotPurposeSelector:
     decisions without requiring separate visual assets.
     """
 
-    def __init__(self, config_path: str = "config/shot_purpose_profiles.json"):
+    def __init__(self, config_path: Optional[str] = None):
         """Initialize with shot purpose profiles"""
+        if config_path is None:
+            # Use shared config by default
+            project_root = Path(__file__).parent.parent.parent.parent
+            config_path = str(project_root / "shared" / "config" / "shot_purpose_profiles.json")
         self.profiles = self._load_profiles(config_path)
         self.purpose_history: List[str] = []
 

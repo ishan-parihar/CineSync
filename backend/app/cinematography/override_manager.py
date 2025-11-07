@@ -47,8 +47,9 @@ class OverrideManager:
             Dictionary of override rules
         """
         # Try to load from config file, fall back to defaults
+        default_config_path = str(Path(__file__).parent.parent.parent.parent / "shared" / "config" / "cinematography_rules.json")
         config_path = self.config.get(
-            "cinematography_config", "config/cinematography_rules.json"
+            "cinematography_config", default_config_path
         )
         try:
             with open(config_path, "r") as f:

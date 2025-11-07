@@ -3,7 +3,7 @@ import json
 import logging
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 logger = logging.getLogger("lip_sync.preset_manager")
 
@@ -11,7 +11,12 @@ logger = logging.getLogger("lip_sync.preset_manager")
 class PresetManager:
     """Manages character presets and asset configurations"""
 
-    def __init__(self, config_path: str = "config/settings.json"):
+    def __init__(self, config_path: Optional[Union[str, Path]] = None):
+        if config_path is None:
+            # Use shared config by default
+            config_path = Path(__file__).parent.parent.parent.parent / "shared" / "config" / "settings.json"
+        
+        config_path = Path(config_path)
         with open(config_path, "r") as f:
             self.config = json.load(f)
 

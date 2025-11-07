@@ -8,6 +8,7 @@ Date: 2025-10-10
 
 import json
 import logging
+from pathlib import Path
 from typing import Any, Dict, List, Optional, cast
 
 from .grammar_machine import GrammarMachine
@@ -53,8 +54,9 @@ class CinematographicDecisionEngine:
             Dictionary of decision rules
         """
         # Try to load from config file, fall back to defaults
+        default_config_path = str(Path(__file__).parent.parent.parent.parent / "shared" / "config" / "cinematography_rules.json")
         config_path = self.config.get(
-            "cinematography_config", "config/cinematography_rules.json"
+            "cinematography_config", default_config_path
         )
         try:
             with open(config_path, "r") as f:

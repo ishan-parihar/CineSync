@@ -9,7 +9,7 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 logger = logging.getLogger("lip_sync.compositor")
 
@@ -20,7 +20,12 @@ class VideoCompositor:
     Provides render_video method for batch processor compatibility.
     """
 
-    def __init__(self, config_path: str = "config/settings.json"):
+    def __init__(self, config_path: Optional[Union[str, Path]] = None):
+        if config_path is None:
+            # Use shared config by default
+            config_path = Path(__file__).parent.parent.parent.parent / "shared" / "config" / "settings.json"
+        
+        config_path = Path(config_path)
         with open(config_path, "r") as f:
             self.config = json.load(f)
 

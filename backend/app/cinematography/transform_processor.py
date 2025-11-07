@@ -7,7 +7,8 @@ additional visual assets - just mathematical transformations of existing assets.
 
 import json
 import logging
-from typing import Any, Dict, Tuple
+from pathlib import Path
+from typing import Any, Dict, Tuple, Optional
 
 import numpy as np
 from PIL import Image
@@ -23,8 +24,12 @@ class TransformProcessor:
     cinematographic effects without requiring additional visual assets.
     """
 
-    def __init__(self, config_path: str = "config/transform_presets.json"):
+    def __init__(self, config_path: Optional[str] = None):
         """Initialize with transform presets"""
+        if config_path is None:
+            # Use shared config by default
+            project_root = Path(__file__).parent.parent.parent.parent
+            config_path = str(project_root / "shared" / "config" / "transform_presets.json")
         self.presets = self._load_presets(config_path)
 
     def _load_presets(self, config_path: str) -> Dict[str, Any]:

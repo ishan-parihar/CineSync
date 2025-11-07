@@ -1,0 +1,47 @@
+Metadata-Version: 2.4
+Name: lipsync-automation
+Version: 2.0.0
+Summary: Psycho-cinematic automation system for lip-sync video generation
+Author-email: Ishan Lagesh <ishan@example.com>
+License: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: Pillow
+Requires-Dist: moviepy
+Requires-Dist: librosa
+Requires-Dist: soundfile
+Requires-Dist: onnxruntime
+Requires-Dist: python-dotenv
+Requires-Dist: tqdm
+Requires-Dist: psutil
+Requires-Dist: fastapi
+Requires-Dist: uvicorn[standard]
+Requires-Dist: websockets
+Requires-Dist: pydantic
+Requires-Dist: ffmpeg-python
+Requires-Dist: python-multipart
+Requires-Dist: pyjwt
+Requires-Dist: bcrypt
+Requires-Dist: python-slugify
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx-rtd-theme; extra == "docs"

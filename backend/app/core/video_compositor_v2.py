@@ -31,18 +31,15 @@ class VideoCompositorV2:
     - Angle-based compositing
     """
 
-    def __init__(self, config_path: Union[str, Path] = "config/settings.json"):
-        # Adjust path loading to work with installed package
-        config_path = Path(config_path)  # Convert to Path for consistent handling
-        if str(config_path) == "config/settings.json":
-            # Default case: load from package config directory
-            config_path_obj = Path(__file__).parent.parent / "config" / "settings.json"
+    def __init__(self, config_path: Optional[Union[str, Path]] = None):
+        # Adjust path loading to work with shared config
+        if config_path is None:
+            # Default case: load from shared config directory
+            config_path_obj = Path(__file__).parent.parent.parent.parent / "shared" / "config" / "settings.json"
         else:
-            config_path_obj = config_path
+            config_path_obj = Path(config_path)  # Convert to Path for consistent handling
 
         config_path_str = str(config_path_obj)
-        with open(config_path_str, "r") as f:
-            self.config = json.load(f)
         with open(config_path_str, "r") as f:
             self.config = json.load(f)
 

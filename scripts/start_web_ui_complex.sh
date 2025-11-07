@@ -225,7 +225,7 @@ start_backend_server() {
     debug "Environment: PORT=$BACKEND_PORT BACKEND_PORT=$BACKEND_PORT"
     
     # Start backend in background
-    env PORT="$BACKEND_PORT" BACKEND_PORT="$BACKEND_PORT" source venv/bin/activate && python web-ui/backend/main.py &
+    env PORT="$BACKEND_PORT" BACKEND_PORT="$BACKEND_PORT" PROJECT_ROOT="$PROJECT_ROOT" source venv/bin/activate && python -m backend.app.main &
     BACKEND_PID=$!
     
     info "Backend server started (PID: $BACKEND_PID)"
@@ -253,7 +253,7 @@ start_backend_server() {
 start_frontend_server() {
     log "Starting frontend server..."
     
-    cd "$PROJECT_ROOT/web-ui/frontend"
+    cd "$PROJECT_ROOT/frontend"
     
     # Find available port
     FRONTEND_PORT=$(find_available_port "$DEFAULT_FRONTEND_PORT")

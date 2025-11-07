@@ -18,7 +18,10 @@ from .utils.validators import validate_audio_file
 
 
 def setup_logging():
-    with open("config/logging_config.json", "r") as f:
+    # Use shared config directory
+    project_root = Path(__file__).parent.parent.parent
+    config_path = project_root / "shared" / "config" / "logging_config.json"
+    with open(config_path, "r") as f:
         config = json.load(f)
     logging.config.dictConfig(config)
     return logging.getLogger("lip_sync.batch")
@@ -99,7 +102,7 @@ def process_single_file(
 class MockCompositor:
     """Mock compositor to maintain interface compatibility"""
 
-    def __init__(self, config_path: str = "config/settings.json"):
+    def __init__(self, config_path: Optional[str] = None):
         from .core.video_compositor_v2 import VideoCompositorV2
 
         self._compositor = VideoCompositorV2(config_path=config_path)
@@ -156,8 +159,9 @@ def main():
     parser.add_argument(
         "--extensions", default="wav,mp3,ogg", help="Comma-separated audio extensions"
     )
+    default_config = str(Path(__file__).parent.parent.parent / "shared" / "config" / "settings.json")
     parser.add_argument(
-        "--config", default="config/settings.json", help="Configuration file"
+        "--config", default=default_config, help="Configuration file"
     )
 
     args = parser.parse_args()

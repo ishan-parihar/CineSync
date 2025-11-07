@@ -4,7 +4,7 @@ import os
 import subprocess
 import wave
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 
 logger = logging.getLogger("lip_sync.generator")
 
@@ -12,7 +12,12 @@ logger = logging.getLogger("lip_sync.generator")
 class LipSyncGenerator:
     """Core engine for phoneme detection and frame sequence generation"""
 
-    def __init__(self, config_path: str = "config/settings.json"):
+    def __init__(self, config_path: Optional[Union[str, Path]] = None):
+        if config_path is None:
+            # Use shared config by default
+            config_path = Path(__file__).parent.parent.parent.parent / "shared" / "config" / "settings.json"
+        
+        config_path = Path(config_path)
         with open(config_path, "r") as f:
             self.config = json.load(f)
 

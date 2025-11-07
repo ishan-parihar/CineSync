@@ -7,8 +7,8 @@ set -euo pipefail
 
 # Configuration
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKEND_PORT=${1:-8001}
-FRONTEND_PORT=${2:-5000}
+BACKEND_PORT=${1:-8002}
+FRONTEND_PORT=${2:-5002}
 
 # Colors
 GREEN='\033[0;32m'
@@ -24,12 +24,12 @@ echo
 # Start backend
 cd "$PROJECT_ROOT"
 source venv/bin/activate
-PORT=$BACKEND_PORT BACKEND_PORT=$BACKEND_PORT python web-ui/backend/main.py &
+PROJECT_ROOT="$PROJECT_ROOT" PORT=$BACKEND_PORT BACKEND_PORT=$BACKEND_PORT python -m backend.app.main &
 BACKEND_PID=$!
 echo -e "${GREEN}✅ Backend started (PID: $BACKEND_PID)${NC}"
 
 # Start frontend
-cd web-ui/frontend
+cd frontend
 BACKEND_URL=http://localhost:$BACKEND_PORT NEXT_PUBLIC_API_URL=http://localhost:$BACKEND_PORT npx next dev -p $FRONTEND_PORT &
 FRONTEND_PID=$!
 echo -e "${GREEN}✅ Frontend started (PID: $FRONTEND_PID)${NC}"

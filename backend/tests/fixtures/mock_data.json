@@ -1,0 +1,58 @@
+{
+  "test_profile": {
+    "character_name": "test_character",
+    "angles": {
+      "front": {
+        "emotions": {
+          "joy": ["rest.png", "open.png", "wide.png"],
+          "anger": ["rest.png", "narrow.png", "tight.png"],
+          "sadness": ["rest.png", "downturn.png", "closed.png"],
+          "surprise": ["rest.png", "wide.png", "raised.png"],
+          "fear": ["rest.png", "wide.png", "tense.png"],
+          "disgust": ["rest.png", "wrinkled.png", "narrow.png"]
+        }
+      },
+      "side": {
+        "emotions": {
+          "joy": ["rest_side.png", "open_side.png", "wide_side.png"],
+          "anger": ["rest_side.png", "narrow_side.png", "tight_side.png"]
+        }
+      }
+    },
+    "metadata": {
+      "created_by": "test_suite",
+      "version": "1.0.0",
+      "description": "Test profile for automated testing"
+    }
+  },
+  "emotion_mappings": {
+    "joy": {"arousal": 0.8, "valence": 0.9, "dominance": 0.7},
+    "anger": {"arousal": 0.9, "valence": -0.8, "dominance": 0.8},
+    "sadness": {"arousal": 0.2, "valence": -0.7, "dominance": 0.3},
+    "surprise": {"arousal": 0.8, "valence": 0.4, "dominance": 0.5},
+    "fear": {"arousal": 0.9, "valence": -0.6, "dominance": 0.2},
+    "disgust": {"arousal": 0.6, "valence": -0.7, "dominance": 0.6},
+    "trust": {"arousal": 0.3, "valence": 0.8, "dominance": 0.7},
+    "anticipation": {"arousal": 0.7, "valence": 0.5, "dominance": 0.6}
+  },
+  "shot_purpose_rules": {
+    "high_arousal": {
+      "threshold": 0.7,
+      "preferred_purposes": ["reaction", "intensified"],
+      "preferred_framings": ["CU", "ECU"]
+    },
+    "low_arousal": {
+      "threshold": 0.4,
+      "preferred_purposes": ["observational", "establishing"],
+      "preferred_framings": ["WS", "MS"]
+    },
+    "first_segment": {
+      "purpose": "establishing",
+      "preferred_framings": ["WS", "MS"]
+    },
+    "last_segment": {
+      "purpose": "conclusion",
+      "preferred_framings": ["MS", "CU"]
+    }
+  }
+}

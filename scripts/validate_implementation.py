@@ -47,7 +47,7 @@ def validate_implementation():
         "src/core/video_compositor_v2.py",
         "src/main.py",
         "src/cli.py",
-        "config/settings.json",
+        "shared/config/settings.json",
         "profiles/character_1.json",
         "requirements.txt"
     ]
@@ -64,7 +64,7 @@ def validate_implementation():
     
     # Check settings.json for v2.0 configuration
     print("3. Checking configuration settings:")
-    settings_path = project_root / "config/settings.json"
+    settings_path = project_root / "shared/config/settings.json"
     if settings_path.exists():
         try:
             with open(settings_path, 'r') as f:
@@ -87,7 +87,7 @@ def validate_implementation():
         except Exception as e:
             print(f"   [ERROR] Error reading settings.json: {e}")
     else:
-        print("   [MISSING] config/settings.json not found")
+        print("   [MISSING] shared/config/settings.json not found")
     print()
     
     # Check main.py for v2.0 imports
