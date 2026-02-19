@@ -1,8 +1,14 @@
 # AGENT CODING GUIDELINES
 
-## Build/Lint/Test Commands
+## Project Structure & Environment
+- Backend: Work in root directory, use venv (`source venv/bin/activate`)
+- Frontend: Work in `frontend/` directory
+- Python package: `lipsync_automation/`
+- Log pattern: `logging.getLogger('lip_sync.module_name')`
+
+## Backend Commands
 ```bash
-# Setup (use venv: source venv/bin/activate)
+# Setup
 pip install -e ".[dev]"
 
 # Linting
@@ -15,24 +21,32 @@ mypy lipsync_automation/
 black
 isort
 
-# Testing - Single test: pytest tests/test_file.py::TestClass::test_method -v
+# Testing (uses pytest.ini markers: unit, integration, slow, api, frontend, network)
 pytest tests/ -v
 pytest tests/test_shot_purpose.py::test_high_arousal_selects_reaction -v
 
 # Pre-commit
 pre-commit run --all-files
-
-# Frontend
-cd web-ui/frontend && npm run dev && npm run build && npm run lint
 ```
 
-## Code Style Guidelines
-- Line length: 88 chars (Black standard)
-- Imports: isort with Black profile (stdlib/third-party/local groups)
-- Types: Use typing hints, mypy strict mode (except lipsync_automation.*)
-- Naming: snake_case for functions/variables, PascalCase for classes
-- Error handling: Use structured logging, return False/None on failure
-- Logging: Module-specific loggers (`logging.getLogger('lip_sync.module')`)
+## Frontend Commands (in frontend/ directory)
+```bash
+# Development
+npm run dev
+npm run build
+
+# Testing
+npm test          # Jest unit tests
+npm run test:e2e  # Cypress
+npm run test:e2e:playwright  # Playwright
+npm run test:a11y # Accessibility tests
+npm run test:perf # Lighthouse CI
+npm run lint      # ESLint
+```
+
+## Code Standards
+- Python: 88 char lines, snake_case functions, PascalCase classes, typing hints
+- TypeScript: Next.js 16, React 19, Tailwind CSS, React hooks
+- Error handling: Structured logging, return False/None on failure
+- Imports: isort Black profile (stdlib/third-party/local groups)
 - Docstrings: Triple quotes, brief description
-- Structure: Follow lipsync_automation/ package organization
-- Frontend: TypeScript strict mode, Tailwind CSS, React hooks

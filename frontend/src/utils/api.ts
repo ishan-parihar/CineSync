@@ -39,7 +39,7 @@ export default api;
     getSystemInfo: () => api.get('/api/system-info'),
     
      // Profiles
-     getProfiles: () => api.get('/api/profiles'),
+     getProfiles: () => api.get('/api/profiles/'),
      createProfile: (profileData: any) => api.post('/api/profiles', profileData),
      getProfile: (profileName: string) => api.get(`/api/profiles/${profileName}`),
      updateProfile: (profileName: string, profileData: any) => api.put(`/api/profiles/${profileName}`, profileData),

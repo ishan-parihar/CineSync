@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile API Test</title>
+</head>
+<body>
+    <h1>Profile API Test</h1>
+    <div id="result">Loading...</div>
+    
+    <script>
+        fetch('/api/profiles/')
+            .then(response => response.json())
+            .then(data => {
+                console.log('API Response:', data);
+                document.getElementById('result').innerHTML = 
+                    '<h2>Profiles loaded: ' + data.profiles.length + '</h2>' +
+                    '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = 'Error: ' + error.message;
+            });
+    </script>
+</body>
+</html>

@@ -80,8 +80,11 @@ const ProfileManager = () => {
   const fetchProfiles = async () => {
     try {
       setLoading(true);
+      console.log('Fetching profiles...');
       const response = await apiEndpoints.getProfiles();
-      const profilesData = response.data?.data?.profiles || [];
+      console.log('API response:', response);
+      const profilesData = response.data?.profiles || [];
+      console.log('Profiles data:', profilesData);
       setProfiles(profilesData.map((p: any) => ({
         ...p,
         profile_name: p.profile_name,
@@ -108,7 +111,7 @@ const ProfileManager = () => {
         selectedAngle,
         selectedEmotion
       );
-      setVisemes(response.data?.data?.visemes || []);
+      setVisemes(response.data?.visemes || []);
       setError(null);
     } catch (err) {
       console.error('Error fetching visemes:', err);
@@ -119,7 +122,7 @@ const ProfileManager = () => {
   const fetchStructureAnalysis = async (profile: Profile) => {
     try {
       const response = await apiEndpoints.getProfileStructure(profile.profile_name);
-      setStructureAnalysis(response.data?.data?.structure_analysis || null);
+      setStructureAnalysis(response.data?.structure_analysis || null);
     } catch (err) {
       console.error('Error fetching structure analysis:', err);
       setStructureAnalysis(null);

@@ -19,10 +19,8 @@ export default function RootLayout({
         <ThemeProvider defaultMode="system">
           <Navigation />
           <div className="min-h-screen">
-            <main className="py-6">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {children}
-              </div>
+            <main>
+              {children}
             </main>
           </div>
         </ThemeProvider>

@@ -2,7 +2,6 @@ Metadata-Version: 2.4
 Name: lipsync-automation
 Version: 2.0.0
 Summary: Psycho-cinematic automation system for lip-sync video generation
-Author: Ishan Lagesh
 Author-email: Ishan Lagesh <ishan@example.com>
 License: MIT
 Classifier: Development Status :: 4 - Beta
@@ -41,62 +40,16 @@ Requires-Dist: pre-commit; extra == "dev"
 Provides-Extra: docs
 Requires-Dist: sphinx; extra == "docs"
 Requires-Dist: sphinx-rtd-theme; extra == "docs"
-Dynamic: author
-Dynamic: requires-python
 
-# LipSync Automation v2.0
+# LipSync Automation
 
 🎬 **A psycho-cinematic automation system for intelligent lip-sync video generation with emotion-driven cinematography**
-
-## 🏗️ Forked Architecture Overview
-
-LipSync Automation has been successfully migrated from a monolithic structure to a clean, forked architecture with clear separation of concerns:
-
-```
-LipSyncAutomation/
-├── frontend/          # 🎨 React/Next.js Web Application
-├── backend/           # 🚀 Python FastAPI Backend
-├── shared/            # 🤝 Common Configurations & Utilities
-└── tools/             # 🔧 External Dependencies (Rhubarb)
-```
-
-### 🎯 Frontend (`frontend/`)
-- **Technology Stack**: React 19, Next.js 16, TypeScript, Tailwind CSS
-- **State Management**: Zustand with persistent storage
-- **Real-time Communication**: WebSocket integration for live updates
-- **Testing**: Jest, Cypress, Playwright for comprehensive coverage
-- **Key Features**: 
-  - Emotion analysis visualization
-  - Cinematography control dashboard
-  - Real-time processing monitoring
-  - Batch processing interface
-
-### 🚀 Backend (`backend/`)
-- **Technology Stack**: Python 3.8+, FastAPI, Uvicorn, WebSockets
-- **Core Processing**: Lip-sync generation, emotion analysis, cinematography engine
-- **API Design**: RESTful endpoints with OpenAPI documentation
-- **Real-time Features**: WebSocket streaming for processing events
-- **Key Components**:
-  - Psycho-cinematic decision engine
-  - Emotion-to-shot mapping system
-  - Film grammar rule enforcement
-  - Profile and asset management
-
-### 🤝 Shared (`shared/`)
-- **Configuration Files**: Application settings, cinematography rules
-- **Environment Variables**: Centralized environment management
-- **Common Utilities**: Shared validation functions and helpers
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Python 3.8+** (verified with Python 3.13)
-- **Node.js 18+** (verified with Node.js v25.1.0)
-- **Git**
-
-### One-Command Startup (Recommended)
+Get LipSync Automation running in under 5 minutes with our automated setup:
 
 ```bash
 # Clone and start everything automatically
@@ -106,142 +59,99 @@ chmod +x start_web_ui.sh
 ./start_web_ui.sh
 ```
 
-✅ The script handles:
-1. Virtual environment setup
-2. Python dependency installation
-3. Node.js dependency installation
-4. Backend server startup (port 8001)
-5. Frontend server startup (port 5000)
-6. Health verification
+✅ **What the script does:**
+- Sets up Python virtual environment
+- Installs all dependencies (Python + Node.js)
+- Starts backend server (port 8002)
+- Starts frontend server (port 5002)
+- Verifies system health
 
-### Manual Startup
+### Prerequisites
+- **Python 3.8+** (verified with Python 3.13)
+- **Node.js 18+** (verified with Node.js v25.1.0)
+- **Git**
 
-#### Start Backend Only
+### Access Points
+Once started, access:
+- **🎨 Frontend UI**: `http://localhost:5002` (primary interface)
+- **🔧 Backend API**: `http://localhost:8002` (RESTful API)
+- **📊 API Documentation**: `http://localhost:8002/docs` (Swagger UI)
+
+---
+
+## 🏗️ Architecture Overview
+
+LipSync Automation uses a clean, forked architecture with clear separation of concerns:
+
+```
+LipSyncAutomation/
+├── frontend/          # 🎨 React/Next.js Web Application
+├── backend/           # 🚀 Python FastAPI Backend
+├── shared/            # 🤝 Common Configurations & Utilities
+├── tools/             # 🔧 External Dependencies (Rhubarb)
+├── docs/              # 📚 Documentation & Migration Records
+└── scripts/           # ⚙️ Development & Deployment Scripts
+```
+
+### Frontend (`frontend/`)
+- **Stack**: React 19, Next.js 16, TypeScript, Tailwind CSS
+- **State Management**: Zustand with persistent storage
+- **Real-time**: WebSocket integration for live updates
+- **Testing**: Jest, Cypress, Playwright
+
+### Backend (`backend/`)
+- **Stack**: Python 3.8+, FastAPI, Uvicorn, WebSockets
+- **Core**: Lip-sync generation, emotion analysis, cinematography engine
+- **API**: RESTful endpoints with OpenAPI documentation
+- **Processing**: Real-time emotion-to-shot mapping
+
+### Shared (`shared/`)
+- Configuration files and environment variables
+- Common utilities and validation functions
+- Centralized settings management
+
+---
+
+## 📁 Directory Structure
+
+```
+LipSyncAutomation/
+├── frontend/                 # React web application
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── pages/          # Next.js pages
+│   │   ├── services/       # API services
+│   │   └── stores/         # State management
+│   └── tests/              # Frontend tests
+├── backend/                 # Python FastAPI backend
+│   ├── app/
+│   │   ├── cinematography/ # Psycho-cinematic engine
+│   │   ├── core/          # Core processing modules
+│   │   └── api/           # API endpoints
+│   └── tests/             # Backend tests
+├── shared/                 # Shared configurations
+│   └── config/            # Common settings
+├── tools/                  # External tools
+│   └── rhubarb/          # Lip-sync processor
+└── scripts/               # Development scripts
+```
+
+---
+
+## 🛠️ Development Commands
+
+### Backend Development
 ```bash
-# Setup Python environment
+# Setup environment
+cd backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -e ".[dev]"
 
-# Start backend server
-cd backend
-python app/main.py
-```
-
-#### Start Frontend Only
-```bash
-# Install dependencies and start
-cd frontend
-npm install
-BACKEND_URL="http://localhost:8001" npm run dev
-```
-
-### Docker Compose (Production-ready)
-```bash
-# Start all services with Docker
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
-```
-
----
-
-## 🌐 Access Points
-
-Once started, you can access:
-
-- **🎨 Frontend UI**: `http://localhost:5000` (primary interface)
-- **🔧 Backend API**: `http://localhost:8001` (RESTful API)
-- **📊 API Documentation**: `http://localhost:8001/docs` (Swagger UI)
-- **🔌 WebSocket**: `ws://localhost:8001/ws/processing-status` (real-time events)
-
----
-
-## 📁 Directory Structure Deep Dive
-
-### Frontend Structure (`frontend/`)
-```
-frontend/
-├── src/
-│   ├── components/          # React components
-│   │   ├── processing/      # Processing-related components
-│   │   ├── visualization/   # Data visualization components
-│   │   └── ui/             # Reusable UI components
-│   ├── contexts/           # React contexts (Theme, WebSocket)
-│   ├── hooks/              # Custom React hooks
-│   ├── services/           # API services and business logic
-│   ├── stores/             # Zustand state management
-│   ├── types/              # TypeScript type definitions
-│   ├── utils/              # Utility functions
-│   └── pages/              # Next.js pages
-├── tests/                  # Frontend test suite
-├── cypress/               # E2E testing
-└── public/                # Static assets
-```
-
-### Backend Structure (`backend/`)
-```
-backend/
-├── app/
-│   ├── cinematography/    # Psycho-cinematic engine
-│   ├── core/              # Core processing modules
-│   ├── config/            # Configuration management
-│   ├── utils/             # Utility modules
-│   └── main.py           # FastAPI application entry
-├── config/                # Configuration files
-├── assets/               # Audio/visual assets
-├── profiles/             # Character profiles
-├── cache/                # Cache directory
-├── logs/                 # Log files
-└── tests/                # Backend test suite
-```
-
-### Shared Resources (`shared/`)
-```
-shared/
-├── config/               # Shared configuration files
-└── .env                  # Environment variables template
-```
-
----
-
-## 🛠️ Development Workflow
-
-### Making Changes to Frontend
-```bash
-cd frontend
-
-# Development server with hot reload
-npm run dev
-
-# Type checking
-npm run type-check
-
-# Linting and formatting
-npm run lint
-npm run lint:fix
-
-# Testing
-npm run test              # Unit tests
-npm run test:e2e          # End-to-end tests
-npm run test:performance  # Performance tests
-
-# Build for production
-npm run build
-```
-
-### Making Changes to Backend
-```bash
-cd backend
-
 # Start development server
 python app/main.py
 
-# Code quality checks
+# Code quality
 flake8                    # Linting
 black --check             # Formatting check
 isort --check-only        # Import sorting
@@ -256,59 +166,34 @@ black
 isort
 ```
 
+### Frontend Development
+```bash
+# Setup and start
+cd frontend
+npm install
+npm run dev
+
+# Code quality
+npm run lint              # ESLint
+npm run lint:fix          # Fix linting issues
+npm run type-check        # TypeScript checking
+
+# Testing
+npm run test              # Unit tests
+npm run test:e2e          # End-to-end tests
+npm run test:performance  # Performance tests
+
+# Build
+npm run build             # Production build
+```
+
 ### Pre-commit Hooks
 ```bash
-# Install pre-commit hooks
+# Install hooks
 pre-commit install
 
-# Run all hooks manually
+# Run all hooks
 pre-commit run --all-files
-```
-
----
-
-## 🧪 Testing & Quality Assurance
-
-### Backend Testing
-```bash
-# Run comprehensive test suite
-pytest tests/ -v --cov=reports
-
-# Key test categories:
-- ✅ Shot Purpose Selection (2/2 tests passing)
-- ✅ Transform Processing (3/3 tests passing)
-- ✅ API Health Checks (all endpoints responding)
-- ✅ System Monitoring (performance metrics)
-- ✅ WebSocket Connections (real-time events)
-```
-
-### Frontend Testing
-```bash
-cd frontend
-
-# Unit and integration tests
-npm run test
-
-# End-to-end testing
-npm run test:e2e
-
-# Performance testing
-npm run test:performance
-
-# Accessibility testing
-npm run test:accessibility
-```
-
-### API Testing
-```bash
-# Health check
-curl http://localhost:8001/api/health
-
-# System performance
-curl http://localhost:8001/api/system/performance
-
-# Cinematography rules
-curl http://localhost:8001/api/cinematography/rules
 ```
 
 ---
@@ -327,85 +212,93 @@ curl http://localhost:8001/api/cinematography/rules
 - **Timeline Visualization**: Interactive emotion timeline
 - **Multi-dimensional Analysis**: Arousal, valence, intensity metrics
 
-### 📈 System Monitoring
-- **Live Metrics**: CPU, memory, disk utilization
-- **Performance Tracking**: Processing queue metrics
-- **Health Checks**: Dependency monitoring
-- **Historical Trends**: Performance analytics
-
 ### 🔌 Real-time Features
 - **WebSocket Streaming**: Live processing events
 - **Stage Updates**: Real-time progress indicators
 - **Decision Notifications**: Shot selection broadcasts
-- **Emotion Broadcasting**: Live emotion segment updates
+- **System Monitoring**: Performance metrics and health checks
 
 ---
 
-## 🚢 Deployment Instructions
+## 🧪 Testing
 
-### Docker Deployment (Recommended)
+### Backend Tests
 ```bash
-# Production deployment
-docker-compose -f docker-compose.yml up -d
+# Run comprehensive test suite
+pytest tests/ -v --cov=reports
+
+# Key test categories:
+- ✅ Shot Purpose Selection
+- ✅ Transform Processing  
+- ✅ API Health Checks
+- ✅ System Monitoring
+- ✅ WebSocket Connections
+```
+
+### Frontend Tests
+```bash
+cd frontend
+
+# Unit and integration tests
+npm run test
+
+# End-to-end testing
+npm run test:e2e
+
+# Performance testing
+npm run test:performance
+```
+
+### API Testing
+```bash
+# Health check
+curl http://localhost:8001/api/health
+
+# System performance
+curl http://localhost:8001/api/system/performance
+
+# Cinematography rules
+curl http://localhost:8001/api/cinematography/rules
+```
+
+---
+
+## 🚢 Deployment
+
+### Docker Compose (Recommended)
+```bash
+# Start all services
+docker-compose up -d
 
 # View logs
-docker-compose logs -f backend
-docker-compose logs -f frontend
+docker-compose logs -f
 
-# Scale services
-docker-compose up -d --scale backend=2
+# Stop services
+docker-compose down
 ```
 
-### Environment Setup
+### Manual Production Setup
 ```bash
-# Copy environment template
-cp shared/.env.example .env
+# Backend (with Gunicorn)
+cd backend
+gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker
 
-# Configure environment variables
-# - BACKEND_URL: Backend API URL
-# - FRONTEND_URL: Frontend application URL
-# - DATABASE_URL: Database connection string (if applicable)
-# - REDIS_URL: Redis connection string (for caching)
+# Frontend (build and serve)
+cd frontend
+npm run build
+# Serve build/ directory with Nginx or similar
 ```
-
-### Production Considerations
-- **Frontend**: Build and serve via Nginx or CDN
-- **Backend**: Use Gunicorn with Uvicorn workers
-- **Database**: PostgreSQL for production data
-- **Caching**: Redis for session and performance caching
-- **Monitoring**: Implement logging and metrics collection
 
 ---
 
-## 🔄 Migration Summary
+## 📚 Documentation
 
-### From Monolithic to Forked
-The project has been successfully migrated from a monolithic structure to a clean forked architecture:
+For detailed information, see:
 
-**Before:**
-```
-LipSyncAutomation/
-├── web-ui/              # Mixed frontend/backend
-├── lipsync_automation/  # Core Python package
-└── Mixed responsibilities
-```
-
-**After:**
-```
-LipSyncAutomation/
-├── frontend/           # Dedicated React application
-├── backend/            # Dedicated Python FastAPI
-├── shared/             # Common configurations
-└── Clear separation
-```
-
-### Benefits Achieved
-- ✅ **Clear Boundaries**: Frontend and backend completely isolated
-- ✅ **Independent Development**: Teams can work separately
-- ✅ **Flexible Deployment**: Scale components independently
-- ✅ **Technology Optimization**: Use best tools for each domain
-- ✅ **Improved Onboarding**: Easier for new developers
-- ✅ **Better Testing**: Isolated testing environments
+- **📖 [ARCHITECTURE.md](./ARCHITECTURE.md)** - Complete system architecture and design decisions
+- **🔧 [AGENTS.md](./AGENTS.md)** - Development guidelines and coding standards
+- **📋 [STARTUP_GUIDE.md](./STARTUP_GUIDE.md)** - Detailed startup instructions
+- **📁 [docs/](./docs/)** - Additional documentation and migration records
 
 ---
 
@@ -413,59 +306,34 @@ LipSyncAutomation/
 
 ### Common Issues
 
-#### Port Conflicts
+**Port Conflicts**
 ```bash
 # Use custom ports
 ./start_web_ui.sh 8080 3000
-
-# Or manually:
-# Backend: python app/main.py --port 8080
-# Frontend: PORT=3000 npm run dev
 ```
 
-#### Dependency Issues
+**Dependency Issues**
 ```bash
-# Reinstall Python dependencies
+# Backend
 source venv/bin/activate
 pip install -e ".[dev]"
 
-# Reinstall frontend dependencies
+# Frontend
 cd frontend
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-#### Permission Issues
+**Permission Issues**
 ```bash
-# Make scripts executable
 chmod +x start_web_ui.sh
 chmod +x setup_web_ui.sh
-
-# Fix Python path
-export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 ```
 
-#### WebSocket Connection Issues
-- Ensure backend is running before frontend
-- Check firewall settings for ports 8001 and 5000
-- Verify browser WebSocket support
-
 ### Log Locations
-- **Backend logs**: Terminal output or `backend/logs/`
-- **Frontend logs**: Browser console and `frontend/logs/`
-- **System logs**: Check terminal output for detailed errors
-
----
-
-## 📊 Performance Metrics
-
-### Success Achieved
-- **Backend Utilization**: 40% → 85%+ 📈
-- **Frontend Completeness**: 25% → 90%+ 📈
-- **API Endpoints**: 5 → 20+ 🚀
-- **React Components**: 0 → 15+ major components ⚛️
-- **Test Coverage**: Basic → Comprehensive 🧪
-- **Real-time Features**: None → Full WebSocket integration 🔌
+- **Backend**: Terminal output or `backend/logs/`
+- **Frontend**: Browser console and `frontend/logs/`
+- **System**: Check terminal output for detailed errors
 
 ---
 
@@ -487,20 +355,9 @@ export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 
 ---
 
-## 📞 Support
-
-For issues or questions:
-1. **Check this README** and troubleshooting section
-2. **Review the test suite** for usage examples
-3. **Examine API documentation** at `http://localhost:8001/docs`
-4. **Check system logs** for detailed error information
-5. **Review migration documentation** in `docs/development/`
-
----
-
 ## 🎉 Project Status
 
-**LipSync Automation v2.0 is production-ready!** 
+**LipSync Automation is production-ready!**
 
 The system has been transformed from a basic lip-sync processing tool into a professional-grade cinematographic automation platform with:
 - Real-time psycho-cinematic decision engine
@@ -511,3 +368,7 @@ The system has been transformed from a basic lip-sync processing tool into a pro
 - Real-time event streaming
 
 **🚀 Enjoy your fully operational LipSync Automation system!**
+
+---
+
+*For detailed architecture information, please refer to [ARCHITECTURE.md](./ARCHITECTURE.md).*

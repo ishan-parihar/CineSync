@@ -80,7 +80,7 @@ const nextConfig = {
   // Add proxy configuration to handle API requests (excluding WebSocket)
   async rewrites() {
     // Use environment variable to determine backend URL, default to localhost for development
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8001';
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8002';
     
     return [
       {
