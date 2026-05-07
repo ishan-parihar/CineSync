@@ -35,3 +35,6 @@ Thumbs.db
 /web-ui/frontend/node_modules
 /web-ui/frontend/out/_next
 /web-ui/frontend/.next
+.env
+.env.local
+web-ui/frontend/.env.local
