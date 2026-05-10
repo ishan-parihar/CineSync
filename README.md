@@ -1,17 +1,20 @@
 # LipSyncAutomation v2.0: Advanced Psycho-Cinematic Automation System
 
-Advanced audio-to-video automation system that combines psycho-cinematic principles with emotional analysis to generate emotionally-responsive video content. This tool uses AI-driven cinematographic decision-making to create dynamic visual experiences that adapt camera angles, distances, and compositions based on the emotional content of audio input.
+Advanced audio-to-video automation system that combines psycho-cinematic principles with emotional analysis to generate emotionally-responsive video content.
 
-## Architecture
+## The Problem
+Most automated lip-sync or "talking head" videos are emotionally flat, using a single camera angle and static expressions regardless of the audio's tone. This creates a "uncanny valley" effect where the visual presentation contradicts the emotional weight of the speech. The challenge was to automate not just the lip movements, but the entire cinematographic experience—camera distance, angle, and timing—to match the psychological state of the speaker.
 
-- **Audio Emotion Recognition**: Advanced emotion detection using Audio2Emotion models with 8-emotion taxonomy (Joy, sadness, anger, fear, surprise, disgust, trust, anticipation)
-- **Psycho-Cinematic Mapping**: Maps emotional and psychological states to cinematographically appropriate shot distances, angles, and transitions
-- **Tension Analysis Engine**: Calculates narrative tension and emotional intensity to inform shot selection
-- **Grammar Validation**: Validates shot sequences against cinematographic rules (32 rules: 18 hard, 14 soft) to ensure visual coherence
-- **Rhubarb Lip Sync**: Phoneme detection from audio for lip-sync synchronization
-- **Python Pipeline**: Orchestration, preset management, and video composition
-- **FFmpeg**: Video rendering and encoding with multi-scene composition
-- **Configurable Workflow**: JSON-based settings system with caching and performance optimization
+## Engineering Highlights
+
+### Psycho-Cinematic Mapping Engine
+I implemented a system that translates detected audio emotions (using an 8-emotion taxonomy) into cinematographic decisions. The system automatically adjusts shot distance (e.g., Extreme Close-Ups for high intensity) and camera angles (e.g., Dutch angles for distress) based on the emotional valence and arousal of the speech, effectively automating a professional cinematographer's intuition.
+
+### Cinematographic Grammar Validation
+To prevent visual jarring and ensure professional flow, I built a validation layer that checks shot sequences against 32 industry-standard cinematography rules. This ensures that transitions between different emotional segments maintain visual coherence and follow professional narrative flow, preventing the "random jump" feel common in automated video generation.
+
+### Emotional Viseme Synchronization
+Beyond simple phoneme-to-mouth mapping, I integrated emotion-aware viseme selection. By mapping detected emotions to specific mouth shapes, the system ensures that a "joyful" greeting looks visually different from an "angry" one. This increases the perceived realism and emotional resonance of the output by aligning the micro-expressions of the character with the audio's tone.
 
 ## Setup and Installation
 
