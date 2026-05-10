@@ -38,3 +38,6 @@ Thumbs.db
 .env
 .env.local
 web-ui/frontend/.env.local
+.contexty
+.memsearch
+.hive
