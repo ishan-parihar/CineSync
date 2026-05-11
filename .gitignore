@@ -44,3 +44,8 @@ web-ui/frontend/.env.local
 .contexty
 .memsearch
 .hive
+# Metadata directories (AI agent session data, tool calls, plans)
+.hive/
+.memsearch/
+.contexty/
+.sisyphus/
