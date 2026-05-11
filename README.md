@@ -1,137 +1,145 @@
-# LipSyncAutomation v2.0: Advanced Psycho-Cinematic Automation System
+# CineSync
 
-Advanced audio-to-video automation system that combines psycho-cinematic principles with emotional analysis to generate emotionally-responsive video content.
+[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg)]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Language: Python](https://img.shields.io/badge/Language-Python-blue.svg)](https://www.python.org/)
+
+An audio-to-video automation system that applies psycho-cinematic principles to generate emotionally-responsive talking-head video content. Detected emotions drive camera distance, angle, and timing decisions — producing video that feels like a professional cinematographer made the calls, not a static script.
 
 ## The Problem
-Most automated lip-sync or "talking head" videos are emotionally flat, using a single camera angle and static expressions regardless of the audio's tone. This creates a "uncanny valley" effect where the visual presentation contradicts the emotional weight of the speech. The challenge was to automate not just the lip movements, but the entire cinematographic experience—camera distance, angle, and timing—to match the psychological state of the speaker.
+
+Most automated talking-head videos are emotionally flat. A single camera angle, fixed expression, identical pacing regardless of whether the narration is joyful, tense, or somber. This creates a visual disconnect — the audio carries emotional weight, but the visuals ignore it entirely.
+
+The result is an uncanny valley effect: technically correct lip sync with a disconnected presentation that undermines the message. Making professional-looking video at scale requires either manual cinematography or expensive post-production work.
+
+## The Solution
+
+CineSync closes the loop between audio and visuals. It analyzes narration for emotional content — eight distinct emotions with valence and arousal metrics — then translates those findings into cinematographic decisions: shot distance (Extreme Close-Up for high intensity, Medium Shot for calm), camera angle (Dutch angle for distress, eye-level for neutrality), and timing (faster cuts for tension, held frames for reflection).
+
+The system also validates every generated shot sequence against 32 cinematography grammar rules, ensuring professional flow between segments rather than jarring random jumps.
 
 ## Engineering Highlights
 
 ### Psycho-Cinematic Mapping Engine
-I implemented a system that translates detected audio emotions (using an 8-emotion taxonomy) into cinematographic decisions. The system automatically adjusts shot distance (e.g., Extreme Close-Ups for high intensity) and camera angles (e.g., Dutch angles for distress) based on the emotional valence and arousal of the speech, effectively automating a professional cinematographer's intuition.
+
+An 8-emotion taxonomy (Joy, Sadness, Anger, Fear, Surprise, Disgust, Trust, Anticipation) drives automated cinematography decisions. Valence (positive/negative) and arousal (intensity) values map to shot distances — Extreme Close-Ups for high arousal, Medium Shots for calm — and camera angles, including Dutch angles for distress signals and eye-level for neutral speech.
 
 ### Cinematographic Grammar Validation
-To prevent visual jarring and ensure professional flow, I built a validation layer that checks shot sequences against 32 industry-standard cinematography rules. This ensures that transitions between different emotional segments maintain visual coherence and follow professional narrative flow, preventing the "random jump" feel common in automated video generation.
+
+A validation layer checks every generated shot sequence against 32 industry-standard cinematography rules. This prevents the "random jump" feel common in automated video: transitions between emotional segments maintain visual coherence, shot progressions follow professional narrative flow, and jump cuts only appear where grammar permits.
 
 ### Emotional Viseme Synchronization
-Beyond simple phoneme-to-mouth mapping, I integrated emotion-aware viseme selection. By mapping detected emotions to specific mouth shapes, the system ensures that a "joyful" greeting looks visually different from an "angry" one. This increases the perceived realism and emotional resonance of the output by aligning the micro-expressions of the character with the audio's tone.
 
-## Setup and Installation
+Beyond basic phoneme-to-mouth mapping, the system maps detected emotions to specific mouth shapes. A joyful greeting produces visually different micro-expressions than an angry one, because the viseme selection is emotion-aware. This aligns the character's facial expressions with the audio's tone, increasing perceived realism.
 
- 1.  **Create Virtual Environment**:
-     ```powershell
-     python -m venv venv
-     ```
+### Tension-Based Pacing
 
- 2.  **Activate Virtual Environment**:
-     ```powershell
-     .\venv\Scripts\Activate.ps1
-     ```
+Narrative tension analysis informs shot duration and transition decisions. High-tension segments trigger faster cuts and shorter held frames. Transitional passages use dissolves or match cuts. Calm moments allow held Medium Shots to breathe. The pacing layer produces output that feels authored rather than assembled.
 
- 3.  **Install Dependencies**:
-     ```powershell
-     pip install -r requirements.txt
-     ```
+## Tech Stack
 
- 4.  **Required Components**:
-     This tool requires **FFmpeg**, **Rhubarb Lip Sync**, and an **Audio2Emotion model** for emotion recognition. The paths to these executables and models are configured in `config/settings.json`. Please ensure they are installed and that the paths in the configuration file are correct.
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| **Language** | Python 3 | Core implementation |
+| **Lip Sync** | Rhubarb Lip Sync | Phoneme extraction |
+| **Emotion Analysis** | ONNX Runtime + audio2emotion | 8-emotion classification from audio |
+| **Audio Processing** | Librosa + soundfile | Feature extraction |
+| **Video Generation** | FFmpeg | Frame compositing, encoding |
+| **Caching** | Local disk cache | Phoneme and emotion caching |
+| **Concurrency** | Python multiprocessing | Batch parallel processing |
 
-     - **FFmpeg**: Can be installed via [winget](https://winget.run/pkg/Gyan/FFmpeg) or [Chocolatey](https://community.chocolatey.org/packages/ffmpeg).
-     - **Rhubarb Lip Sync**: The system includes Rhubarb in the `tools/rhubarb` directory.
-     - **Audio2Emotion Model**: Place the ONNX model file at `./models/audio2emotion/network.onnx` for emotion analysis.
-     - **Audio Libraries**: Install `librosa`, `onnxruntime`, and `soundfile` for audio processing and emotion recognition capabilities.
+## Quick Start
 
-## Usage
+### Prerequisites
 
-### Quick Start
+- Python 3.10+
+- FFmpeg (in PATH)
+- Rhubarb Lip Sync (bundled in `tools/rhubarb/`)
+- audio2emotion ONNX model at `./models/audio2emotion/network.onnx`
 
--   **Process a single audio file**:
-    ```powershell
-    python src\cli.py --audio assets/audio/raw/narration.wav --output output/video.mp4
-    ```
+### Installation
 
--   **Batch process a directory of audio files**:
-    ```powershell
-    python src\batch_processor.py --input assets/audio/raw --output output/batch --workers 4
-    ```
+```powershell
+# Clone the repository
+git clone https://github.com/ishanparihar/CineSync.git
+cd CineSync
 
-### Command-Line Interface (CLI)
+# Create virtual environment
+python -m venv venv
+.\venv\Scripts\Activate.ps1
 
-The `src/cli.py` script provides the following options:
+# Install dependencies
+pip install -r requirements.txt
+```
 
--   `--audio`: Path to the input audio file (required).
--   `--output`: Path for the output video file (required).
--   `--preset`: The character preset to use (e.g., `character_1/front`).
--   `--config`: Path to the configuration file (defaults to `config/settings.json`).
--   `--fps`: Override the frames per second setting from the configuration.
--   `--no-cache`: Disable phoneme caching for the current run.
--   `--verbose`: Enable detailed debug logging.
--   `--list-presets`: List all available character presets and exit.
+FFmpeg can be installed via [winget](https://winget.run/pkg/Gyan/FFmpeg) or [Chocolatey](https://community.chocolatey.org/packages/ffmpeg).
 
-### Advanced Capabilities
+### Process a Single Audio File
 
-The system automatically analyzes the emotional content of your audio and applies psycho-cinematic principles to generate appropriate cinematography:
+```powershell
+python src/cli.py --audio assets/audio/raw/narration.wav --output output/video.mp4
+```
 
-- **Emotion-Driven Shot Selection**: Automatically selects shot distances (ECU, CU, MCU, MS) based on detected emotions
-- **Dynamic Angle Adjustment**: Changes camera angles (eye-level, high angle, low angle, Dutch) according to emotional intensity
-- **Tension-Based Pacing**: Adjusts shot duration and transitions based on narrative tension levels
-- **Grammar-Compliant Sequences**: Ensures cinematographically sound shot progressions following industry standards
-- **Multi-Scene Composition**: Creates complex multi-scene videos with appropriate transitions between different emotional segments
+### Batch Process a Directory
 
-## Character Presets
+```powershell
+python src/batch_processor.py --input assets/audio/raw --output output/batch --workers 4
+```
 
-### Adding New Characters
+## Command-Line Interface
 
- 1.  **Create Preset Structure**:
-     Run the following command to create a new preset directory from the template:
-     ```powershell
-     python -c "from src.core.preset_manager import PresetManager; pm = PresetManager(); pm.create_preset_from_template('character_name', 'angle')"
-     ```
-     Replace `character_name` and `angle` with your desired names (e.g., `character_2`, `side`).
+| Flag | Description |
+|------|-------------|
+| `--audio` | Path to input audio file (required) |
+| `--output` | Path for output video file (required) |
+| `--preset` | Character preset to use (e.g., `character_1/front`) |
+| `--config` | Path to configuration file (default: `config/settings.json`) |
+| `--fps` | Override frames per second |
+| `--no-cache` | Disable phoneme and emotion caching |
+| `--verbose` | Enable detailed debug logging |
+| `--list-presets` | List all available character presets |
 
- 2.  **Add Character Assets**:
-     Add the following image files to the newly created `assets/presets/character_name/angle/` directory:
-     -   `background.png`: The character's background image.
-     -   `mouth_A.png` through `mouth_X.png`: The nine required mouth shapes with transparent backgrounds.
-     -   Optional: Include emotion-specific subdirectories (e.g., `emotions/joy/`, `emotions/anger/`) for emotion-aware viseme selection.
+## Project Structure
 
- 3.  **Use the New Preset**:
-     You can now use your new preset in your commands:
-     ```powershell
-     python src\cli.py --audio audio.wav --output video.mp4 --preset character_name/angle
-     ```
+```
+CineSync/
+├── README.md
+├── requirements.txt
+├── config/
+│   └── settings.json           # Paths to FFmpeg, Rhubarb, model
+├── tools/
+│   └── rhubarb/                # Rhubarb Lip Sync binary
+├── models/
+│   └── audio2emotion/          # ONNX emotion model
+│       └── network.onnx
+├── assets/
+│   ├── audio/raw/              # Input audio files
+│   └── presets/                 # Character image presets
+│       └── character_1/front/  # Per-character assets
+│           ├── background.png
+│           └── mouth_*.png      # Viseme images
+├── output/                      # Generated video output
+├── src/
+│   ├── cli.py                  # Main CLI entry point
+│   ├── batch_processor.py       # Parallel batch processing
+│   └── core/
+│       ├── emotion_engine.py     # Audio analysis + emotion mapping
+│       ├── cinematographer.py     # Shot selection + grammar validation
+│       ├── viseme_sync.py        # Emotion-aware mouth shape mapping
+│       ├── tension_analyzer.py    # Narrative tension scoring
+│       ├── video_composer.py      # FFmpeg-based frame assembly
+│       └── preset_manager.py      # Character preset management
+└── tests/
+```
 
-### Multi-Angle Support
+## Development Status
 
-The system supports multiple camera angles per character with appropriate emotional mapping:
-- **Front/Straight-on**: Direct emotional connection, ideal for dialogue
-- **Side Profile**: Narrative storytelling, emotional distance
-- **ECU (Extreme Close-up)**: High emotional intensity moments
-- **CU (Close-up)**: Emotional expressions and reactions
-- **MCU (Medium Close-up)**: Standard dialogue shots
-- **MS (Medium Shot)**: Establishing presence in context
+Operational. Core pipeline (emotion analysis, cinematography, lip sync, video assembly) is functional. Batch processing supports parallel execution. Character preset system supports multi-angle assets and emotion-specific visemes.
 
-## Troubleshooting
+## License
 
- -   **`Rhubarb not found` or `FFmpeg not found`**:
-     Ensure that the paths to `rhubarb.exe` and `ffmpeg.exe` in `config/settings.json` are correct. If you installed FFmpeg via a package manager, it may already be in your system's PATH.
+MIT License — see LICENSE file for details.
 
- -   **Dependency Issues**:
-     If you encounter module not found errors, ensure you have activated the virtual environment (`.\venv\Scripts\Activate.ps1`) and installed all the required packages from `requirements.txt`. For emotion analysis, ensure `librosa`, `onnxruntime`, and `soundfile` are installed.
+---
 
- -   **Emotion Analysis Issues**:
-     If emotion analysis is not working, verify that the Audio2Emotion model is available at `./models/audio2emotion/network.onnx` and that the path is correctly configured in `config/settings.json`.
-
- -   **Preset Not Found**:
-     Run `python src/cli.py --list-presets` to see a list of all available presets. Make sure the preset you are trying to use is listed.
-
-## System Capabilities
-
- -   **Emotion Analysis**: The system analyzes audio to detect 8 distinct emotions (Joy, sadness, anger, fear, surprise, disgust, trust, anticipation) with valence and arousal metrics.
- -   **Psycho-Cinematic Mapping**: Automatically translates detected emotions into appropriate cinematographic choices including shot distance, angle, and composition.
- -   **Tension Analysis**: Calculates narrative tension levels to inform shot duration and transition decisions for dramatic impact.
- -   **Grammar Validation**: Ensures shot sequences follow cinematographic rules and best practices for visual coherence.
- -   **Multi-Scene Composition**: Creates complex multi-scene videos with appropriate transitions between different emotional segments.
- -   **Caching**: The system uses caching for emotion analysis and phoneme data to avoid reprocessing the same audio files. This is enabled by default and can be disabled with the `--no-cache` flag.
- -   **Batch Processing**: For large numbers of audio files, the `batch_processor.py` script can significantly speed up the process by running multiple instances in parallel.
- -   **Processing Time**: On modern hardware, processing time varies based on audio length and emotional complexity, typically 10-30 seconds per minute of audio due to advanced emotion analysis and cinematographic decision-making.
+Developed by [Ishan Parihar](https://github.com/ishanparihar) — If you find this useful, [consider supporting](https://rzp.io/rzp/ishan-parihar)

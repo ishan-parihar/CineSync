@@ -12,6 +12,7 @@ env/
 # Output directories
 output/temp/
 output/cache/
+output/*.aac
 *.mp4
 *.avi
 *.mkv
@@ -32,6 +33,8 @@ Thumbs.db
 *_phonemes.json
 /models/audio2emotion
 /temp
+cache/
+
 /web-ui/frontend/node_modules
 /web-ui/frontend/out/_next
 /web-ui/frontend/.next
